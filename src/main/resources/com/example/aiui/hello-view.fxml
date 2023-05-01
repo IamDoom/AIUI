@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Scene?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Scene xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <AnchorPane prefHeight="314.0" prefWidth="514.0" style="-fx-background-color: #2786d9;">
       <children>
-         <SplitPane opacity="0.21" prefHeight="314.0" prefWidth="186.0" style="-fx-background-color: black;" />
-         <TextField alignment="CENTER" layoutX="227.0" layoutY="256.0" opacity="0.68" prefHeight="26.0" prefWidth="243.0" promptText="type hier uw vraag" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;" />
+         <SplitPane fx:id="pane" opacity="0.21" prefHeight="314.0" prefWidth="186.0" style="-fx-background-color: black;" />
+         <TextField fx:id="vraag" alignment="CENTER" layoutX="227.0" layoutY="256.0" opacity="0.68" prefHeight="26.0" prefWidth="243.0" promptText="type hier uw vraag" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;" />
       </children></AnchorPane>
 </Scene>
