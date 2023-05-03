@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class HelloController {
@@ -51,7 +52,7 @@ public class HelloController {
     }
     @FXML
     public void switchToScene2(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Ai.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Ai.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
