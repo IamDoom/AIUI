@@ -1,39 +1,35 @@
 package com.example.aiui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 
 import java.io.IOException;
 
 
 public class HelloController {
 
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
     @FXML
     private Button hello;
-
-    public Button getEllo() {
-        return hello;
-    }
 
     @FXML
     private VBox box;
     @FXML
-    private Button hello;
-    @FXML
     private Label welcomeText;
     @FXML
     private ToggleButton mode;
-
-    @FXML
-    protected void onHelloButtonClick() {
-
-    }
 
     @FXML
     protected void onmodetoggle() {
@@ -52,5 +48,14 @@ public class HelloController {
 
 
         }
+    }
+    @FXML
+    public void switchToScene2(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Ai.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 }

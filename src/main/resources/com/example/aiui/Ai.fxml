@@ -3,13 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="401.0" prefWidth="599.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.AI">
+<AnchorPane fx:id="Ai" prefHeight="401.0" prefWidth="599.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.AI">
    <children>
-      <SplitPane dividerPositions="0.2959866220735786" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;">
+      <SplitPane fx:id="Split" dividerPositions="0.2959866220735786" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: aqua;">
                <children>
-                  <Button alignment="TOP_CENTER" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Button" />
+                  <Button fx:id="NewChat" alignment="TOP_CENTER" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Button" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #05696B;">
                <children>
