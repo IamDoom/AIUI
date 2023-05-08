@@ -11,5 +11,5 @@
    <ToggleButton fx:id="mode" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#onmodetoggle" style="-fx-background-color: black; -fx-border-color: white; -fx-text-fill: white;" text="lightmode" />
 
     <Label fx:id="welcomeText" style="-fx-text-fill: white;" />
-    <Button fx:id="hello" onAction="#switchToScene2" style="-fx-text-fill: white; -fx-background-color: black; -fx-border-color: white;" text="Hello!" />
+    <Button fx:id="hello" onAction="#switchToScene2" style="-fx-text-fill: white; -fx-background-color: black; -fx-border-color: white;" text="next scene" />
 </VBox>
