@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 
 public class HelloApplication extends Application {
+    User testUser = new User("password","username","email");
+    public String name = testUser.getUsername();
 
     @Override
     public void start(Stage stage) {
@@ -14,6 +16,7 @@ public class HelloApplication extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.setTitle(name);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
