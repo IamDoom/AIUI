@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,15 +9,24 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.HelloController">
    <children>
-      <Pane layoutX="3.0" prefHeight="406.0" prefWidth="600.0" style="-fx-background-color: #bcc1c4;">
+      <Pane fx:id="Base" layoutX="3.0" prefHeight="406.4" prefWidth="603.0" style="-fx-background-color: #bcc1c4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <SplitPane layoutX="-8.0" layoutY="-7.0" prefHeight="414.0" prefWidth="228.0" style="-fx-background-color: #307eb3;" />
-            <TextField alignment="CENTER" layoutX="272.0" layoutY="354.0" opacity="0.69" prefHeight="17.0" prefWidth="235.0" promptText="type hier uw vraag" style="-fx-background-radius: 10; -fx-border-width: 2; -fx-border-radius: 10; -fx-border-color: #646566;">
+            <Pane fx:id="sidebar" layoutX="-6.0" prefHeight="406.0" prefWidth="241.0" style="-fx-background-color: #307eb3;" />
+            <TextField fx:id="input" alignment="CENTER" layoutX="269.0" layoutY="353.0" opacity="0.69" prefHeight="35.0" prefWidth="235.0" promptText="type hier uw vraag" style="-fx-background-radius: 10; -fx-border-width: 2; -fx-border-radius: 10; -fx-border-color: #646566;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </TextField>
-            <ToggleButton fx:id="mode" layoutX="514.0" layoutY="356.0" mnemonicParsing="false" onAction="#onmodetoggle" prefHeight="16.0" prefWidth="72.0" text="#text" />
+            <Button fx:id="submit" alignment="CENTER" contentDisplay="CENTER" layoutX="513.0" layoutY="358.0" mnemonicParsing="false" onAction="#onmodetoggle" style="-fx-background-color: #307eb3;" text="submit">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="13.0" />
+               </font>
+            </Button>
+            <ToggleButton fx:id="mode" layoutX="533.0" layoutY="14.0" mnemonicParsing="false" opacity="0.5" style="-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0; -fx-region-border: 0;" text="Darkmode">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </ToggleButton>
          </children>
       </Pane>
    </children>

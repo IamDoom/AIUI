@@ -5,13 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-
+import javafx.scene.layout.Pane;
 import java.io.IOException;
 
 
@@ -23,31 +24,32 @@ public class HelloController {
     private Parent root;
 
     @FXML
-    private Button hello;
+    private Pane Base;
 
-    @FXML
-    private VBox box;
-    @FXML
-    private Label welcomeText;
     @FXML
     private ToggleButton mode;
 
     @FXML
-    protected void onmodetoggle() {
+    private TextField input;
+
+    @FXML
+    private Pane sidebar;
+
+    @FXML
+    private Button submit;
+
+    @FXML
+    protected void onmodetoggle(ActionEvent event) {
         if (mode.getStyle().equals("-fx-background-color: white; -fx-text-fill: black; -fx-border-color: black;")) {
             mode.setStyle("-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white;");
-            box.setStyle("-fx-background-color: black;");
-            welcomeText.setStyle("-fx-background-color: black; -fx-text-fill: white;");
-            hello.setStyle("-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white;");
-            mode.setText("lightmode");
+            Base.setStyle("-fx-background-color: black;");
+
+            input.setStyle("-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white;");
+            mode.setText("Lightmode");
         }else{
-            mode.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-border-color: black;");
-            box.setStyle("-fx-background-color: white;");
-            welcomeText.setStyle("-fx-background-color: white; -fx-text-fill: black;");
-            hello.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-border-color: black;");
-            mode.setText("darkmode");
-
-
+            mode.setStyle("-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0; -fx-region-border: 0;");
+            Base.setStyle("-fx-background-color: white;");
+            mode.setText("Darkmode");
         }
     }
     @FXML
