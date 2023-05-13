@@ -7,8 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -22,12 +20,12 @@ public class HelloController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
+    boolean Lightmode = true;
     @FXML
     private Pane Base;
 
     @FXML
-    private ToggleButton mode;
+    private Button mode;
 
     @FXML
     private TextField input;
@@ -39,19 +37,30 @@ public class HelloController {
     private Button submit;
 
     @FXML
-    protected void onmodetoggle(ActionEvent event) {
-        if (mode.getStyle().equals("-fx-background-color: white; -fx-text-fill: black; -fx-border-color: black;")) {
-            mode.setStyle("-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white;");
-            Base.setStyle("-fx-background-color: black;");
-
-            input.setStyle("-fx-background-color: black; -fx-text-fill: white; -fx-border-color: white;");
-            mode.setText("Lightmode");
-        }else{
-            mode.setStyle("-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0; -fx-region-border: 0;");
-            Base.setStyle("-fx-background-color: white;");
-            mode.setText("Darkmode");
+    protected void Toggle(){
+        if (Lightmode){
+            Lightmode = false;
+            Darkmode();
+        } else {
+            Lightmode = true;
+            LightMode();
         }
+
     }
+
+    protected void LightMode() {
+        Base.setStyle("-fx-background-color: #bcc1c4;");
+        sidebar.setStyle("-fx-background-color: #307eb3;");
+        mode.setStyle("-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0;");
+        mode.setText("Darkmode");
+    }
+    protected void Darkmode() {
+        Base.setStyle("-fx-background-color: #000000");
+        sidebar.setStyle("-fx-background-color: #bcc1c4;");
+        mode.setStyle("-fx-background-radius: 10; -fx-background-color: #b6b7ba; -fx-border-width: 0;");
+        mode.setText("Lightmode");
+    }
+
     @FXML
     public void switchToScene2(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Ai.fxml"));
