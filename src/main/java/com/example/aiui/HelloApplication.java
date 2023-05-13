@@ -13,10 +13,10 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Startlogin.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle(name);
+            stage.setTitle("AIUI: Login");
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

@@ -63,7 +63,7 @@ public class HelloController {
 
     @FXML
     public void switchToScene2(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Ai.fxml"));
+        root = FXMLLoader.load(getClass().getResource("main-scene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
