@@ -11,6 +11,7 @@ public class HelloApplication extends Application {
     public String name = testUser.getUsername();
 
     @Override
+
     public void start(Stage stage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Startlogin.fxml"));
