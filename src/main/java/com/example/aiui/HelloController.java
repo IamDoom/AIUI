@@ -24,6 +24,8 @@ public class HelloController {
     boolean Lightmode = true;
     @FXML
     private Pane Base;
+    @FXML
+    private Button login;
 
     @FXML
     private Button mode;
