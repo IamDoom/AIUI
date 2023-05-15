@@ -14,7 +14,7 @@ public class HelloApplication extends Application {
 
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Startlogin.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("StartLogin.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("AIUI: Login");
