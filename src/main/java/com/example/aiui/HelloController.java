@@ -17,6 +17,7 @@ import java.io.IOException;
 
 
 public class HelloController {
+    data DB = new data();
 
     private Stage stage;
     private Scene scene;
