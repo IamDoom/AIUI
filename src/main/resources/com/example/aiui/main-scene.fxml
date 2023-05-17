@@ -24,8 +24,7 @@
                   <Font name="System Bold" size="10.0" />
                </font>
             </Button>
-            <Label fx:id="antwoord" layoutX="234.0" layoutY="253.0" prefHeight="17.0" prefWidth="369.0" />
-            <Label fx:id="antwoord2" layoutX="234.0" layoutY="295.0" prefHeight="17.0" prefWidth="369.0" />
+            <ListView fx:id="chatList" layoutX="234.0" layoutY="47.0" prefHeight="306.0" prefWidth="369.0" />
          </children>
       </Pane>
    </children>
