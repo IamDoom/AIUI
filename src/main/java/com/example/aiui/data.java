@@ -5,12 +5,51 @@ import java.sql.*;
 
 class User{
     private String password;
-    private String Username;
+    private String firstName;
+    private String lastName;
     private String Email;
+    private int employeeID;
+    private boolean administrator;
 
-    public User(String password, String email) {
+    public User(String password,String firstName,String lastName, String email, int employeeID,boolean administrator) {
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
         Email = email;
+        this.employeeID = employeeID;
+        this.administrator = administrator;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public boolean isAdministrator() {
+        return administrator;
+    }
+
+    public void setAdministrator(boolean administrator) {
+        this.administrator = administrator;
     }
 
     public String getPassword() {
@@ -31,6 +70,13 @@ class User{
 
 }
 public class data {
+    public User retrieveEmployee(User testEmployee) {
+        return testEmployee;
+    }
+    public void createTestEmployee(){
+        createEmployee("john","doe","johndoe@emailadress.com","securepassword",234045,true);
+
+    }
 
     public void createEmployee(String firstName, String lastName, String emailAddress, String password,
                                       int employeeID, boolean administrator) {
@@ -103,7 +149,7 @@ public class data {
                     "firstname VARCHAR(50) NOT NULL," +
                     "lastname VARCHAR(50) NOT NULL," +
                     "emailaddress VARCHAR(100) NOT NULL," +
-                    "password VARCHAR(50) NOT NULL," +
+                    "employeeID INT NOT NULL UNIQUE," +
                     "employeeID INT NOT NULL," +
                     "administrator BOOLEAN NOT NULL" +
                     ")";

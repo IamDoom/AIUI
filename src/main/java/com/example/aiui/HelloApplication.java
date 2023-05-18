@@ -16,6 +16,8 @@ public class HelloApplication extends Application {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             DB.createDB();
+            DB.createTestEmployee();
+            User testemployee = new User("john","doe","johndoe@emailadress.com","securepassword",234045,true);
             stage.setTitle("AIUI: Login");
             stage.show();
         } catch (Exception e) {
