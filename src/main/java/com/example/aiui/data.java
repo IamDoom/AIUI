@@ -4,13 +4,62 @@ package com.example.aiui;
 import java.sql.*;
 
 class User{
+    private String firstName;
+    private String lastName;
     private String password;
     private String Username;
+    private int employeeID;
     private String Email;
+    private boolean administrator;
 
-    public User(String password, String email) {
+    public User(String firstName, String lastName, String password, String username, int employeeID, String email, boolean administrator) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
+        Username = username;
+        this.employeeID = employeeID;
         Email = email;
+        this.administrator = administrator;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String username) {
+        Username = username;
+    }
+
+    public int getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public boolean isAdministrator() {
+        return administrator;
+    }
+
+    public void setAdministrator(boolean administrator) {
+        this.administrator = administrator;
     }
 
     public String getPassword() {
@@ -31,8 +80,42 @@ class User{
 
 }
 public class data {
+    public User login(String username, String password) {
 
-    public void createEmployee(String firstName, String lastName, String emailAddress, String password,
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            String url = "jdbc:mysql://localhost:3307/employees";
+            String DBusername = "root";
+            String DBpassword = "";
+            Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
+            String query = "SELECT COUNT(*) FROM employees WHERE emailaddress = ? AND password = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet resultset = statement.executeQuery();
+            if(resultset.next()){
+                String firstName = resultset.getString("firstname");
+                String lastName = resultset.getString("lastname");
+                String email = resultset.getString("emailaddress");
+                int employeeID = resultset.getInt("employeeID");
+                boolean administrator = resultset.getBoolean("administrator");
+                User user = new User(firstName, lastName, password, username, employeeID, email, administrator);
+                return user;
+            }
+
+        } catch (ClassNotFoundException e){
+            System.out.println("Failed to load the database driver.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Failed to check if the user exists.");
+            e.printStackTrace();
+        }
+        System.out.println("user login failed");
+        return null;
+    }
+    public void createEmployee(String firstName, String lastName, String emailAddress, String userName ,String password,
                                       int employeeID, boolean administrator) {
         try {
             // Load the driver
@@ -47,16 +130,17 @@ public class data {
             Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
 
             // Create an employee
-            String insertQuery = "INSERT INTO employees (firstname, lastname, emailaddress, password, employeeID, administrator) VALUES (?, ?, ?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO employees (firstname, lastname, emailaddress, userName, password, employeeID, administrator) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             // Prepare the statement with the employee details
             PreparedStatement statement = connection.prepareStatement(insertQuery);
             statement.setString(1, firstName);
             statement.setString(2, lastName);
             statement.setString(3, emailAddress);
-            statement.setString(4, password);
-            statement.setInt(5, employeeID);
-            statement.setBoolean(6, administrator);
+            statement.setString(4, userName);
+            statement.setString(5, password);
+            statement.setInt(6, employeeID);
+            statement.setBoolean(7, administrator);
 
             // Execute the insert statement
             int rowsAffected = statement.executeUpdate();
