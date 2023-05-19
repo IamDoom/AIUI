@@ -85,7 +85,7 @@ public class data {
     }
 
     public void createTestEmployee() {
-        createEmployee("john", "doe", "johndoe@emailadress.com", "securepassword", 234045, true);
+        createEmployee("john", "doe", "johndoe@emailadress.com","username", "securepassword", 234045, true);
 
     }
     public User login(String username, String password) {
@@ -196,6 +196,7 @@ public class data {
                     "id INT PRIMARY KEY AUTO_INCREMENT," +
                     "firstname VARCHAR(50) NOT NULL," +
                     "lastname VARCHAR(50) NOT NULL," +
+                    "username VARCHAR(50) NOT NULL UNIQUE"+
                     "emailaddress VARCHAR(100) NOT NULL," +
                     "password VARCHAR(50) NOT NULL," +
                     "employeeID INT NOT NULL UNIQUE," +

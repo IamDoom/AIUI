@@ -40,9 +40,9 @@ public class HelloController {
     @FXML
     private Button submit;
     @FXML
-    private PasswordField Password;
+    private PasswordField Password = new PasswordField();
     @FXML
-    private TextField Username;
+    private TextField Username = new TextField();
     @FXML
     private Label errorMessage;
 
