@@ -85,7 +85,7 @@ public class data {
     }
 
     public void createTestEmployee() {
-        createEmployee("john", "doe", "johndoe@emailadress.com","username", "securepassword", 234045, true);
+        createEmployee("john", "doe", "johndoe@emailadress.com","testusername", "securepassword", 234045, true);
 
     }
     public User login(String username, String password) {
@@ -125,7 +125,7 @@ public class data {
         return null;
 }
 
-    public void createEmployee(String firstName, String lastName, String emailAddress, String userName ,String password,
+    public void createEmployee(String firstName, String lastName, String emailAddress, String username ,String password,
                                       int employeeID, boolean administrator) {
         try {
             // Load the driver
@@ -147,7 +147,7 @@ public class data {
             statement.setString(1, firstName);
             statement.setString(2, lastName);
             statement.setString(3, emailAddress);
-            statement.setString(4, userName);
+            statement.setString(4, username);
             statement.setString(5, password);
             statement.setInt(6, employeeID);
             statement.setBoolean(7, administrator);
@@ -196,8 +196,8 @@ public class data {
                     "id INT PRIMARY KEY AUTO_INCREMENT," +
                     "firstname VARCHAR(50) NOT NULL," +
                     "lastname VARCHAR(50) NOT NULL," +
-                    "username VARCHAR(50) NOT NULL UNIQUE"+
                     "emailaddress VARCHAR(100) NOT NULL," +
+                    "username VARCHAR(50) NOT NULL UNIQUE,"+
                     "password VARCHAR(50) NOT NULL," +
                     "employeeID INT NOT NULL UNIQUE," +
                     "administrator BOOLEAN NOT NULL" +
