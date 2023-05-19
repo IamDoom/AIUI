@@ -140,7 +140,7 @@ public class data {
             Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
 
             // Create an employee
-            String insertQuery = "INSERT INTO employees (firstname, lastname, emailaddress, userName, password, employeeID, administrator) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO employees (firstname, lastname, emailaddress, username, password, employeeID, administrator) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             // Prepare the statement with the employee details
             PreparedStatement statement = connection.prepareStatement(insertQuery);
