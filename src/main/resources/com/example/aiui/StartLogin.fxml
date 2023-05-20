@@ -28,7 +28,7 @@
                      </font>
                   </Label>
                   <PasswordField fx:id="password" layoutX="89.0" layoutY="183.0" onAction="#submitlogin" promptText="Password" />
-                  <Button fx:id="login" layoutX="137.0" layoutY="223.0" onAction="#switchToScene2" mnemonicParsing="false" text="login" />
+                  <Button fx:id="login" layoutX="137.0" layoutY="223.0" onAction="#submitlogin" mnemonicParsing="false" text="login" />
                </children></Pane>
                 <Button fx:id="mode" layoutX="533.0" layoutY="14.0" mnemonicParsing="false" onAction="#Toggle" opacity="0.5" style="-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0;" text="Darkmode">
                     <font>

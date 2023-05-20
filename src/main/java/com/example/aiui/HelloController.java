@@ -18,6 +18,7 @@ import java.util.Objects;
 
 
 public class HelloController {
+    data DB = new data();
 
     private Stage stage;
     private Scene scene;
@@ -40,9 +41,9 @@ public class HelloController {
     @FXML
     private Button submit;
     @FXML
-    private PasswordField Password;
+    private PasswordField Password = new PasswordField();
     @FXML
-    private TextField username;
+    private TextField Username = new TextField();
     @FXML
     private Label errorMessage;
 
@@ -59,13 +60,21 @@ public class HelloController {
     }
     @FXML
     protected void submitlogin() {
-        if (Password.getText().isEmpty() || username.getText().isEmpty()) {
+        String password = Password.toString();
+        String username = Username.toString();
+        if (password.isEmpty() || username.isEmpty()) {
             errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
         } else {
-            try {
-                switchToScene2(null);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            User user = DB.login(username,password);
+            if (user == null){
+                errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
+            } else {
+                try {
+                    switchToScene2(null);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException();
+                }
             }
         }
     }
@@ -90,6 +99,5 @@ public class HelloController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
 }
