@@ -91,40 +91,38 @@ public class data {
     public User login(String username, String password) {
 
         try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-        String url = "jdbc:mysql://localhost:3307/employees";
-        String DBusername = "root";
-        String DBpassword = "";
-        Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
-        String query = "SELECT COUNT(*) FROM employees WHERE emailaddress = ? AND password = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setString(1, username);
-        statement.setString(2, password);
-        ResultSet resultset = statement.executeQuery();
-        if (resultset.next()) {
-            String firstName = resultset.getString("firstname");
-            String lastName = resultset.getString("lastname");
-            String email = resultset.getString("emailaddress");
-            int employeeID = resultset.getInt("employeeID");
-            boolean administrator = resultset.getBoolean("administrator");
-            User user = new User(firstName, lastName, password, username, employeeID, email, administrator);
-            return user;
+            String url = "jdbc:mysql://localhost:3307/employees";
+            String DBusername = "root";
+            String DBpassword = "";
+            Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
+            String query = "SELECT * FROM employees WHERE username = ? AND password = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet resultset = statement.executeQuery();
+            if (resultset.next()) {
+                String firstName = resultset.getString("firstname");
+                String lastName = resultset.getString("lastname");
+                String email = resultset.getString("emailaddress");
+                int employeeID = resultset.getInt("employeeID");
+                boolean administrator = resultset.getBoolean("administrator");
+                User user = new User(firstName, lastName, password, username, employeeID, email, administrator);
+                return user;
+            } else {
+                System.out.println("No matching user found for the given credentials.");
+            }
+        } catch (ClassNotFoundException e) {
+            System.out.println("Failed to load the database driver.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Failed to execute the login query.");
+            e.printStackTrace();
         }
-
-    } catch(ClassNotFoundException e)
-
-    {
-        System.out.println("Failed to load the database driver.");
-        e.printStackTrace();
-    } catch(SQLException e){
-        System.out.println("Failed to check if the user exists.");
-        e.printStackTrace();
-    }
-        System.out.println("user login failed");
+        System.out.println("User login failed");
         return null;
-}
-
+    }
     public void createEmployee(String firstName, String lastName, String emailAddress, String username ,String password,
                                       int employeeID, boolean administrator) {
         try {
@@ -161,10 +159,10 @@ public class data {
             connection.close();
         } catch (ClassNotFoundException e) {
             System.out.println("Failed to load the database driver.");
-            e.printStackTrace();
+            e.getMessage();
         } catch (SQLException e) {
             System.out.println("Failed to create an employee.");
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 

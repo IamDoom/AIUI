@@ -58,13 +58,17 @@ public class HelloController {
 
     }
     @FXML
-    protected void submitlogin() {
-        String password = Password.toString();
-        String username = Username.toString();
+    protected void submitlogin(ActionEvent event) {
+        String password = Password.getText();
+        String username = Username.getText();
         if (password.isEmpty() || username.isEmpty()) {
             errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
+            System.out.println(username);
+            System.out.println(password);
         } else {
             User user = DB.login(username,password);
+            System.out.println(username);
+            System.out.println(password);
             if (user == null){
                 errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
             } else {
