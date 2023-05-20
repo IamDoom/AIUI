@@ -8,7 +8,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-public class AI {
+public class Ai {
     boolean Lightmode = true;
 
     @FXML
