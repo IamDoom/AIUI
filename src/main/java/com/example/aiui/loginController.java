@@ -73,7 +73,7 @@ public class loginController {
             } else {
                 try {
                     System.out.println("login succesfull");
-                    switchToScene2(event);
+                    login(event);
                 } catch (IOException e) {
                     e.printStackTrace();
                     throw new RuntimeException();
@@ -96,7 +96,7 @@ public class loginController {
     }
 
     @FXML
-    public void switchToScene2(ActionEvent event) throws IOException {
+    public void login(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("main-scene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
