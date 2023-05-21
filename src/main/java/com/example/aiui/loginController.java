@@ -1,7 +1,6 @@
 package com.example.aiui;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +15,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 
 
-public class HelloController {
+public class loginController {
     data DB = new data();
 
     private Stage stage;
@@ -73,7 +72,8 @@ public class HelloController {
                 errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
-                    switchToScene2(null);
+                    System.out.println("login succesfull");
+                    switchToScene2(event);
                 } catch (IOException e) {
                     e.printStackTrace();
                     throw new RuntimeException();
