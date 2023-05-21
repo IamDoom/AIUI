@@ -4,6 +4,7 @@ package com.example.aiui;
 import java.sql.*;
 
 class User{
+    private static int IDcounter = 1;
     private String firstName;
     private String lastName;
     private String password;
@@ -18,6 +19,17 @@ class User{
         this.password = password;
         Username = username;
         this.employeeID = employeeID;
+        Email = email;
+        this.administrator = administrator;
+    }
+
+    public User(String firstName, String lastName, String password, String username, String email, boolean administrator) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        Username = username;
+        IDcounter += 1;
+        this.employeeID = IDcounter;
         Email = email;
         this.administrator = administrator;
     }
@@ -80,6 +92,10 @@ class User{
 
 }
 public class data {
+    public boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password, boolean administrator){
+        return true;
+    }
+
     public User retrieveEmployee(User testEmployee) {
         return testEmployee;
     }
@@ -123,7 +139,7 @@ public class data {
         System.out.println("User login failed");
         return null;
     }
-    public void createEmployee(String firstName, String lastName, String emailAddress, String username ,String password,
+    public void createEmployee(String firstName, String lastName, String emailAddress, String username ,String password,  //test employee only for testing sake
                                       int employeeID, boolean administrator) {
         try {
             // Load the driver
