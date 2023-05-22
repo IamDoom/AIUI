@@ -44,7 +44,7 @@ public class loginController {
     @FXML
     private TextField Username = new TextField();
     @FXML
-    private Label errorMessage;
+    private Label errorMessage = new Label();
 
     @FXML
     protected void Toggle(){
@@ -63,6 +63,7 @@ public class loginController {
         String username = Username.getText();
         if (password.isEmpty() || username.isEmpty()) {
             errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
+            System.out.println("Wachtwoord of gebruikersnaam incompleet");
             System.out.println(username);
             System.out.println(password);
         } else {
@@ -71,6 +72,7 @@ public class loginController {
             System.out.println(password);
             if (user == null){
                 errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
+                System.out.println("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
                     System.out.println("login succesfull");

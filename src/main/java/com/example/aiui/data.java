@@ -23,6 +23,16 @@ class User{
         this.administrator = administrator;
     }
 
+    public User(String firstName, String lastName, String password, String username, String email, boolean administrator) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        Username = username;
+        IDcounter += 1;
+        this.employeeID = IDcounter;
+        Email = email;
+        this.administrator = administrator;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -99,7 +109,7 @@ public class data {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String url = "jdbc:mysql://localhost:3307/employees";
+            String url = "jdbc:mysql://localhost:3306/employees";
             String DBusername = "root";
             String DBpassword = "";
             Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
@@ -136,7 +146,7 @@ public class data {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Define connection parameters
-            String url = "jdbc:mysql://localhost:3307/employees"; // Replace "mydatabase" with the name of your database
+            String url = "jdbc:mysql://localhost:3306/employees"; // Replace "mydatabase" with the name of your database
             String DBusername = "root";
             String DBpassword = "";
 
@@ -178,7 +188,7 @@ public class data {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Define connection parameters
-            String url = "jdbc:mysql://localhost:3307/mysql";
+            String url = "jdbc:mysql://localhost:3306/mysql";
             String username = "root";
             String password = "";
 
