@@ -23,16 +23,6 @@ class User{
         this.administrator = administrator;
     }
 
-    public User(String firstName, String lastName, String password, String username, String email, boolean administrator) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        Username = username;
-        IDcounter += 1;
-        this.employeeID = IDcounter;
-        Email = email;
-        this.administrator = administrator;
-    }
 
     public String getFirstName() {
         return firstName;
