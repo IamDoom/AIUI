@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.AI">
    <children>
-      <Pane fx:id="Base" layoutX="3.0" prefHeight="406.4" prefWidth="603.0" style="-fx-background-color: #bcc1c4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="Base" layoutX="3.0" prefHeight="406.4" prefWidth="603.0" style="-fx-background-color: #174694;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane fx:id="sidebar" layoutX="-6.0" prefHeight="407.0" prefWidth="241.0" style="-fx-background-color: #307eb3;" />
-            <TextField fx:id="input" alignment="CENTER" layoutX="269.0" layoutY="353.0" onAction="#setOnKeyPressed" opacity="0.69" prefHeight="35.0" prefWidth="235.0" promptText="type hier uw vraag" style="-fx-background-radius: 10; -fx-border-width: 2; -fx-border-radius: 10; -fx-border-color: #646566;">
+            <Pane fx:id="sidebar" layoutX="-6.0" prefHeight="407.0" prefWidth="241.0" style="-fx-background-color: #5bc3f0;">
+               <children>
+                  <ImageView fitHeight="125.0" fitWidth="216.0" layoutX="13.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@42logo.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+            <TextField fx:id="input" alignment="CENTER" layoutX="268.0" layoutY="365.0" onAction="#setOnKeyPressed" prefHeight="35.0" prefWidth="235.0" promptText="Typ uw vraag..." style="-fx-background-color: white; -fx-background-radius: 4; -fx-border-radius: 4; -fx-border-color: #0078D7;">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="Segoe UI" size="12.0" />
                </font>
             </TextField>
-            <Button fx:id="submit" alignment="CENTER" contentDisplay="CENTER" layoutX="513.0" layoutY="358.0" mnemonicParsing="false" style="-fx-background-color: #307eb3;" text="submit">
+            <Button fx:id="submit" alignment="CENTER" contentDisplay="CENTER" layoutX="533.0" layoutY="370.0" mnemonicParsing="false" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4;" text="Submit" textFill="WHITE">
                <font>
-                  <Font name="Century Gothic Bold Italic" size="13.0" />
+                  <Font name="Segoe UI Bold" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="mode" layoutX="533.0" layoutY="14.0" mnemonicParsing="false" onAction="#Toggle" opacity="0.5" style="-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0;" text="Darkmode">
+            <Button fx:id="mode" layoutX="533.0" layoutY="14.0" mnemonicParsing="false" onAction="#Toggle" style="-fx-background-radius: 4; -fx-background-color: #5BC3F0;" text="Darkmode" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="10.0" />
+                  <Font name="Segoe UI Bold" size="10.0" />
                </font>
             </Button>
-            <Label fx:id="antwoord" layoutX="234.0" layoutY="253.0" prefHeight="17.0" prefWidth="369.0" />
-            <Label fx:id="antwoord2" layoutX="234.0" layoutY="295.0" prefHeight="17.0" prefWidth="369.0" />
+            <ListView fx:id="chatList" layoutX="235.0" layoutY="50.0" prefHeight="306.0" prefWidth="368.0" />
          </children>
       </Pane>
    </children>
