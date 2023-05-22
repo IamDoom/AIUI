@@ -1,7 +1,6 @@
 package com.example.aiui;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +16,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 
-public class HelloController {
+public class loginController {
     data DB = new data();
 
     private Stage stage;
@@ -59,18 +58,23 @@ public class HelloController {
 
     }
     @FXML
-    protected void submitlogin() {
-        String password = Password.toString();
-        String username = Username.toString();
+    protected void submitlogin(ActionEvent event) {
+        String password = Password.getText();
+        String username = Username.getText();
         if (password.isEmpty() || username.isEmpty()) {
             errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
+            System.out.println(username);
+            System.out.println(password);
         } else {
             User user = DB.login(username,password);
+            System.out.println(username);
+            System.out.println(password);
             if (user == null){
                 errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
-                    switchToScene2(null);
+                    System.out.println("login succesfull");
+                    login(event);
                 } catch (IOException e) {
                     e.printStackTrace();
                     throw new RuntimeException();
@@ -93,7 +97,7 @@ public class HelloController {
     }
 
     @FXML
-    public void switchToScene2(ActionEvent event) throws IOException {
+    public void login(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("main-scene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
