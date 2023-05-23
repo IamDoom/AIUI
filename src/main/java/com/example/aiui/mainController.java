@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
@@ -12,8 +13,10 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
+import javafx.stage.Modality;
 
 public class mainController {
+    data DB = new data();
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -38,6 +41,9 @@ public class mainController {
     @FXML
     private Pane settingspane;
     boolean settings = false;
+
+    @FXML
+    private Button setting_register;
 
     @FXML
     private TextField input;
@@ -103,6 +109,29 @@ public class mainController {
             return "As an AI, I don't have feelings or emotions, but I'm functioning as intended and ready to help you. How can I assist you today?";
         } else {
             return "I don't have an answer for that now";
+        }
+    }
+    @FXML
+    protected void registerEmployee(ActionEvent event) throws IOException{
+        Stage stage = (Stage) setting_register.getScene().getWindow();
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register.fxml"));
+            Parent root = fxmlLoader.load();
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.initOwner(stage);
+            popupStage.setTitle("Register employee");
+            popupStage.setScene(new Scene(root));
+
+            // Access the controller of the loaded FXML file if needed
+            registrationController registrationController = fxmlLoader.getController();
+            registrationController.setStage();
+            // Show the popup window
+            popupStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

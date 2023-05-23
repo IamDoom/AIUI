@@ -40,7 +40,7 @@
                         <Font name="Century Gothic Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="register user (admin)" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                  <Button fx:id="setting_register" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" onAction="#registerEmployee" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="register user (admin)" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>

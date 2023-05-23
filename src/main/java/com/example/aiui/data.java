@@ -93,10 +93,53 @@ class User{
 }
 public class data {
     public boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password, boolean administrator){
-        return true;
+        User newEmployee = new User(firstname, lastname, emailaddress, username, password, administrator);
+        try {
+            // Load the driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Define connection parameters
+            String url = "jdbc:mysql://localhost:3307/employees"; // Replace "mydatabase" with the name of your database
+            String DBusername = "root";
+            String DBpassword = "";
+
+            // Establish the connection
+            Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
+
+            // Create an employee
+            String insertQuery = "INSERT INTO employees (firstname, lastname, emailaddress, username, password, employeeID, administrator) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            // Prepare the statement with the employee details
+            PreparedStatement statement = connection.prepareStatement(insertQuery);
+            statement.setString(1, newEmployee.getFirstName());
+            statement.setString(2, newEmployee.getLastName());
+            statement.setString(3, newEmployee.getEmail());
+            statement.setString(4, newEmployee.getUsername());
+            statement.setString(5, newEmployee.getPassword());
+            statement.setInt(6, newEmployee.getEmployeeID());
+            statement.setBoolean(7, newEmployee.isAdministrator());
+
+            // Execute the insert statement
+            int rowsAffected = statement.executeUpdate();
+            System.out.println(rowsAffected+" "+newEmployee.getFirstName()+" "+newEmployee.getLastName()+": "+newEmployee.getEmployeeID()+" is succesvol aangemaakt");
+
+            // Close the statement and connection
+            statement.close();
+            connection.close();
+            return true;
+        } catch (ClassNotFoundException e) {
+            System.out.println("Failed to load the database driver.");
+            e.getMessage();
+            return false;
+        } catch (SQLException e) {
+            System.out.println("Failed to create an employee.");
+            e.getMessage();
+            return false;
+        }
     }
 
     public User retrieveEmployee(User testEmployee) {
+
         return testEmployee;
     }
 
