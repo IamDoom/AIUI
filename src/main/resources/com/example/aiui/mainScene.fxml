@@ -13,7 +13,7 @@
                <children>
                   <ImageView fitHeight="125.0" fitWidth="216.0" layoutX="13.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@42logo.png" />
+                        <Image url="@icons/fullLogo.png" />
                      </image>
                   </ImageView>
                </children></Pane>

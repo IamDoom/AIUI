@@ -13,11 +13,10 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
-import java.util.Objects;
 
 
 public class loginController {
-    data DB = new data();
+    Data DB = new Data();
 
     private Stage stage;
     private Scene scene;
@@ -100,7 +99,7 @@ public class loginController {
 
     @FXML
     public void login(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("main-scene.fxml"));
+        root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
