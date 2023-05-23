@@ -2,7 +2,8 @@ package com.example.aiui;
 
 
 import java.sql.*;
-public class data {
+
+public class Data {
     public boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password, boolean administrator){
         return true;
     }
@@ -140,5 +141,9 @@ public class data {
             System.out.println("Failed to create the database or table.");
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }

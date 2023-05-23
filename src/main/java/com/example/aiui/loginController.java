@@ -13,11 +13,10 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
-import java.util.Objects;
 
 
 public class loginController {
-    data DB = new data();
+    Data DB = new Data();
 
     private Stage stage;
     private Scene scene;
@@ -44,7 +43,7 @@ public class loginController {
     @FXML
     private TextField Username = new TextField();
     @FXML
-    private Label errorMessage;
+    private Label errorMessage = new Label();
 
     @FXML
     protected void Toggle(){
@@ -63,6 +62,7 @@ public class loginController {
         String username = Username.getText();
         if (password.isEmpty() || username.isEmpty()) {
             errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
+            System.out.println("Wachtwoord of gebruikersnaam incompleet");
             System.out.println(username);
             System.out.println(password);
         } else {
@@ -71,6 +71,7 @@ public class loginController {
             System.out.println(password);
             if (user == null){
                 errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
+                System.out.println("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
                     System.out.println("login succesfull");
@@ -98,7 +99,7 @@ public class loginController {
 
     @FXML
     public void login(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("main-scene.fxml"));
+        root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

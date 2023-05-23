@@ -48,7 +48,7 @@ public class AI {
         mode.setStyle("-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0;");
         submit.setStyle("-fx-background-color: #307eb3");
         mode.setText("Darkmode");
-        chatList.setStyle("-fx-background-color: white; -fx-text-fill: black");
+        chatList.setStyle("-fx-control-inner-background: #307eb3; -fx-text-fill: black");
     }
 
     protected void Darkmode() {
@@ -57,7 +57,7 @@ public class AI {
         mode.setStyle("-fx-background-radius: 10; -fx-background-color: #b6b7ba; -fx-border-width: 0;");
         submit.setStyle("-fx-background-color: #b6b7ba;");
         mode.setText("Lightmode");
-        chatList.setStyle("-fx-background-color: black; -fx-text-fill: white");
+        chatList.setStyle("-fx-control-inner-background: black; -fx-text-fill: white");
     }
 
     @FXML

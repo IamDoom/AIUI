@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.HelloController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.loginController">
     <children>
         <Pane fx:id="Base" layoutX="3.0" prefHeight="406.4" prefWidth="603.0" style="-fx-background-color: #174694;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -18,7 +18,7 @@
                <children>
                   <ImageView fitHeight="110.0" fitWidth="197.0" layoutX="27.0" layoutY="158.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
-                         <Image url="@42logo.png" />
+                         <Image url="@icons/fullLogo.png" />
                      </image>
                   </ImageView>
                </children></Pane>
@@ -27,17 +27,17 @@
                   <Font name="Segoe UI Bold" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="username" alignment="CENTER" layoutX="343.0" layoutY="183.0" onAction="#submitlogin" prefHeight="24.0" prefWidth="160.0" promptText="Username" style="-fx-background-color: white; -fx-background-radius: 4; -fx-border-color: #0078D7; -fx-border-radius: 4;">
+            <TextField fx:id="Username" alignment="CENTER" layoutX="343.0" layoutY="183.0" onAction="#submitlogin" prefHeight="24.0" prefWidth="160.0" promptText="Username" style="-fx-background-color: white; -fx-background-radius: 4; -fx-border-color: #0078D7; -fx-border-radius: 4;">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="password" alignment="CENTER" layoutX="343.0" layoutY="217.0" onAction="#submitlogin" prefHeight="24.0" prefWidth="160.0" promptText="Password" style="-fx-background-radius: 4; -fx-background-color: white; -fx-border-color: #0078D7; -fx-border-radius: 4;">
+            <PasswordField fx:id="Password" alignment="CENTER" layoutX="343.0" layoutY="217.0" onAction="#submitlogin" prefHeight="24.0" prefWidth="160.0" promptText="Password" style="-fx-background-radius: 4; -fx-background-color: white; -fx-border-color: #0078D7; -fx-border-radius: 4;">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </PasswordField>
-            <Button fx:id="login" layoutX="400.0" layoutY="262.0" mnemonicParsing="false" onAction="#switchToScene2" style="-fx-background-radius: 4; -fx-background-color: #5BC3F0;" text="login" textFill="WHITE">
+            <Button fx:id="login" layoutX="400.0" layoutY="262.0" mnemonicParsing="false" onAction="#submitlogin" style="-fx-background-radius: 4; -fx-background-color: #5BC3F0;" text="login" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
