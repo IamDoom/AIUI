@@ -33,6 +33,35 @@
                </font>
             </Button>
             <ListView fx:id="chatList" layoutX="235.0" layoutY="50.0" prefHeight="306.0" prefWidth="368.0" />
+            <Pane fx:id="settingspane" layoutX="269.0" layoutY="8.0" prefHeight="285.0" prefWidth="258.0" style="-fx-background-color: #307eb3; -fx-opacity: 70%; -fx-border-color: black; -fx-border-width: 5px;">
+               <children>
+                  <Button fx:id="closeSettings" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#displaySettings" style="-fx-background-color: #307eb3;" text="close" textAlignment="CENTER" textOverrun="CLIP">
+                     <font>
+                        <Font name="Century Gothic Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="register user (admin)" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button defaultButton="true" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="115.0" style="-fx-background-color: #307eb3;" text="language: ">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="82.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="edit user" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="110.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="advanced (admin)" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>
