@@ -12,7 +12,7 @@ public class helloApplication extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             DB.createDB();

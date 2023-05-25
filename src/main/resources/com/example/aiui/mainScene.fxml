@@ -38,7 +38,7 @@
                </font>
             </Button>
             <ListView fx:id="chatList" layoutX="235.0" layoutY="50.0" prefHeight="306.0" prefWidth="368.0" />
-            <Pane fx:id="settingspane" layoutX="269.0" layoutY="8.0" prefHeight="285.0" prefWidth="258.0" style="-fx-background-color: #307eb3; -fx-opacity: 70%; -fx-border-color: black; -fx-border-width: 5px;">
+            <Pane fx:id="settingspane" layoutX="269.0" layoutY="8.0" prefHeight="285.0" prefWidth="258.0" style="-fx-background-color: #307eb3; -fx-opacity: 70%; -fx-border-color: black; -fx-border-width: 5px;" visible="false">
                <children>
                   <Button fx:id="closeSettings" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#displaySettings" style="-fx-background-color: #307eb3;" text="close" textAlignment="CENTER" textOverrun="CLIP">
                      <font>
