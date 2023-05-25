@@ -1,7 +1,6 @@
 package com.example.aiui;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,10 +13,10 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
-import java.util.Objects;
 
 
-public class HelloController {
+public class loginController {
+    Data DB = new Data();
 
     private Stage stage;
     private Scene scene;
@@ -40,11 +39,11 @@ public class HelloController {
     @FXML
     private Button submit;
     @FXML
-    private PasswordField Password;
+    private PasswordField Password = new PasswordField();
     @FXML
-    private TextField username;
+    private TextField Username = new TextField();
     @FXML
-    private Label errorMessage;
+    private Label errorMessage = new Label();
 
     @FXML
     protected void Toggle(){
@@ -58,14 +57,29 @@ public class HelloController {
 
     }
     @FXML
-    protected void submitlogin() {
-        if (Password.getText().isEmpty() || username.getText().isEmpty()) {
+    protected void submitlogin(ActionEvent event) {
+        String password = Password.getText();
+        String username = Username.getText();
+        if (password.isEmpty() || username.isEmpty()) {
             errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
+            System.out.println("Wachtwoord of gebruikersnaam incompleet");
+            System.out.println(username);
+            System.out.println(password);
         } else {
-            try {
-                switchToScene2(null);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            User user = DB.login(username,password);
+            System.out.println(username);
+            System.out.println(password);
+            if (user == null){
+                errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
+                System.out.println("Wachtwoord of gebruikersnaam incorrect");
+            } else {
+                try {
+                    System.out.println("login succesfull");
+                    login(event);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException();
+                }
             }
         }
     }
@@ -84,12 +98,11 @@ public class HelloController {
     }
 
     @FXML
-    public void switchToScene2(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("main-scene.fxml"));
+    public void login(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
 }
