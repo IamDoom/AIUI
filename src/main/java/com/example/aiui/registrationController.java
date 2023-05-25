@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 public class registrationController {
     private Stage stage;
-    data DB = new data();
+    Data DB = new Data();
 
     @FXML
     private Pane Base;

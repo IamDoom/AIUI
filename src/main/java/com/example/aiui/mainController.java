@@ -15,8 +15,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import javafx.stage.Modality;
 
-public class mainController {
-    data DB = new data();
+public class mainController { Data DB = new Data();
     private Stage stage;
     private Scene scene;
     private Parent root;
