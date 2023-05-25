@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.mainController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.Ai">
    <children>
       <Pane fx:id="Base" layoutX="3.0" prefHeight="406.4" prefWidth="603.0" style="-fx-background-color: #bcc1c4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -40,7 +40,7 @@
                         <Font name="Century Gothic Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="register user (admin)" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                  <Button fx:id="setting_register" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" onAction="#registerEmployee" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="register user (admin)" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>
