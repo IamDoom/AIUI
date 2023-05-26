@@ -2,25 +2,31 @@ package com.example.aiui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.control.skin.ToggleButtonSkin;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.stage.Modality;
 
-public class mainController { Data DB = new Data();
+public class mainController implements Initializable {
+    Data DB = new Data();
     private Stage stage;
     private Scene scene;
     private Parent root;
 
     boolean Lightmode = true;
+
+    private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
+    private boolean EnglishIsActive = true;
 
     @FXML
     private ListView<String> chatList;
@@ -32,7 +38,13 @@ public class mainController { Data DB = new Data();
     private Button mode;
 
     @FXML
+    private Label OnderwerpLabel;
+
+    @FXML
     private Button showSettings;
+
+    @FXML
+    private Button Submit;
 
     @FXML
     private Button closeSettings;
@@ -51,6 +63,21 @@ public class mainController { Data DB = new Data();
     private Pane sidebar;
 
     @FXML
+    private Button edituser;
+
+    @FXML
+    private Button language;
+
+    @FXML
+    private Button advanced;
+
+
+
+
+
+    private boolean FirstMessage = true;
+
+    @FXML
     protected void Toggle(){
         if (Lightmode){
             Lightmode = false;
@@ -61,6 +88,38 @@ public class mainController { Data DB = new Data();
         }
 
     }
+
+
+    public void Togglelang(ActionEvent event){
+        if (EnglishIsActive){
+            EnglishIsActive = false;
+            bundle = ResourceBundle.getBundle("com.example.aiui.Nederlands");
+            showSettings.setText(bundle.getString("Settings"));
+            input.setPromptText(bundle.getString("PromptText"));
+            Submit.setText(bundle.getString("Submit"));
+            closeSettings.setText(bundle.getString("closesettings"));
+            advanced.setText(bundle.getString("advanced"));
+            edituser.setText(bundle.getString("edituser"));
+            language.setText(bundle.getString("Taal"));
+            setting_register.setText(bundle.getString("settingsregister"));
+
+
+        } else {
+            EnglishIsActive = true;
+            bundle = ResourceBundle.getBundle("com.example.aiui.English");
+            showSettings.setText(bundle.getString("Settings"));
+            input.setPromptText(bundle.getString("PromptText"));
+            Submit.setText(bundle.getString("Submit"));
+            closeSettings.setText(bundle.getString("closesettings"));
+            advanced.setText(bundle.getString("advanced"));
+            edituser.setText(bundle.getString("edituser"));
+            language.setText(bundle.getString("Taal"));
+            setting_register.setText(bundle.getString("settingsregister"));
+        }
+
+    }
+
+
 
     protected void LightMode() {
         Base.setStyle("-fx-background-color: #bcc1c4;");
@@ -86,6 +145,10 @@ public class mainController { Data DB = new Data();
     @FXML
     public void setOnKeyPressed(ActionEvent Enter) {
         String userMessage = input.getText();
+        if(FirstMessage){
+            OnderwerpLabel.setText(userMessage);
+            FirstMessage = false;
+        }
 
         // Add user's message to the chat list
         chatList.getItems().add("User: " + userMessage);
@@ -135,5 +198,16 @@ public class mainController { Data DB = new Data();
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        showSettings.setText(bundle.getString("Settings"));
+        input.setPromptText(bundle.getString("PromptText"));
+        Submit.setText(bundle.getString("Submit"));
+        closeSettings.setText(bundle.getString("closesettings"));
+        advanced.setText(bundle.getString("advanced"));
+        edituser.setText(bundle.getString("edituser"));
+        language.setText(bundle.getString("Taal"));
+        setting_register.setText(bundle.getString("settingsregister"));
 
+    }
 }
