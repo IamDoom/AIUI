@@ -59,6 +59,7 @@ public class mainController implements Initializable {
     @FXML
     private TextField input;
 
+
     @FXML
     private Pane sidebar;
 
@@ -90,7 +91,7 @@ public class mainController implements Initializable {
     }
 
 
-    public void Togglelang(ActionEvent event){
+    public void Togglelang(ActionEvent event){ // voor taal switchen
         if (EnglishIsActive){
             EnglishIsActive = false;
             bundle = ResourceBundle.getBundle("com.example.aiui.Nederlands");
