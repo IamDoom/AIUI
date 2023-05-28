@@ -76,6 +76,7 @@ public class mainController {
         mode.setText("Lightmode");
     }
 
+
     @FXML
     protected void displaySettings(){
         settingspane.setVisible(!settings);
