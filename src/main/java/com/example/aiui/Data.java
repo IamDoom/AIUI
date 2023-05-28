@@ -2,6 +2,7 @@ package com.example.aiui;
 
 
 import java.sql.*;
+
 public class Data {
     public boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password, boolean administrator){
         User newEmployee = new User(firstname, lastname, emailaddress, username, password, administrator);
@@ -63,7 +64,7 @@ public class Data {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String url = "jdbc:mysql://localhost:3306/employees";
+            String url = "jdbc:mysql://localhost:3307/employees";
             String DBusername = "root";
             String DBpassword = "";
             Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
@@ -100,7 +101,7 @@ public class Data {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Define connection parameters
-            String url = "jdbc:mysql://localhost:3306/employees"; // Replace "mydatabase" with the name of your database
+            String url = "jdbc:mysql://localhost:3307/employees"; // Replace "mydatabase" with the name of your database
             String DBusername = "root";
             String DBpassword = "";
 
@@ -142,7 +143,7 @@ public class Data {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Define connection parameters
-            String url = "jdbc:mysql://localhost:3306/mysql";
+            String url = "jdbc:mysql://localhost:3307/mysql";
             String username = "root";
             String password = "";
 
