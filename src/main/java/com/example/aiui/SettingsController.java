@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
         private String[] modes = {"Dark", "Light"};
         private String[] talen = {"Nederlands", "English"};
-        private ResourceBundle bundle;
+        private static ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,9 +50,9 @@ import java.util.ResourceBundle;
 
         }
 
-
-
-
+        public static ResourceBundle getBundle() {
+            return bundle;
+        }
 
         public String getTaal(){
             return Choicebox2.getValue();
