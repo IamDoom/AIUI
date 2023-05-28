@@ -24,21 +24,20 @@ public class AI {
     @FXML
     private Button submit;
 
-
     @FXML
     public void setOnKeyPressed(ActionEvent Enter) {
         String userMessage = input.getText();
 
-        // Add user's message to the chat list
-        chatList.getItems().add("User: " + userMessage);
+        // Voeg het bericht van de gebruiker toe aan de chatlijst
+        chatList.getItems().add("Gebruiker: " + userMessage);
 
-        // Generate an automatic response
+        // Genereer een automatisch antwoord
         String automaticResponse = generateResponse(userMessage);
 
-        // Add the automatic response to the chat list
+        // Voeg het automatische antwoord toe aan de chatlijst
         chatList.getItems().add("AI: " + automaticResponse);
 
-        // Clear the input field
+        // Maak het invoerveld leeg
         input.clear();
     }
 
@@ -47,7 +46,7 @@ public class AI {
         sidebar.setStyle("-fx-background-color: #307eb3;");
         mode.setStyle("-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0;");
         submit.setStyle("-fx-background-color: #307eb3");
-        mode.setText("Darkmode");
+        mode.setText("Donkere modus");
         chatList.setStyle("-fx-control-inner-background: #307eb3; -fx-text-fill: black");
     }
 
@@ -56,7 +55,7 @@ public class AI {
         sidebar.setStyle("-fx-background-color: #bcc1c4;");
         mode.setStyle("-fx-background-radius: 10; -fx-background-color: #b6b7ba; -fx-border-width: 0;");
         submit.setStyle("-fx-background-color: #b6b7ba;");
-        mode.setText("Lightmode");
+        mode.setText("Lichte modus");
         chatList.setStyle("-fx-control-inner-background: black; -fx-text-fill: white");
     }
 
@@ -69,7 +68,6 @@ public class AI {
             Lightmode = true;
             LightMode();
         }
-
     }
 
     private String generateResponse(String userMessage) {

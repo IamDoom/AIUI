@@ -11,34 +11,34 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.mainController">
    <children>
-      <Pane layoutX="160.0" prefHeight="480.0" prefWidth="480.0" style="-fx-background-color: #174694;">
+      <Pane layoutX="160.0" prefHeight="480.0" prefWidth="480.0" styleClass="rightPanel" stylesheets="@CSS/ChatLight.css">
          <children>
-            <ListView fx:id="chatList" layoutX="52.0" layoutY="87.0" prefHeight="306.0" prefWidth="368.0" />
-            <Button fx:id="submit" alignment="CENTER" contentDisplay="CENTER" layoutX="370.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4;" text="Submit" textFill="WHITE">
+            <ListView fx:id="chatList" layoutX="52.0" layoutY="87.0" prefHeight="306.0" prefWidth="368.0" styleClass="listView" stylesheets="@CSS/ChatLight.css" />
+            <Button fx:id="submit" alignment="CENTER" contentDisplay="CENTER" layoutX="366.0" layoutY="418.0" mnemonicParsing="false" stylesheets="@CSS/ChatLight.css" text="Submit" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="13.0" />
                </font>
             </Button>
-            <TextField fx:id="input" alignment="CENTER" layoutX="118.0" layoutY="419.0" onAction="#setOnKeyPressed" prefHeight="25.0" prefWidth="235.0" promptText="Typ uw vraag..." style="-fx-background-color: white; -fx-background-radius: 4; -fx-border-radius: 4; -fx-border-color: #0078D7;">
+            <TextField fx:id="input" alignment="CENTER" layoutX="122.0" layoutY="418.0" onAction="#setOnKeyPressed" prefHeight="25.0" prefWidth="235.0" promptText="Typ uw vraag..." styleClass="input" stylesheets="@CSS/ChatLight.css">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </TextField>
-            <Button fx:id="mode" layoutX="39.0" layoutY="422.0" mnemonicParsing="false" onAction="#Toggle" style="-fx-background-radius: 4; -fx-background-color: #5BC3F0;" text="Darkmode" textFill="WHITE">
+            <Button fx:id="mode" layoutX="39.0" layoutY="419.0" mnemonicParsing="false" onAction="#Toggle" stylesheets="@CSS/ChatLight.css" text="Darkmode" textFill="WHITE">
                <font>
-                  <Font name="Segoe UI Bold" size="10.0" />
+                  <Font name="Segoe UI Bold" size="1.0" />
                </font>
             </Button>
          </children>
       </Pane>
-      <Pane prefHeight="480.0" prefWidth="160.0" style="-fx-background-color: #5bc3f0;">
+      <Pane prefHeight="480.0" prefWidth="160.0" styleClass="leftPanel" stylesheets="@CSS/ChatLight.css">
          <children>
             <ImageView fitHeight="61.0" fitWidth="121.0" layoutX="27.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/fullLogo.png" />
                </image>
             </ImageView>
-            <ListView layoutX="8.0" layoutY="87.0" prefHeight="306.0" prefWidth="144.0" />
+            <ListView layoutX="8.0" layoutY="87.0" prefHeight="306.0" prefWidth="144.0" styleClass="listView" stylesheets="@CSS/ChatLight.css" />
          </children>
       </Pane>
    </children>
