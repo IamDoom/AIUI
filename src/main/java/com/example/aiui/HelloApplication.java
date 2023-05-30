@@ -12,11 +12,11 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("StartLogin.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("main-scene.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             DB.createDB();
-            DB.createTestEmployee();
+            DB.registerUser("john", "doe", "johndoe@emailadress.com","testusername", "securepassword", false);
             stage.setTitle("AIUI: Login");
             stage.show();
         } catch (Exception e) {

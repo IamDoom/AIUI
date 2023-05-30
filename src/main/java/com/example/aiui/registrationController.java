@@ -89,7 +89,8 @@ public class registrationController {
             String email = register_emailadress.getText();
             String username = register_username.getText();
             String password = register_password.getText();
-            DB.registerUser(firstname,lastname,email,username,password);
+            boolean admin = register_admin.isSelected();
+            DB.registerUser(firstname,lastname,email,username,password,admin);
             closeStage();
         }
     }

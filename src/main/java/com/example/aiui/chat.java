@@ -1,76 +1,50 @@
 package com.example.aiui;
+import java.util.ArrayList;
 
-interface messageFunction{
-     void consolePresentation();
-
-     String sendMessage();
+interface MessageReceiver {
+    void receiveMessage(String message);
 
 }
 
-abstract class message implements messageFunction{
-    private String message;
-    message(String message){
-        this.message = message;
-    }
-
-    public String sendMessage(){
-        return this.message;
-    }
-
-    public String getMessage(){
-        return this.message;
-    }
-
+class tempBot implements MessageReceiver {
     @Override
-    public void consolePresentation() {
-        System.out.println(this.sendMessage());
+    public void receiveMessage(String message) {
+        System.out.println("Bot received message: " + message);
+        String reply = generateReply(message);
+        System.out.println("Bot's reply: " + reply);
+    }
+
+    private String generateReply(String message) {
+
+        return "This is the bot's reply to: " + message;
     }
 
 }
-class question extends message{
-    private String type;
-    private String sender;
-    question(String message, String sender){
-        super(message);
-        this.type = "question";
-        this.sender = sender;
+class tempUser {
+    private MessageReceiver messageReceiver;
+
+    public void setMessageReceiver(MessageReceiver messageReceiver) {
+        this.messageReceiver = messageReceiver;
     }
 
-    public String getSender(){
-        return sender;
+    public void sendMessage(String message) {
+        System.out.println("User sent message: " + message);
+        messageReceiver.receiveMessage(message);
     }
-
-    @Override
-    public String sendMessage(){
-        String identity = this.sender;
-        String question = super.sendMessage();
-        return identity+": "+question;
-    }
-
 }
 
-class answer extends message {
-    private String question;
-    private String sender;
-
-    answer(question question, String message) {
-        super(message);
-        this.question = question.getMessage();
-        this.sender = question.getSender();
-    }
-    //for a question to be answered with an answer the method or answer must first be supplied with the question
-
-    @Override
-    public void consolePresentation(){
-        System.out.println(super.getMessage());
-    }
+class chat{
 
 
 }
 
 
+public class chat{
+            tempUser tempuser = new tempUser();
+            tempBot tempbot = new tempBot();
 
-public class chat {
+            tempuser.setMessageReceiver(tempBot);
 
+            tempuser.sendMessage("Hello, bot!");
 
 }
