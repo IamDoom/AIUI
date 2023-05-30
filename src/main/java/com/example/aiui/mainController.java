@@ -50,6 +50,10 @@ public class mainController implements Initializable {
     private Button closeSettings;
 
     @FXML
+    private Button newChat;
+
+
+    @FXML
     private Pane settingspane;
     boolean settings = false;
 
@@ -135,6 +139,7 @@ public class mainController implements Initializable {
         mode.setText("Lightmode");
     }
 
+
     @FXML
     protected void displaySettings(){
         settingspane.setVisible(!settings);
@@ -155,7 +160,7 @@ public class mainController implements Initializable {
         chatList.getItems().add("User: " + userMessage);
 
         // Generate an automatic response
-        String automaticResponse = generateResponse(userMessage);
+        String automaticResponse = sendMessage(userMessage);
 
         // Add the automatic response to the chat list
         chatList.getItems().add("AI: " + automaticResponse);
@@ -164,7 +169,7 @@ public class mainController implements Initializable {
         input.clear();
     }
 
-    private String generateResponse(String userMessage) {
+    private String sendMessage(String userMessage) {
         // Replace this logic with your own or use an AI/chatbot API
         if (userMessage.equalsIgnoreCase("hello")) {
             return "Hi! How can I assist you?";

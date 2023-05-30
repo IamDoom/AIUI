@@ -3,7 +3,95 @@ package com.example.aiui;
 
 import java.sql.*;
 
-public class Data {
+class User{
+    private static int IDcounter = 1;
+    private String firstName;
+    private String lastName;
+    private String password;
+    private String Username;
+    private int employeeID;
+    private String Email;
+    private boolean administrator;
+
+    public User(String firstName, String lastName, String password, String username, int employeeID, String email, boolean administrator) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        Username = username;
+        this.employeeID = employeeID;
+        Email = email;
+        this.administrator = administrator;
+    }
+
+    public User(String firstName, String lastName, String password, String username, String email, boolean administrator) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        Username = username;
+        IDcounter += 1;
+        this.employeeID = IDcounter;
+        Email = email;
+        this.administrator = administrator;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String username) {
+        Username = username;
+    }
+
+    public int getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public boolean isAdministrator() {
+        return administrator;
+    }
+
+    public void setAdministrator(boolean administrator) {
+        this.administrator = administrator;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+
+}
+public class data {
     public boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password, boolean administrator){
         User newEmployee = new User(firstname, lastname, emailaddress, username, password, administrator);
         try {
@@ -11,7 +99,7 @@ public class Data {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Define connection parameters
-            String url = "jdbc:mysql://localhost:3306/employees"; // Replace "mydatabase" with the name of your database
+            String url = "jdbc:mysql://localhost:3307/employees"; // Replace "mydatabase" with the name of your database
             String DBusername = "root";
             String DBpassword = "";
 
@@ -64,7 +152,7 @@ public class Data {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String url = "jdbc:mysql://localhost:3306/employees";
+            String url = "jdbc:mysql://localhost:3307/employees";
             String DBusername = "root";
             String DBpassword = "";
             Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
@@ -94,65 +182,57 @@ public class Data {
         System.out.println("User login failed");
         return null;
     }
-    public void createEmployee(String firstName, String lastName, String emailAddress, String username ,String password,  //test employee only for testing sake
-                                      int employeeID, boolean administrator) {
+
+    public  void createChatDB(){
         try {
             // Load the driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // Define connection parameters
-            String url = "jdbc:mysql://localhost:3306/employees"; // Replace "mydatabase" with the name of your database
-            String DBusername = "root";
-            String DBpassword = "";
+            Class.forName(dbClass);
 
             // Establish the connection
-            Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
+            Connection connection = DriverManager.getConnection(employeesUrl, dbUsername, dbPassword);
 
-            // Create an employee
-            String insertQuery = "INSERT INTO employees (firstname, lastname, emailaddress, username, password, employeeID, administrator) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            // Create a new database
+            Statement statement = connection.createStatement();
+            String databaseName = "chats";
+            String createDatabaseQuery = "CREATE DATABASE " + databaseName;
+            statement.executeUpdate(createDatabaseQuery);
+            System.out.println("Database created successfully!");
 
-            // Prepare the statement with the employee details
-            PreparedStatement statement = connection.prepareStatement(insertQuery);
-            statement.setString(1, firstName);
-            statement.setString(2, lastName);
-            statement.setString(3, emailAddress);
-            statement.setString(4, username);
-            statement.setString(5, password);
-            statement.setInt(6, employeeID);
-            statement.setBoolean(7, administrator);
+            // Switch to the new database
+            statement.execute("USE " + databaseName);
 
-            // Execute the insert statement
-            int rowsAffected = statement.executeUpdate();
-            System.out.println(rowsAffected + " row(s) inserted successfully!");
+            // Create a new table
+            String createTableQuery = "CREATE TABLE chats (" +
+                    "id INT PRIMARY KEY AUTO_INCREMENT," +
+                    "username VARCHAR(50) NOT NULL," +
+                    "message VARCHAR(250) NOT NULL," +
+                    ")";
+            statement.executeUpdate(createTableQuery);
+            System.out.println("Table created successfully!");
 
             // Close the statement and connection
             statement.close();
             connection.close();
         } catch (ClassNotFoundException e) {
             System.out.println("Failed to load the database driver.");
-            e.getMessage();
+            e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("Failed to create an employee.");
-            e.getMessage();
+            System.out.println("Failed to create the database or table.");
+            e.printStackTrace();
         }
     }
 
     public  void createDB(){
         try {
             // Load the driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // Define connection parameters
-            String url = "jdbc:mysql://localhost:3306/mysql";
-            String username = "root";
-            String password = "";
+            Class.forName(dbClass);
 
             // Establish the connection
-            Connection connection = DriverManager.getConnection(url, username, password);
+            Connection connection = DriverManager.getConnection(employeesUrl, dbUsername, dbPassword);
 
             // Create a new database
             Statement statement = connection.createStatement();
-            String databaseName = "employees"; // Replace with your desired database name
+            String databaseName = "employees";
             String createDatabaseQuery = "CREATE DATABASE " + databaseName;
             statement.executeUpdate(createDatabaseQuery);
             System.out.println("Database created successfully!");
