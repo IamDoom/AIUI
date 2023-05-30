@@ -14,7 +14,6 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
 
-
 public class loginController {
     Data DB = new Data();
 
@@ -22,20 +21,17 @@ public class loginController {
     private Scene scene;
     private Parent root;
     boolean Lightmode = true;
+
     @FXML
     private Pane Base;
     @FXML
     private Button login;
-
     @FXML
     private Button mode;
-
     @FXML
     private TextField input;
-
     @FXML
     private Pane sidebar;
-
     @FXML
     private Button submit;
     @FXML
@@ -45,36 +41,45 @@ public class loginController {
     @FXML
     private Label errorMessage = new Label();
 
+    /**
+     * Methode om tussen lichte en donkere modus te schakelen
+     */
     @FXML
-    protected void Toggle(){
-        if (Lightmode){
+    protected void Toggle() {
+        if (Lightmode) {
             Lightmode = false;
-            Darkmode();
+            darkMode();
         } else {
             Lightmode = true;
-            LightMode();
+            lightMode();
         }
-
     }
+
+    /**
+     * Methode om in te loggen na het indrukken van de login knop
+     * @param event Het actie-evenement
+     */
     @FXML
-    protected void submitlogin(ActionEvent event) {
+    protected void submitLogin(ActionEvent event) {
         String password = Password.getText();
         String username = Username.getText();
+
         if (password.isEmpty() || username.isEmpty()) {
             errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
             System.out.println("Wachtwoord of gebruikersnaam incompleet");
             System.out.println(username);
             System.out.println(password);
         } else {
-            User user = DB.login(username,password);
+            User user = DB.login(username, password);
             System.out.println(username);
             System.out.println(password);
-            if (user == null){
+
+            if (user == null) {
                 errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
                 System.out.println("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
-                    System.out.println("login succesfull");
+                    System.out.println("Login succesvol");
                     login(event);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -84,19 +89,31 @@ public class loginController {
         }
     }
 
-    protected void LightMode() {
+    /**
+     * Methode om de lichte modus in te schakelen
+     */
+    protected void lightMode() {
         Base.setStyle("-fx-background-color: #bcc1c4;");
         sidebar.setStyle("-fx-background-color: #307eb3;");
         mode.setStyle("-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0;");
         mode.setText("Darkmode");
     }
-    protected void Darkmode() {
+
+    /**
+     * Methode om de donkere modus in te schakelen
+     */
+    protected void darkMode() {
         Base.setStyle("-fx-background-color: #000000");
         sidebar.setStyle("-fx-background-color: #bcc1c4;");
         mode.setStyle("-fx-background-radius: 10; -fx-background-color: #b6b7ba; -fx-border-width: 0;");
         mode.setText("Lightmode");
     }
 
+    /**
+     * Methode om in te loggen en de hoofdscene te laden
+     * @param event Het actie-evenement
+     * @throws IOException Als er een fout optreedt bij het laden van de fxml-bestanden
+     */
     @FXML
     public void login(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
