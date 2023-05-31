@@ -5,6 +5,12 @@ interface MessageReceiver {
     void receiveMessage(String message);
 
 }
+/*
+user has method startchat() start chat creates chat object which calls chat which may or may not create a bot (still considering)
+then this method interfaces with the guy and then when it calls on the method to append to chat log. then when new chat is started
+or chat is closed the startchat method returns a method of getting the chat and storing it while restarting the startchat method.
+this is a mere sggestion based on the college class 30/05/2023
+*/
 
 class tempBot implements MessageReceiver {
     @Override
@@ -27,15 +33,10 @@ class tempUser {
         this.messageReceiver = messageReceiver;
     }
 
-    public void sendMessage(String message) {
+    public void sendessage(String message) {
         System.out.println("User sent message: " + message);
         messageReceiver.receiveMessage(message);
     }
-}
-
-class chat{
-
-
 }
 
 
@@ -43,8 +44,8 @@ public class chat{
             tempUser tempuser = new tempUser();
             tempBot tempbot = new tempBot();
 
-            tempuser.setMessageReceiver(tempBot);
+           // tempuser.setMessageReceiver(tempBot);
 
-            tempuser.sendMessage("Hello, bot!");
+           // tempuser.sendessage("Hello, bot!");
 
 }

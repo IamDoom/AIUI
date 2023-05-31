@@ -17,6 +17,7 @@ import java.io.IOException;
 
 public class loginController {
     Data DB = new Data();
+    User user = new User();
 
     private Stage stage;
     private Scene scene;
@@ -66,7 +67,7 @@ public class loginController {
             System.out.println(username);
             System.out.println(password);
         } else {
-            User user = DB.login(username,password);
+            user = DB.login(username,password);
             System.out.println(username);
             System.out.println(password);
             if (user == null){
@@ -99,7 +100,10 @@ public class loginController {
 
     @FXML
     public void login(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
+        FXMLLoader loader = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
+        Parent root = loader.load();
+        mainController mainController = loader.getController();
+        mainController.setUser(user);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

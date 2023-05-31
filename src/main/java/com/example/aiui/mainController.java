@@ -19,6 +19,7 @@ import javafx.stage.Modality;
 
 public class mainController implements Initializable {
     Data DB = new Data();
+    User user = new User();
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -27,6 +28,10 @@ public class mainController implements Initializable {
 
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
     private boolean EnglishIsActive = true;
+
+    public void setUser(User user){
+        this.user = user;
+    }
 
     @FXML
     private ListView<String> chatList;
@@ -75,10 +80,6 @@ public class mainController implements Initializable {
 
     @FXML
     private Button advanced;
-
-
-
-
 
     private boolean FirstMessage = true;
 
@@ -151,16 +152,15 @@ public class mainController implements Initializable {
     @FXML
     public void setOnKeyPressed(ActionEvent Enter) {
         String userMessage = input.getText();
-        if(FirstMessage){
+        if(!OnderwerpLabel.hasProperties()){
             OnderwerpLabel.setText(userMessage);
-            FirstMessage = false;
         }
 
         // Add user's message to the chat list
         chatList.getItems().add("User: " + userMessage);
 
         // Generate an automatic response
-        String automaticResponse = sendMessage(userMessage);
+        String automaticResponse = user.sendMessage(userMessage);
 
         // Add the automatic response to the chat list
         chatList.getItems().add("AI: " + automaticResponse);
@@ -169,15 +169,10 @@ public class mainController implements Initializable {
         input.clear();
     }
 
-    private String sendMessage(String userMessage) {
+    private String getUserInput(String userMessage) {
         // Replace this logic with your own or use an AI/chatbot API
-        if (userMessage.equalsIgnoreCase("hello")) {
-            return "Hi! How can I assist you?";
-        } else if (userMessage.equalsIgnoreCase("How are you?") || userMessage.toLowerCase().startsWith("how are you")) {
-            return "As an AI, I don't have feelings or emotions, but I'm functioning as intended and ready to help you. How can I assist you today?";
-        } else {
             return "I don't have an answer for that now";
-        }
+
     }
     @FXML
     protected void registerEmployee(ActionEvent event) throws IOException{

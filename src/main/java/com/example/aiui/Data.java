@@ -1,111 +1,20 @@
 package com.example.aiui;
-
-
 import java.sql.*;
 
-class User{
-    private static int IDcounter = 1;
-    private String firstName;
-    private String lastName;
-    private String password;
-    private String Username;
-    private int employeeID;
-    private String Email;
-    private boolean administrator;
+public class Data {
 
-    public User(String firstName, String lastName, String password, String username, int employeeID, String email, boolean administrator) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        Username = username;
-        this.employeeID = employeeID;
-        Email = email;
-        this.administrator = administrator;
-    }
+    String dbDriver = "com.mysql.cj.jdbc.Driver";
+    String dbUrl = "jdbc:mysql://localhost:3307/employees";
+    String dbUsername = "root";
+    String dbPassword = "";
 
-    public User(String firstName, String lastName, String password, String username, String email, boolean administrator) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        Username = username;
-        IDcounter += 1;
-        this.employeeID = IDcounter;
-        Email = email;
-        this.administrator = administrator;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getUsername() {
-        return Username;
-    }
-
-    public void setUsername(String username) {
-        Username = username;
-    }
-
-    public int getEmployeeID() {
-        return employeeID;
-    }
-
-    public void setEmployeeID(int employeeID) {
-        this.employeeID = employeeID;
-    }
-
-    public boolean isAdministrator() {
-        return administrator;
-    }
-
-    public void setAdministrator(boolean administrator) {
-        this.administrator = administrator;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-
-}
-public class data {
     public boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password, boolean administrator){
         User newEmployee = new User(firstname, lastname, emailaddress, username, password, administrator);
         try {
             // Load the driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // Define connection parameters
-            String url = "jdbc:mysql://localhost:3307/employees"; // Replace "mydatabase" with the name of your database
-            String DBusername = "root";
-            String DBpassword = "";
-
+            Class.forName(dbDriver);
             // Establish the connection
-            Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
-
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
             // Create an employee
             String insertQuery = "INSERT INTO employees (firstname, lastname, emailaddress, username, password, employeeID, administrator) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -142,20 +51,12 @@ public class data {
 
         return testEmployee;
     }
-
-    public void createTestEmployee() {
-        createEmployee("john", "doe", "johndoe@emailadress.com","testusername", "securepassword", 234045, true);
-
-    }
     public User login(String username, String password) {
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(dbDriver);
 
-            String url = "jdbc:mysql://localhost:3307/employees";
-            String DBusername = "root";
-            String DBpassword = "";
-            Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
             String query = "SELECT * FROM employees WHERE username = ? AND password = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
@@ -186,10 +87,10 @@ public class data {
     public  void createChatDB(){
         try {
             // Load the driver
-            Class.forName(dbClass);
+            Class.forName(dbDriver);
 
             // Establish the connection
-            Connection connection = DriverManager.getConnection(employeesUrl, dbUsername, dbPassword);
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 
             // Create a new database
             Statement statement = connection.createStatement();
@@ -214,10 +115,10 @@ public class data {
             statement.close();
             connection.close();
         } catch (ClassNotFoundException e) {
-            System.out.println("Failed to load the database driver.");
+            System.out.println("Failed to load the chatdatabase driver.");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("Failed to create the database or table.");
+            System.out.println("Failed to create the chatdatabase or table.");
             e.printStackTrace();
         }
     }
@@ -225,10 +126,10 @@ public class data {
     public  void createDB(){
         try {
             // Load the driver
-            Class.forName(dbClass);
+            Class.forName(dbDriver);
 
             // Establish the connection
-            Connection connection = DriverManager.getConnection(employeesUrl, dbUsername, dbPassword);
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 
             // Create a new database
             Statement statement = connection.createStatement();
@@ -249,7 +150,7 @@ public class data {
                     "username VARCHAR(50) NOT NULL UNIQUE,"+
                     "password VARCHAR(50) NOT NULL," +
                     "employeeID INT NOT NULL UNIQUE," +
-                    "administrator BOOLEAN NOT NULL" +
+                    "administrator BOOLEAN NOT NULL," +
                     ")";
             statement.executeUpdate(createTableQuery);
             System.out.println("Table created successfully!");
@@ -264,9 +165,5 @@ public class data {
             System.out.println("Failed to create the database or table.");
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-
     }
 }

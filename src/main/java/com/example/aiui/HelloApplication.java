@@ -7,12 +7,12 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 
 public class HelloApplication extends Application {
-   data DB = new data();
+   Data DB = new Data();
 
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("main-scene.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             DB.createDB();
