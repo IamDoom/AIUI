@@ -2,6 +2,7 @@ package com.example.aiui;
 
 
 import java.sql.*;
+
 public class Data {
     public boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password, boolean administrator){
         User newEmployee = new User(firstname, lastname, emailaddress, username, password, administrator);

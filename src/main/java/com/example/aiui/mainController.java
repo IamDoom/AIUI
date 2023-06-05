@@ -1,32 +1,32 @@
 package com.example.aiui;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.*;
+import javafx.scene.control.skin.ToggleButtonSkin;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.stage.Modality;
 
-public class mainController {
+public class mainController implements Initializable {
     Data DB = new Data();
     private Stage stage;
     private Scene scene;
     private Parent root;
 
     boolean Lightmode = true;
+
+    private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
+    private boolean EnglishIsActive = true;
 
     @FXML
     private ListView<String> chatList;
@@ -38,7 +38,13 @@ public class mainController {
     private Button mode;
 
     @FXML
+    private Label OnderwerpLabel;
+
+    @FXML
     private Button showSettings;
+
+    @FXML
+    private Button Submit;
 
     @FXML
     private Button closeSettings;
@@ -53,19 +59,24 @@ public class mainController {
     @FXML
     private TextField input;
 
+
     @FXML
     private Pane sidebar;
 
-    private ObservableList<String> conversation; // Houdt de gesprekken bij
+    @FXML
+    private Button edituser;
 
     @FXML
-    protected void initialize() {
-        conversation = FXCollections.observableArrayList();
-        chatList.setItems(conversation);
+    private Button language;
 
-        // Laad de gesprekken
-        loadConversation();
-    }
+    @FXML
+    private Button advanced;
+
+
+
+
+
+    private boolean FirstMessage = true;
 
     @FXML
     protected void Toggle(){
@@ -76,7 +87,40 @@ public class mainController {
             Lightmode = true;
             LightMode();
         }
+
     }
+
+
+    public void Togglelang(ActionEvent event){ // voor taal switchen
+        if (EnglishIsActive){
+            EnglishIsActive = false;
+            bundle = ResourceBundle.getBundle("com.example.aiui.Nederlands");
+            showSettings.setText(bundle.getString("Settings"));
+            input.setPromptText(bundle.getString("PromptText"));
+            Submit.setText(bundle.getString("Submit"));
+            closeSettings.setText(bundle.getString("closesettings"));
+            advanced.setText(bundle.getString("advanced"));
+            edituser.setText(bundle.getString("edituser"));
+            language.setText(bundle.getString("Taal"));
+            setting_register.setText(bundle.getString("settingsregister"));
+
+
+        } else {
+            EnglishIsActive = true;
+            bundle = ResourceBundle.getBundle("com.example.aiui.English");
+            showSettings.setText(bundle.getString("Settings"));
+            input.setPromptText(bundle.getString("PromptText"));
+            Submit.setText(bundle.getString("Submit"));
+            closeSettings.setText(bundle.getString("closesettings"));
+            advanced.setText(bundle.getString("advanced"));
+            edituser.setText(bundle.getString("edituser"));
+            language.setText(bundle.getString("Taal"));
+            setting_register.setText(bundle.getString("settingsregister"));
+        }
+
+    }
+
+
 
     protected void LightMode() {
         Base.setStyle("-fx-background-color: #bcc1c4;");
@@ -84,7 +128,6 @@ public class mainController {
         mode.setStyle("-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0;");
         mode.setText("Darkmode");
     }
-
     protected void Darkmode() {
         Base.setStyle("-fx-background-color: #000000");
         sidebar.setStyle("-fx-background-color: #bcc1c4;");
@@ -99,25 +142,30 @@ public class mainController {
         settings = !settings;
     }
 
+
     @FXML
     public void setOnKeyPressed(ActionEvent Enter) {
         String userMessage = input.getText();
+        if(FirstMessage){
+            OnderwerpLabel.setText(userMessage);
+            FirstMessage = false;
+        }
 
-        // Voeg het bericht van de gebruiker toe aan de chatgesprekken
-        conversation.add("User: " + userMessage);
+        // Add user's message to the chat list
+        chatList.getItems().add("User: " + userMessage);
 
-        // Genereer een automatisch antwoord
+        // Generate an automatic response
         String automaticResponse = generateResponse(userMessage);
 
-        // Voeg het automatische antwoord toe aan de chatgesprekken
-        conversation.add("AI: " + automaticResponse);
+        // Add the automatic response to the chat list
+        chatList.getItems().add("AI: " + automaticResponse);
 
-        // Wis het invoerveld
+        // Clear the input field
         input.clear();
     }
 
     private String generateResponse(String userMessage) {
-        // Vervang deze logica door je eigen implementatie of gebruik een AI/chatbot API
+        // Replace this logic with your own or use an AI/chatbot API
         if (userMessage.equalsIgnoreCase("hello")) {
             return "Hi! How can I assist you?";
         } else if (userMessage.equalsIgnoreCase("How are you?") || userMessage.toLowerCase().startsWith("how are you")) {
@@ -126,7 +174,6 @@ public class mainController {
             return "I don't have an answer for that now";
         }
     }
-
     @FXML
     protected void registerEmployee(ActionEvent event) throws IOException{
         Stage stage = (Stage) setting_register.getScene().getWindow();
@@ -141,58 +188,27 @@ public class mainController {
             popupStage.setTitle("Register employee");
             popupStage.setScene(new Scene(root));
 
-            // Toegang tot de controller van het geladen FXML-bestand indien nodig
+            // Access the controller of the loaded FXML file if needed
             registrationController registrationController = fxmlLoader.getController();
             registrationController.setStage();
-            // Toon het popup-venster
+            // Show the popup window
             popupStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @FXML
-    public void LogoutButton(ActionEvent event) throws IOException {
-        // Stap 1: Het gesprek opslaan
-        saveConversation();
 
-        // Stap 2: Uitloggen en navigeren naar het startscherm
-        root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        showSettings.setText(bundle.getString("Settings"));
+        input.setPromptText(bundle.getString("PromptText"));
+        Submit.setText(bundle.getString("Submit"));
+        closeSettings.setText(bundle.getString("closesettings"));
+        advanced.setText(bundle.getString("advanced"));
+        edituser.setText(bundle.getString("edituser"));
+        language.setText(bundle.getString("Taal"));
+        setting_register.setText(bundle.getString("settingsregister"));
 
-    private void saveConversation() {
-        // Stap 1: Implementeer hier je logica om het gesprek op te slaan
-        // In dit voorbeeld wordt het gesprek opgeslagen naar een tekstbestand met de naam "conversation.txt"
-        try {
-            FileWriter writer = new FileWriter("conversation.txt");
-            for (String message : conversation) {
-                writer.write(message + "\n");
-            }
-            writer.close();
-            System.out.println("Gesprek opgeslagen.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    private void loadConversation() {
-        try {
-            // Lees het tekstbestand "conversation.txt"
-            BufferedReader reader = new BufferedReader(new FileReader("conversation.txt"));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // Voeg elk bericht toe aan de gesprekkenlijst
-                conversation.add(line);
-            }
-
-            reader.close();
-            System.out.println("Gesprek geladen.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
