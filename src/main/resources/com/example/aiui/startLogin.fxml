@@ -12,18 +12,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="480.0" minWidth="640.0" stylesheets="@CSS/LoginLight.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.loginController">
+<AnchorPane minHeight="480.0" minWidth="640.0" stylesheets="@CSS/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.loginController">
     <children>
-      <Pane layoutX="160.0" minHeight="480.0" minWidth="480.0" styleClass="rightPanel" stylesheets="@CSS/LoginLight.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="rightPane" layoutX="160.0" minHeight="480.0" minWidth="480.0" styleClass="rightPanel" stylesheets="@CSS/Login.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER" layoutX="115.0" layoutY="115.0" minHeight="250.0" minWidth="250.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="139.0" styleClass="loginTitle" stylesheets="@CSS/LoginLight.css" text="LOGIN">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="139.0" styleClass="loginTitle" stylesheets="@CSS/Login.css" text="LOGIN">
                      <VBox.margin>
                         <Insets bottom="32.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="Username" alignment="CENTER" onAction="#submitlogin" promptText="Username" styleClass="input" stylesheets="@CSS/LoginLight.css">
+                  <TextField fx:id="username" alignment="CENTER" onAction="#submitlogin" promptText="Username" styleClass="input" stylesheets="@CSS/Login.css">
                      <font>
                         <Font name="Segoe UI" size="12.0" />
                      </font>
@@ -31,7 +31,7 @@
                         <Insets bottom="8.0" />
                      </VBox.margin>
                   </TextField>
-                  <PasswordField fx:id="Password" alignment="CENTER" onAction="#submitlogin" promptText="Password" styleClass="input" stylesheets="@CSS/LoginLight.css">
+                  <PasswordField fx:id="password" alignment="CENTER" onAction="#submitlogin" promptText="Password" styleClass="input" stylesheets="@CSS/Login.css">
                      <font>
                         <Font name="Segoe UI" size="12.0" />
                      </font>
@@ -39,7 +39,7 @@
                         <Insets bottom="16.0" />
                      </VBox.margin>
                   </PasswordField>
-                  <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" mnemonicParsing="false" onAction="#submitlogin" styleClass="input" stylesheets="@CSS/LoginLight.css" text="login" textFill="WHITE">
+                  <Button fx:id="button" alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" mnemonicParsing="false" onAction="#submitlogin" styleClass="input" stylesheets="@CSS/Login.css" text="login" textFill="WHITE">
                      <font>
                         <Font name="Segoe UI" size="12.0" />
                      </font>
@@ -47,7 +47,7 @@
                         <Insets bottom="8.0" />
                      </VBox.margin>
                   </Button>
-                      <Button fx:id="mode" alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" mnemonicParsing="false" onAction="#Toggle" styleClass="input" stylesheets="@CSS/LoginLight.css" text="Darkmode" textFill="WHITE">
+                      <Button fx:id="mode" alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" mnemonicParsing="false" onAction="#Toggle" styleClass="input" stylesheets="@CSS/Login.css" text="Darkmode" textFill="WHITE">
                           <font>
                               <Font name="Segoe UI" size="12.0" />
                           </font>
@@ -56,7 +56,7 @@
             </VBox>
          </children>
       </Pane>
-      <Pane minHeight="480.0" minWidth="160.0" styleClass="leftPanel" stylesheets="@CSS/LoginLight.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="leftPane" minHeight="480.0" minWidth="160.0" styleClass="leftPanel" stylesheets="@CSS/Login.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="81.0" fitWidth="160.0" layoutX="11.0" layoutY="200.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>

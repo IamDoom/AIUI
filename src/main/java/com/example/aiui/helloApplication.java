@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 
+import java.util.Objects;
+
 public class helloApplication extends Application {
     Data DB = new Data();
 
@@ -13,7 +15,7 @@ public class helloApplication extends Application {
     public void start(Stage stage) {
         try {
             // Het laden van het FXML-bestand
-            Parent root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("startLogin.fxml")));
 
             // Creëren van een scene
             Scene scene = new Scene(root);

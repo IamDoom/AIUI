@@ -1,30 +1,70 @@
 package com.example.aiui;
 
+
 import java.sql.*;
 
 public class Data {
-
-    // Registreren van een gebruiker
     public boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password, boolean administrator){
-        return true;
+        User newEmployee = new User(firstname, lastname, emailaddress, username, password, administrator);
+        try {
+            // Load the driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Define connection parameters
+            String url = "jdbc:mysql://localhost:3306/employees"; // Replace "mydatabase" with the name of your database
+            String DBusername = "root";
+            String DBpassword = "";
+
+            // Establish the connection
+            Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
+
+            // Create an employee
+            String insertQuery = "INSERT INTO employees (firstname, lastname, emailaddress, username, password, employeeID, administrator) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            // Prepare the statement with the employee details
+            PreparedStatement statement = connection.prepareStatement(insertQuery);
+            statement.setString(1, newEmployee.getFirstName());
+            statement.setString(2, newEmployee.getLastName());
+            statement.setString(3, newEmployee.getEmail());
+            statement.setString(4, newEmployee.getUsername());
+            statement.setString(5, newEmployee.getPassword());
+            statement.setInt(6, newEmployee.getEmployeeID());
+            statement.setBoolean(7, newEmployee.isAdministrator());
+
+            // Execute the insert statement
+            int rowsAffected = statement.executeUpdate();
+            System.out.println(rowsAffected+" "+newEmployee.getFirstName()+" "+newEmployee.getLastName()+": "+newEmployee.getEmployeeID()+" is succesvol aangemaakt");
+
+            // Close the statement and connection
+            statement.close();
+            connection.close();
+            return true;
+        } catch (ClassNotFoundException e) {
+            System.out.println("Failed to load the database driver.");
+            e.getMessage();
+            return false;
+        } catch (SQLException e) {
+            System.out.println("Failed to create an employee.");
+            e.getMessage();
+            return false;
+        }
     }
 
-    // Gegevens ophalen van een medewerker
     public User retrieveEmployee(User testEmployee) {
+
         return testEmployee;
     }
 
-    // Voor het testen: maak een testmedewerker aan
     public void createTestEmployee() {
-        createEmployee("john", "doe", "emailadres@voorbeeld.com","testgebruiker", "wachtwoord", 234045, true);
-    }
+        createEmployee("john", "doe", "johndoe@emailadress.com","testusername", "securepassword", 234045, true);
 
-    // Inloggen van een gebruiker
+    }
     public User login(String username, String password) {
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String url = "jdbc:mysql://localhost:3307/employees"; // Verander "employees" naar de naam van jouw database
+            String url = "jdbc:mysql://localhost:3306/employees";
             String DBusername = "root";
             String DBpassword = "";
             Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
@@ -42,38 +82,36 @@ public class Data {
                 User user = new User(firstName, lastName, password, username, employeeID, email, administrator);
                 return user;
             } else {
-                System.out.println("Geen overeenkomende gebruiker gevonden voor de opgegeven inloggegevens.");
+                System.out.println("No matching user found for the given credentials.");
             }
         } catch (ClassNotFoundException e) {
-            System.out.println("Kon de database driver niet laden.");
+            System.out.println("Failed to load the database driver.");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("Fout bij het uitvoeren van de login-query.");
+            System.out.println("Failed to execute the login query.");
             e.printStackTrace();
         }
-        System.out.println("Inloggen mislukt");
+        System.out.println("User login failed");
         return null;
     }
-
-    // Een medewerker aanmaken
-    public void createEmployee(String firstName, String lastName, String emailAddress, String username, String password,
+    public void createEmployee(String firstName, String lastName, String emailAddress, String username ,String password,  //test employee only for testing sake
                                int employeeID, boolean administrator) {
         try {
-            // Laden van de database driver
+            // Load the driver
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Definieer de verbindingsparameters
-            String url = "jdbc:mysql://localhost:3307/employees"; // Verander "employees" naar de naam van jouw database
+            // Define connection parameters
+            String url = "jdbc:mysql://localhost:3306/employees"; // Replace "mydatabase" with the name of your database
             String DBusername = "root";
             String DBpassword = "";
 
-            // Verbinding maken met de database
+            // Establish the connection
             Connection connection = DriverManager.getConnection(url, DBusername, DBpassword);
 
-            // Een medewerker aanmaken
+            // Create an employee
             String insertQuery = "INSERT INTO employees (firstname, lastname, emailaddress, username, password, employeeID, administrator) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            // Voorbereiden van de statement met de medewerkersgegevens
+            // Prepare the statement with the employee details
             PreparedStatement statement = connection.prepareStatement(insertQuery);
             statement.setString(1, firstName);
             statement.setString(2, lastName);
@@ -83,68 +121,67 @@ public class Data {
             statement.setInt(6, employeeID);
             statement.setBoolean(7, administrator);
 
-            // Uitvoeren van de insert statement
+            // Execute the insert statement
             int rowsAffected = statement.executeUpdate();
-            System.out.println(rowsAffected + " rij(en) succesvol toegevoegd!");
+            System.out.println(rowsAffected + " row(s) inserted successfully!");
 
-            // Sluiten van de statement en verbinding
+            // Close the statement and connection
             statement.close();
             connection.close();
         } catch (ClassNotFoundException e) {
-            System.out.println("Kon de database driver niet laden.");
+            System.out.println("Failed to load the database driver.");
             e.getMessage();
         } catch (SQLException e) {
-            System.out.println("Fout bij het aanmaken van een medewerker.");
+            System.out.println("Failed to create an employee.");
             e.getMessage();
         }
     }
 
-    // Een database en tabel aanmaken
-    public void createDB(){
+    public  void createDB(){
         try {
-            // Laden van de database driver
+            // Load the driver
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Definieer de verbindingsparameters
-            String url = "jdbc:mysql://localhost:3307/mysql";
+            // Define connection parameters
+            String url = "jdbc:mysql://localhost:3306/mysql";
             String username = "root";
             String password = "";
 
-            // Verbinding maken met de database
+            // Establish the connection
             Connection connection = DriverManager.getConnection(url, username, password);
 
-            // Een nieuwe database aanmaken
+            // Create a new database
             Statement statement = connection.createStatement();
-            String databaseName = "employees"; // Verander naar de gewenste naam van je database
+            String databaseName = "employees"; // Replace with your desired database name
             String createDatabaseQuery = "CREATE DATABASE " + databaseName;
             statement.executeUpdate(createDatabaseQuery);
-            System.out.println("Database succesvol aangemaakt!");
+            System.out.println("Database created successfully!");
 
-            // Schakelen naar de nieuwe database
+            // Switch to the new database
             statement.execute("USE " + databaseName);
 
-            // Een nieuwe tabel aanmaken
+            // Create a new table
             String createTableQuery = "CREATE TABLE employees (" +
                     "id INT PRIMARY KEY AUTO_INCREMENT," +
                     "firstname VARCHAR(50) NOT NULL," +
                     "lastname VARCHAR(50) NOT NULL," +
                     "emailaddress VARCHAR(100) NOT NULL," +
-                    "username VARCHAR(50) NOT NULL UNIQUE," +
+                    "username VARCHAR(50) NOT NULL UNIQUE,"+
                     "password VARCHAR(50) NOT NULL," +
                     "employeeID INT NOT NULL UNIQUE," +
                     "administrator BOOLEAN NOT NULL" +
                     ")";
             statement.executeUpdate(createTableQuery);
-            System.out.println("Tabel succesvol aangemaakt!");
+            System.out.println("Table created successfully!");
 
-            // Sluiten van de statement en verbinding
+            // Close the statement and connection
             statement.close();
             connection.close();
         } catch (ClassNotFoundException e) {
-            System.out.println("Kon de database driver niet laden.");
+            System.out.println("Failed to load the database driver.");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("Fout bij het aanmaken van de database of tabel.");
+            System.out.println("Failed to create the database or table.");
             e.printStackTrace();
         }
     }
