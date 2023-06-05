@@ -1,44 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.mainController">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.mainController">
    <children>
-      <Pane layoutX="160.0" prefHeight="480.0" prefWidth="480.0" styleClass="rightPanel" stylesheets="@CSS/ChatLight.css">
+      <Pane fx:id="Base" layoutX="3.0" prefHeight="406.4" prefWidth="603.0" style="-fx-background-color: #174694;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ListView fx:id="chatList" layoutX="52.0" layoutY="87.0" prefHeight="306.0" prefWidth="368.0" styleClass="listView" stylesheets="@CSS/ChatLight.css" />
-            <Button fx:id="submit" alignment="CENTER" contentDisplay="CENTER" layoutX="366.0" layoutY="418.0" mnemonicParsing="false" stylesheets="@CSS/ChatLight.css" text="Submit" textFill="WHITE">
+            <Button fx:id="showSettings" layoutX="243.0" layoutY="14.0" mnemonicParsing="false" onAction="#displaySettings" prefHeight="19.0" prefWidth="73.0" style="-fx-background-radius: 100; -fx-background-color: white;" text="settings">
                <font>
-                  <Font name="Segoe UI Bold" size="13.0" />
+                  <Font size="9.0" />
                </font>
             </Button>
-            <TextField fx:id="input" alignment="CENTER" layoutX="122.0" layoutY="418.0" onAction="#setOnKeyPressed" prefHeight="25.0" prefWidth="235.0" promptText="Typ uw vraag..." styleClass="input" stylesheets="@CSS/ChatLight.css">
+            <Pane fx:id="sidebar" layoutX="-6.0" prefHeight="407.0" prefWidth="241.0" style="-fx-background-color: #5bc3f0;">
+               <children>
+                  <ImageView fitHeight="125.0" fitWidth="216.0" layoutX="13.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/fullLogo.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+            <TextField fx:id="input" alignment="CENTER" layoutX="243.0" layoutY="365.0" onAction="#setOnKeyPressed" prefHeight="35.0" prefWidth="247.0" promptText="Typ uw vraag..." style="-fx-background-color: white; -fx-background-radius: 4; -fx-border-radius: 4; -fx-border-color: #0078D7;">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </TextField>
-            <Button fx:id="mode" layoutX="39.0" layoutY="419.0" mnemonicParsing="false" onAction="#Toggle" stylesheets="@CSS/ChatLight.css" text="Darkmode" textFill="WHITE">
+            <Button fx:id="Submit" alignment="CENTER" contentDisplay="CENTER" layoutX="517.0" layoutY="370.0" mnemonicParsing="false" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4;" text="Submit" textFill="WHITE">
                <font>
-                  <Font name="Segoe UI Bold" size="1.0" />
+                  <Font name="Segoe UI Bold" size="13.0" />
                </font>
             </Button>
-         </children>
-      </Pane>
-      <Pane prefHeight="480.0" prefWidth="160.0" styleClass="leftPanel" stylesheets="@CSS/ChatLight.css">
-         <children>
-            <ImageView fitHeight="61.0" fitWidth="121.0" layoutX="27.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@icons/fullLogo.png" />
-               </image>
-            </ImageView>
-            <ListView layoutX="8.0" layoutY="87.0" prefHeight="306.0" prefWidth="144.0" styleClass="listView" stylesheets="@CSS/ChatLight.css" />
+            <Button fx:id="mode" layoutX="533.0" layoutY="14.0" mnemonicParsing="false" onAction="#Toggle" style="-fx-background-radius: 4; -fx-background-color: #5BC3F0;" text="Darkmode" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="10.0" />
+               </font>
+            </Button>
+            <ListView fx:id="chatList" layoutX="235.0" layoutY="50.0" prefHeight="306.0" prefWidth="368.0" />
+            <Pane fx:id="settingspane" layoutX="269.0" layoutY="8.0" prefHeight="285.0" prefWidth="258.0" style="-fx-background-color: #307eb3; -fx-opacity: 70%; -fx-border-color: black; -fx-border-width: 5px;" visible="false">
+               <children>
+                  <Button fx:id="closeSettings" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#displaySettings" style="-fx-background-color: #307eb3;" text="close" textAlignment="CENTER" textOverrun="CLIP">
+                     <font>
+                        <Font name="Century Gothic Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="setting_register" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" onAction="#registerEmployee" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="register user (admin)" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="language" defaultButton="true" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onAction="#Togglelang" prefHeight="28.0" prefWidth="150.0" style="-fx-background-color: #307eb3;" text="language: ">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="edituser" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="82.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="edit user" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="advanced" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="110.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="advanced (admin)" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Label fx:id="OnderwerpLabel" layoutX="321.0" layoutY="10.0" prefHeight="27.0" prefWidth="129.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
