@@ -4,10 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -133,7 +131,12 @@ public class mainController { Data DB = new Data();
             e.printStackTrace();
         }
     }
-
-
-
+    @FXML
+    public void LogoutButton(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
