@@ -1,19 +1,27 @@
 package com.example.aiui;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import javafx.stage.Modality;
 
-public class mainController { Data DB = new Data();
+public class mainController {
+    Data DB = new Data();
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -48,6 +56,17 @@ public class mainController { Data DB = new Data();
     @FXML
     private Pane sidebar;
 
+    private ObservableList<String> conversation; // Houdt de gesprekken bij
+
+    @FXML
+    protected void initialize() {
+        conversation = FXCollections.observableArrayList();
+        chatList.setItems(conversation);
+
+        // Laad de gesprekken
+        loadConversation();
+    }
+
     @FXML
     protected void Toggle(){
         if (Lightmode){
@@ -57,7 +76,6 @@ public class mainController { Data DB = new Data();
             Lightmode = true;
             LightMode();
         }
-
     }
 
     protected void LightMode() {
@@ -66,6 +84,7 @@ public class mainController { Data DB = new Data();
         mode.setStyle("-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0;");
         mode.setText("Darkmode");
     }
+
     protected void Darkmode() {
         Base.setStyle("-fx-background-color: #000000");
         sidebar.setStyle("-fx-background-color: #bcc1c4;");
@@ -80,26 +99,25 @@ public class mainController { Data DB = new Data();
         settings = !settings;
     }
 
-
     @FXML
     public void setOnKeyPressed(ActionEvent Enter) {
         String userMessage = input.getText();
 
-        // Add user's message to the chat list
-        chatList.getItems().add("User: " + userMessage);
+        // Voeg het bericht van de gebruiker toe aan de chatgesprekken
+        conversation.add("User: " + userMessage);
 
-        // Generate an automatic response
+        // Genereer een automatisch antwoord
         String automaticResponse = generateResponse(userMessage);
 
-        // Add the automatic response to the chat list
-        chatList.getItems().add("AI: " + automaticResponse);
+        // Voeg het automatische antwoord toe aan de chatgesprekken
+        conversation.add("AI: " + automaticResponse);
 
-        // Clear the input field
+        // Wis het invoerveld
         input.clear();
     }
 
     private String generateResponse(String userMessage) {
-        // Replace this logic with your own or use an AI/chatbot API
+        // Vervang deze logica door je eigen implementatie of gebruik een AI/chatbot API
         if (userMessage.equalsIgnoreCase("hello")) {
             return "Hi! How can I assist you?";
         } else if (userMessage.equalsIgnoreCase("How are you?") || userMessage.toLowerCase().startsWith("how are you")) {
@@ -108,6 +126,7 @@ public class mainController { Data DB = new Data();
             return "I don't have an answer for that now";
         }
     }
+
     @FXML
     protected void registerEmployee(ActionEvent event) throws IOException{
         Stage stage = (Stage) setting_register.getScene().getWindow();
@@ -122,21 +141,58 @@ public class mainController { Data DB = new Data();
             popupStage.setTitle("Register employee");
             popupStage.setScene(new Scene(root));
 
-            // Access the controller of the loaded FXML file if needed
+            // Toegang tot de controller van het geladen FXML-bestand indien nodig
             registrationController registrationController = fxmlLoader.getController();
             registrationController.setStage();
-            // Show the popup window
+            // Toon het popup-venster
             popupStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     @FXML
     public void LogoutButton(ActionEvent event) throws IOException {
+        // Stap 1: Het gesprek opslaan
+        saveConversation();
+
+        // Stap 2: Uitloggen en navigeren naar het startscherm
         root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void saveConversation() {
+        // Stap 1: Implementeer hier je logica om het gesprek op te slaan
+        // In dit voorbeeld wordt het gesprek opgeslagen naar een tekstbestand met de naam "conversation.txt"
+        try {
+            FileWriter writer = new FileWriter("conversation.txt");
+            for (String message : conversation) {
+                writer.write(message + "\n");
+            }
+            writer.close();
+            System.out.println("Gesprek opgeslagen.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void loadConversation() {
+        try {
+            // Lees het tekstbestand "conversation.txt"
+            BufferedReader reader = new BufferedReader(new FileReader("conversation.txt"));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Voeg elk bericht toe aan de gesprekkenlijst
+                conversation.add(line);
+            }
+
+            reader.close();
+            System.out.println("Gesprek geladen.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
