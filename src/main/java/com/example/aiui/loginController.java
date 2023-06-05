@@ -1,5 +1,6 @@
 package com.example.aiui;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +14,16 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
+import java.net.URL;
+
 
 public class loginController {
     Data DB = new Data();
 
     private Stage stage;
-    private Scene scene;
+
     private Parent root;
+    private Scene scene;
     boolean Lightmode = true;
 
     @FXML
@@ -46,12 +50,20 @@ public class loginController {
      */
     @FXML
     protected void Toggle() {
-        if (Lightmode) {
-            Lightmode = false;
-            darkMode();
+        URL fxml = getClass().getResource("fxml/startLogin");
+
+        if (mode.getText().equals("Darkmode")) {
+
+            String css1 = this.getClass().getResource("css/LoginLight.css").toExternalForm();
+            scene.getStylesheets().add(css1);
+            mode.setText("Lightmode");
+
         } else {
-            Lightmode = true;
-            lightMode();
+            String css = this.getClass().getResource("css/LoginDark.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            mode.setText("Darkmode");
+
+
         }
     }
 

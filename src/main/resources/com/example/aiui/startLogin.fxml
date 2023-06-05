@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="480.0" minWidth="640.0" stylesheets="@CSS/LoginLight.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.loginController">
+<AnchorPane minHeight="480.0" minWidth="640.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.loginController">
     <children>
       <Pane layoutX="160.0" minHeight="480.0" minWidth="480.0" styleClass="rightPanel" stylesheets="@CSS/LoginLight.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -23,7 +17,7 @@
                         <Insets bottom="32.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="Username" alignment="CENTER" onAction="#submitlogin" promptText="Username" styleClass="input" stylesheets="@CSS/LoginLight.css">
+                  <TextField fx:id="Username" alignment="CENTER" onAction="#submitLogin" promptText="Username" styleClass="input" stylesheets="@CSS/LoginLight.css">
                      <font>
                         <Font name="Segoe UI" size="12.0" />
                      </font>
@@ -31,7 +25,7 @@
                         <Insets bottom="8.0" />
                      </VBox.margin>
                   </TextField>
-                  <PasswordField fx:id="Password" alignment="CENTER" onAction="#submitlogin" promptText="Password" styleClass="input" stylesheets="@CSS/LoginLight.css">
+                  <PasswordField fx:id="Password" alignment="CENTER" onAction="#submitLogin" promptText="Password" styleClass="input" stylesheets="@CSS/LoginLight.css">
                      <font>
                         <Font name="Segoe UI" size="12.0" />
                      </font>
@@ -39,7 +33,7 @@
                         <Insets bottom="16.0" />
                      </VBox.margin>
                   </PasswordField>
-                  <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" mnemonicParsing="false" onAction="#submitlogin" styleClass="input" stylesheets="@CSS/LoginLight.css" text="login" textFill="WHITE">
+                  <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" mnemonicParsing="false" onAction="#submitLogin" styleClass="input" stylesheets="@CSS/LoginLight.css" text="login" textFill="WHITE">
                      <font>
                         <Font name="Segoe UI" size="12.0" />
                      </font>
@@ -56,7 +50,7 @@
             </VBox>
          </children>
       </Pane>
-      <Pane minHeight="480.0" minWidth="160.0" styleClass="leftPanel" stylesheets="@CSS/LoginLight.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane minHeight="480.0" minWidth="160.0" styleClass="leftPanel" stylesheets="@CSS/LoginDark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="81.0" fitWidth="160.0" layoutX="11.0" layoutY="200.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
