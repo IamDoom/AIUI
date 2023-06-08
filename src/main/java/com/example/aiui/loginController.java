@@ -81,20 +81,23 @@ public class loginController {
     }
 
     protected void lightMode() {
-        username.setStyle("-fx-background-color: white; -fx-text-fill: black");
-        password.setStyle("-fx-background-color: white; -fx-text-fill: black");
+        username.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        password.setStyle("-fx-background-color: white; -fx-text-fill: black;");
         leftPane.setStyle("-fx-background-color: #5bc3f0;");
         rightPane.setStyle("-fx-background-color: #174694;");
-        mode.setText("Darkmode");
+        mode.setText("Donkere modus");
+        mode.setStyle("-fx-background-color: #5BC3F0");
+        button.setStyle("-fx-background-color: #5BC3F0");
     }
 
     protected void darkMode() {
-        username.setStyle("-fx-background-color: #000000; -fx-text-fill: white");
-        password.setStyle("-fx-background-color: #000000; -fx-text-fill: white");
-        rightPane.setStyle("-fx-background-color: #0B234A;");
-        leftPane.setStyle("-fx-background-color: #174694;");
-        mode.setText("Lightmode");
-        mode.setStyle("-fx-text-fill: white;");
+        username.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        password.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        leftPane.setStyle("-fx-background-color: #1b8bc5;");
+        rightPane.setStyle("-fx-background-color: #174694;");
+        mode.setText("Lichte modus");
+        mode.setStyle("-fx-background-color: #1b8bc5");
+        button.setStyle("-fx-background-color: #1b8bc5");
     }
 
     @FXML
