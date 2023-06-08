@@ -1,4 +1,6 @@
 package com.example.aiui;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,10 @@ import javafx.scene.control.skin.ToggleButtonSkin;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -72,9 +78,7 @@ public class mainController implements Initializable {
     @FXML
     private Button advanced;
 
-
-
-
+    private ObservableList<String> conversation;
 
     private boolean FirstMessage = true;
 
@@ -198,6 +202,51 @@ public class mainController implements Initializable {
         }
     }
 
+    @FXML
+    public void LogoutButton(ActionEvent event) throws IOException {
+        // Stap 1: Het gesprek opslaan
+        saveConversation();
+
+        // Stap 2: Uitloggen en navigeren naar het startscherm
+        root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void saveConversation() {
+        // Stap 1: Implementeer hier je logica om het gesprek op te slaan
+        // In dit voorbeeld wordt het gesprek opgeslagen naar een tekstbestand met de naam "conversation.txt"
+        try {
+            FileWriter writer = new FileWriter("conversation.txt");
+            for (String message : conversation) {
+                writer.write(message + "\n");
+            }
+            writer.close();
+            System.out.println("Gesprek opgeslagen.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadConversation() {
+        try {
+            // Lees het tekstbestand "conversation.txt"
+            BufferedReader reader = new BufferedReader(new FileReader("conversation.txt"));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Voeg elk bericht toe aan de gesprekkenlijst
+                conversation.add(line);
+            }
+
+            reader.close();
+            System.out.println("Gesprek geladen.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -209,6 +258,11 @@ public class mainController implements Initializable {
         edituser.setText(bundle.getString("edituser"));
         language.setText(bundle.getString("Taal"));
         setting_register.setText(bundle.getString("settingsregister"));
+        conversation = FXCollections.observableArrayList();
+        chatList.setItems(conversation);
+
+        // Laad de gesprekken
+        loadConversation();
 
     }
 }

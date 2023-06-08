@@ -57,7 +57,6 @@ public class Data {
 
     public void createTestEmployee() {
         createEmployee("john", "doe", "johndoe@emailadress.com","testusername", "securepassword", 234045, true);
-        createEmployee("john", "doe", "johndoe@emailadress.com","testusernamee", "securepasswordd", 234045, true);
     }
     public User login(String username, String password) {
 
