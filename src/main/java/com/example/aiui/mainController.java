@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 import javafx.stage.Modality;
 
-public class mainController implements Initializable {
+public class mainController implements Initializable, Observer {
     Data DB = new Data();
     private Stage stage;
     private Scene scene;
@@ -90,6 +90,12 @@ public class mainController implements Initializable {
 
     }
 
+    @Override
+    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
+        if (darkmode = true){
+
+        }
+    }
 
     public void Togglelang(ActionEvent event){ // voor taal switchen
         if (EnglishIsActive){

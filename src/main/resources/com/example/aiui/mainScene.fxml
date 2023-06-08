@@ -65,6 +65,26 @@
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>
                   </Button>
+                  <Button fx:id="darkmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="138.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="darkmode" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="lightmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="166.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="lightmode" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="colormode1" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="192.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="color 1" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="colormode2" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="220.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="color 2" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
             <Label fx:id="OnderwerpLabel" layoutX="321.0" layoutY="10.0" prefHeight="27.0" prefWidth="129.0">

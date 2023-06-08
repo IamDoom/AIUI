@@ -1,5 +1,11 @@
 package com.example.aiui;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public interface modes {
-    public void update();
+
+    void registerObserver(Observer observer);
+    void removeObserver(Observer observer);
+    void notifyObservers();
 }

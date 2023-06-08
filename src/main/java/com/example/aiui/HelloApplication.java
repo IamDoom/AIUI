@@ -15,7 +15,7 @@ public class HelloApplication extends Application {
 
 
             // Het laden van het FXML-bestand
-            Parent root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
 
             // Creëren van een scene
 

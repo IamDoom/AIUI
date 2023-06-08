@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 
 
-public class loginController {
+public class loginController implements Observer {
     Data DB = new Data();
 
     private Stage stage;
@@ -50,21 +50,18 @@ public class loginController {
      */
     @FXML
     protected void Toggle() {
-        URL fxml = getClass().getResource("fxml/startLogin");
 
         if (mode.getText().equals("Darkmode")) {
 
-            String css1 = this.getClass().getResource("css/LoginLight.css").toExternalForm();
-            scene.getStylesheets().add(css1);
-            mode.setText("Lightmode");
 
-        } else {
-            String css = this.getClass().getResource("css/LoginDark.css").toExternalForm();
-            scene.getStylesheets().add(css);
-            mode.setText("Darkmode");
 
 
         }
+    }
+
+    @Override
+    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
+        if
     }
 
     /**
@@ -105,10 +102,13 @@ public class loginController {
      * Methode om de lichte modus in te schakelen
      */
     protected void lightMode() {
-        Base.setStyle("-fx-background-color: #bcc1c4;");
-        sidebar.setStyle("-fx-background-color: #307eb3;");
-        mode.setStyle("-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0;");
-        mode.setText("Darkmode");
+        username.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        password.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        leftPane.setStyle("-fx-background-color: #5bc3f0;");
+        rightPane.setStyle("-fx-background-color: #174694;");
+        mode.setText("Donkere modus");
+        mode.setStyle("-fx-background-color: #5BC3F0");
+        button.setStyle("-fx-background-color: #5BC3F0");
     }
 
     /**
