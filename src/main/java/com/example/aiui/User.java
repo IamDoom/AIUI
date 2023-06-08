@@ -5,32 +5,27 @@ class User {
     private String firstName;
     private String lastName;
     private String password;
-    private String Username;
+    private String username;
     private int employeeID;
-    private String Email;
+    private String email;
     private boolean administrator;
 
     public User(String firstName, String lastName, String password, String username, int employeeID, String email, boolean administrator) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        Username = username;
+        this.username = username;
         this.employeeID = employeeID;
-        Email = email;
+        this.email = email;
         this.administrator = administrator;
     }
 
+    // Overloaded constructor to generate employeeID automatically
     public User(String firstName, String lastName, String password, String username, String email, boolean administrator) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        Username = username;
-        IDcounter += 1;
-        this.employeeID = IDcounter;
-        Email = email;
-        this.administrator = administrator;
+        this(firstName, lastName, password, username, IDcounter++, email, administrator);
     }
 
+    // Getter and setter methods
     public String getFirstName() {
         return firstName;
     }
@@ -48,11 +43,11 @@ class User {
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public int getEmployeeID() {
@@ -74,15 +69,16 @@ class User {
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 }

@@ -3,17 +3,18 @@ package com.example.aiui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import java.io.IOException;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.Objects;
 
 public class loginController {
     Data DB = new Data();
@@ -21,60 +22,55 @@ public class loginController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    boolean Lightmode = true;
-    @FXML
-    private Pane Base;
-    @FXML
-    private Button login;
+    private boolean lightMode = true;
 
     @FXML
     private Button mode;
+    @FXML
+    private Button button;
+    @FXML
+    private Pane leftPane;
+    @FXML
+    private Pane rightPane;
+    @FXML
+    private PasswordField password;
+    @FXML
+    private TextField username;
+    @FXML
+    private Label errorMessage;
 
     @FXML
-    private TextField input;
-
-    @FXML
-    private Pane sidebar;
-
-    @FXML
-    private Button submit;
-    @FXML
-    private PasswordField Password = new PasswordField();
-    @FXML
-    private TextField Username = new TextField();
-    @FXML
-    private Label errorMessage = new Label();
-
-    @FXML
-    protected void Toggle(){
-        if (Lightmode){
-            Lightmode = false;
-            Darkmode();
+    protected void Toggle() {
+        if (lightMode) {
+            lightMode = false;
+            darkMode();
         } else {
-            Lightmode = true;
-            LightMode();
+            lightMode = true;
+            lightMode();
         }
-
     }
+
     @FXML
     protected void submitlogin(ActionEvent event) {
-        String password = Password.getText();
-        String username = Username.getText();
-        if (password.isEmpty() || username.isEmpty()) {
+        String enteredPassword = password.getText();
+        String enteredUsername = username.getText();
+
+        if (enteredPassword.isEmpty() || enteredUsername.isEmpty()) {
             errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
             System.out.println("Wachtwoord of gebruikersnaam incompleet");
-            System.out.println(username);
-            System.out.println(password);
+            System.out.println(enteredUsername);
+            System.out.println(enteredPassword);
         } else {
-            User user = DB.login(username,password);
-            System.out.println(username);
-            System.out.println(password);
-            if (user == null){
+            User user = DB.login(enteredUsername, enteredPassword);
+            System.out.println(enteredUsername);
+            System.out.println(enteredPassword);
+
+            if (user == null) {
                 errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
                 System.out.println("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
-                    System.out.println("login succesfull");
+                    System.out.println("Login succesvol");
                     login(event);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -84,23 +80,30 @@ public class loginController {
         }
     }
 
-    protected void LightMode() {
-        Base.setStyle("-fx-background-color: #bcc1c4;");
-        sidebar.setStyle("-fx-background-color: #307eb3;");
-        mode.setStyle("-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0;");
-        mode.setText("Darkmode");
+    protected void lightMode() {
+        username.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        password.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        leftPane.setStyle("-fx-background-color: #5bc3f0;");
+        rightPane.setStyle("-fx-background-color: #174694;");
+        mode.setText("Donkere modus");
+        mode.setStyle("-fx-background-color: #5BC3F0");
+        button.setStyle("-fx-background-color: #5BC3F0");
     }
-    protected void Darkmode() {
-        Base.setStyle("-fx-background-color: #000000");
-        sidebar.setStyle("-fx-background-color: #bcc1c4;");
-        mode.setStyle("-fx-background-radius: 10; -fx-background-color: #b6b7ba; -fx-border-width: 0;");
-        mode.setText("Lightmode");
+
+    protected void darkMode() {
+        username.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        password.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        leftPane.setStyle("-fx-background-color: #1b8bc5;");
+        rightPane.setStyle("-fx-background-color: #174694;");
+        mode.setText("Lichte modus");
+        mode.setStyle("-fx-background-color: #1b8bc5");
+        button.setStyle("-fx-background-color: #1b8bc5");
     }
 
     @FXML
     public void login(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainScene.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
