@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class loginController implements Observer {
@@ -114,6 +115,11 @@ public class loginController implements Observer {
         mode.setText("Lichte modus");
         mode.setStyle("-fx-background-color: #1b8bc5");
         button.setStyle("-fx-background-color: #1b8bc5");
+    }
+
+    @Override
+    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
+
     }
 
     /**

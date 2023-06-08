@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 
 import java.util.Objects;
 
-public class helloApplication extends Application {
+public class HelloApplication extends Application {
     Data DB = new Data();
 
     @Override
