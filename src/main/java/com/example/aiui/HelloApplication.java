@@ -6,23 +6,19 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 
-public class HelloApplication extends Application {
+import java.util.Objects;
+
+public class helloApplication extends Application {
     Data DB = new Data();
 
     @Override
     public void start(Stage stage) {
         try {
-
-
             // Het laden van het FXML-bestand
-            Parent root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("startLogin.fxml")));
 
             // Creëren van een scene
-
             Scene scene = new Scene(root);
-            String css1 = this.getClass().getResource("css/LoginDark.css").toExternalForm();
-            scene.getStylesheets().add(css1);
-
 
             // Het instellen van de scene op het podium
             stage.setScene(scene);

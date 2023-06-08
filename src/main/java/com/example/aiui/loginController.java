@@ -1,6 +1,5 @@
 package com.example.aiui;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,16 +13,14 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
-import java.net.URL;
 
 
 public class loginController implements Observer {
     Data DB = new Data();
 
     private Stage stage;
-
-    private Parent root;
     private Scene scene;
+    private Parent root;
     boolean Lightmode = true;
 
     @FXML
@@ -33,35 +30,30 @@ public class loginController implements Observer {
     @FXML
     private Button mode;
     @FXML
-    private TextField input;
+    private Button button;
     @FXML
-    private Pane sidebar;
+    private Pane leftPane;
     @FXML
-    private Button submit;
+    private Pane rightPane;
     @FXML
-    private PasswordField Password = new PasswordField();
+    private PasswordField password;
     @FXML
-    private TextField Username = new TextField();
+    private TextField username;
     @FXML
-    private Label errorMessage = new Label();
+    private Label errorMessage;
 
     /**
      * Methode om tussen lichte en donkere modus te schakelen
      */
     @FXML
     protected void Toggle() {
-
-        if (mode.getText().equals("Darkmode")) {
-
-
-
-
+        if (Lightmode) {
+            Lightmode = false;
+            darkMode();
+        } else {
+            Lightmode = true;
+            lightMode();
         }
-    }
-
-    @Override
-    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
-        if
     }
 
     /**
@@ -69,19 +61,19 @@ public class loginController implements Observer {
      * @param event Het actie-evenement
      */
     @FXML
-    protected void submitLogin(ActionEvent event) {
-        String password = Password.getText();
-        String username = Username.getText();
+    protected void submitlogin(ActionEvent event) {
+        String enteredPassword = password.getText();
+        String enteredUsername = username.getText();
 
-        if (password.isEmpty() || username.isEmpty()) {
+        if (enteredPassword.isEmpty() || enteredUsername.isEmpty()) {
             errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
             System.out.println("Wachtwoord of gebruikersnaam incompleet");
-            System.out.println(username);
-            System.out.println(password);
+            System.out.println(enteredUsername);
+            System.out.println(enteredPassword);
         } else {
-            User user = DB.login(username, password);
-            System.out.println(username);
-            System.out.println(password);
+            User user = DB.login(enteredUsername, enteredPassword);
+            System.out.println(enteredUsername);
+            System.out.println(enteredPassword);
 
             if (user == null) {
                 errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
@@ -115,10 +107,13 @@ public class loginController implements Observer {
      * Methode om de donkere modus in te schakelen
      */
     protected void darkMode() {
-        Base.setStyle("-fx-background-color: #000000");
-        sidebar.setStyle("-fx-background-color: #bcc1c4;");
-        mode.setStyle("-fx-background-radius: 10; -fx-background-color: #b6b7ba; -fx-border-width: 0;");
-        mode.setText("Lightmode");
+        username.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        password.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        leftPane.setStyle("-fx-background-color: #1b8bc5;");
+        rightPane.setStyle("-fx-background-color: #174694;");
+        mode.setText("Lichte modus");
+        mode.setStyle("-fx-background-color: #1b8bc5");
+        button.setStyle("-fx-background-color: #1b8bc5");
     }
 
     /**
@@ -128,8 +123,8 @@ public class loginController implements Observer {
      */
     @FXML
     public void login(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainScene.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

@@ -1,13 +1,20 @@
 package com.example.aiui;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+<<<<<<<<< Temporary merge branch 1
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.ToggleButtonSkin;
+=========
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+>>>>>>>>> Temporary merge branch 2
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -23,7 +30,7 @@ public class mainController implements Initializable, Observer {
     private Scene scene;
     private Parent root;
 
-    boolean Lightmode = true;
+    boolean lightMode = true;
 
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
     private boolean EnglishIsActive = true;
@@ -83,11 +90,16 @@ public class mainController implements Initializable, Observer {
         if (Lightmode){
             Lightmode = false;
             Darkmode();
+=========
+    protected void toggle() {
+        if (lightMode) {
+            lightMode = false;
+            darkMode();
+>>>>>>>>> Temporary merge branch 2
         } else {
             Lightmode = true;
             LightMode();
         }
-
     }
 
     @Override
@@ -130,6 +142,13 @@ public class mainController implements Initializable, Observer {
 
     protected void LightMode() {
         Base.setStyle("-fx-background-color: #bcc1c4;");
+=========
+    /**
+     * Methode om de lichte modus in te schakelen
+     */
+    protected void lightMode() {
+        base.setStyle("-fx-background-color: #bcc1c4;");
+>>>>>>>>> Temporary merge branch 2
         sidebar.setStyle("-fx-background-color: #307eb3;");
         mode.setStyle("-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0;");
         mode.setText("Darkmode");
@@ -141,6 +160,9 @@ public class mainController implements Initializable, Observer {
         mode.setText("Lightmode");
     }
 
+    /**
+     * Methode om de instellingen weer te geven of te verbergen
+     */
     @FXML
     protected void displaySettings(){
         settingspane.setVisible(!settings);
@@ -180,6 +202,7 @@ public class mainController implements Initializable, Observer {
             return "I don't have an answer for that now";
         }
     }
+<<<<<<<<< Temporary merge branch 1
     @FXML
     protected void registerEmployee(ActionEvent event) throws IOException{
         Stage stage = (Stage) setting_register.getScene().getWindow();
@@ -217,4 +240,6 @@ public class mainController implements Initializable, Observer {
         setting_register.setText(bundle.getString("settingsregister"));
 
     }
+=========
+>>>>>>>>> Temporary merge branch 2
 }
