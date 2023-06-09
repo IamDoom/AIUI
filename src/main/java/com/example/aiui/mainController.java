@@ -7,19 +7,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
-import javafx.scene.control.skin.ToggleButtonSkin;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.stage.Modality;
 
-public class mainController implements Initializable {
+public class mainController implements Initializable, Observer {
     Data DB = new Data();
     private Stage stage;
     private Scene scene;
@@ -77,11 +79,14 @@ public class mainController implements Initializable {
     private ObservableList<String> conversation;
 
     private boolean FirstMessage = true;
+
+
     public mainController(){
 
     }
     loginController loginController = new loginController();
     modesData modesData = new modesData();
+
 
 
     public void Togglelang(ActionEvent event){ // voor taal switchen
@@ -139,34 +144,56 @@ public class mainController implements Initializable {
 
     }
     @FXML
-    protected void darkKlick() {
+    public void darkKlick() {
+        boolean darkmode = true;
+        boolean lightmode = false;
+        boolean colormode1 =  false;
+        boolean colormode2 = false;
         update(true, false, false, false);
     }
     @FXML
-    protected void lightKlick() {
+    public void lightKlick() {
+        boolean darkmode = false;
+        boolean lightmode = true;
+        boolean colormode1 =  false;
+        boolean colormode2 = false;
         update(false, true, false, false);
     }
     @FXML
-    protected void color1Klick() {
+    public void color1Klick() {
+        boolean darkmode = false;
+        boolean lightmode = false;
+        boolean colormode1 =  true;
+        boolean colormode2 = false;
         update(false, false, true, false);
     }
     @FXML
-    protected void color2Klick() {
+    public void color2Klick() {
+        boolean darkmode = false;
+        boolean lightmode = false;
+        boolean colormode1 =  false;
+        boolean colormode2 = true;
         update(false, false, false, true);
     }
 
     @Override
-    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
+    public boolean update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
         modesData.notifyObservers();
         if (darkmode == true) {
+            modesData.setmode(true, false , false, false);
             DarkMode();
         } else if (lightmode == true) {
+            modesData.setmode(false, true , false, false);
             Lightmode();
         } else if (colormode1 == true) {
+            modesData.setmode(false, false , true, false);
             color1();
         } else if (colormode2 == true) {
+            modesData.setmode(false, false , false, true);
             color2();
         }
+        loginController.update(darkmode, lightmode, colormode1, colormode2);
+        return darkmode;
     }
 
 
@@ -247,6 +274,10 @@ public class mainController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        if (update(true, false, false, false)){
+            modesData.setmode(true, false , false, false);
+        }
+
     }
 
     private void saveConversation() {

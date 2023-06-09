@@ -21,6 +21,7 @@
                         <Image url="@icons/fullLogo.png" />
                      </image>
                   </ImageView>
+                  <Button layoutX="7.0" layoutY="202.0" mnemonicParsing="false" onAction="#LogoutButton" text="log uit" />
                </children></Pane>
             <TextField fx:id="input" alignment="CENTER" layoutX="243.0" layoutY="365.0" onAction="#setOnKeyPressed" prefHeight="35.0" prefWidth="247.0" promptText="Typ uw vraag..." style="-fx-background-color: white; -fx-background-radius: 4; -fx-border-radius: 4; -fx-border-color: #0078D7;">
                <font>
@@ -65,22 +66,22 @@
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="darkmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" onAction="#darkKlick" layoutX="12.0" layoutY="138.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="darkmode" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                  <Button fx:id="darkmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="138.0" mnemonicParsing="false" onAction="#darkKlick" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="darkmode" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="lightmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" onAction="#lightKlick" layoutX="12.0" layoutY="166.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="lightmode" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                  <Button fx:id="lightmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="166.0" mnemonicParsing="false" onAction="#lightKlick" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="lightmode" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="colormode1" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" onAction="#color1Klick" layoutX="12.0" layoutY="192.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="color 1" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                  <Button fx:id="colormode1" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="192.0" mnemonicParsing="false" onAction="#color1Klick" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="color 1" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="colormode2" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" onAction="#color2Klick" layoutX="12.0" layoutY="220.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="color 2" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                  <Button fx:id="colormode2" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="220.0" mnemonicParsing="false" onAction="#color2Klick" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="color 2" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>

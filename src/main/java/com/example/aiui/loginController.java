@@ -111,6 +111,7 @@ public class loginController implements Observer {
     }
     protected void color1(){
 
+
     }
     protected void color2(){
 
@@ -118,19 +119,22 @@ public class loginController implements Observer {
 
 
     @Override
-    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
+    public boolean update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
 
-        if (darkmode == true){
-            darkMode();
-        } else if (lightmode == true) {
-            lightMode();
-        } else if (colormode1 == true) {
-            color1();
-        } else if (colormode2 == true) {
-            color2();
+             if (darkmode == true){
+                 darkMode();
+             } else {
+            if (lightmode == true) {
+                lightMode();
+            } else if (colormode1 == true) {
+                color1();
+            } else if (colormode2 == true) {
+                color2();
+            }
         }
 
 
+        return darkmode;
     }
 
     /**

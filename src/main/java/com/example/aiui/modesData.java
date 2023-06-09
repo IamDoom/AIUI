@@ -12,6 +12,13 @@ public class modesData implements modes{
     public modesData(){
         observers = new ArrayList<>();
     }
+    public void setmode(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2){
+        this.darkmode = darkmode;
+        this.lightmode = lightmode;
+        this.colormode1 = colormode1;
+        this.colormode2 = colormode2;
+        notifyObservers();
+    }
     @Override
     public void registerObserver(Observer observer) {
         observers.add(observer);

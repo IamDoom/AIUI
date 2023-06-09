@@ -41,9 +41,10 @@ public class HelloApplication extends Application {
     modesData modesData = new modesData();
     Observer loginController = new loginController();
     Observer mainController = new mainController();
-    modesData.registerObserver(loginController);
     modesData.registerObserver(mainController);
+    modesData.registerObserver(loginController);
         // Starten van de JavaFX-toepassing
         launch(args);
+
     }
 }
