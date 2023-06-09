@@ -1,5 +1,6 @@
 package com.example.aiui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class modesData implements modes{
@@ -8,6 +9,9 @@ public class modesData implements modes{
     private  boolean colormode1;
     private boolean colormode2;
     private List<Observer> observers;
+    public modesData(){
+        observers = new ArrayList<>();
+    }
     @Override
     public void registerObserver(Observer observer) {
         observers.add(observer);

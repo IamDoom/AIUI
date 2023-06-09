@@ -22,7 +22,6 @@ public class loginController implements Observer {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    boolean Lightmode = true;
 
     @FXML
     private Pane Base;
@@ -42,20 +41,14 @@ public class loginController implements Observer {
     private TextField username;
     @FXML
     private Label errorMessage;
+    public loginController(){
+
+    }
 
     /**
      * Methode om tussen lichte en donkere modus te schakelen
      */
-    @FXML
-    protected void Toggle() {
-        if (Lightmode) {
-            Lightmode = false;
-            darkMode();
-        } else {
-            Lightmode = true;
-            lightMode();
-        }
-    }
+
 
     /**
      * Methode om in te loggen na het indrukken van de login knop
@@ -116,9 +109,27 @@ public class loginController implements Observer {
         mode.setStyle("-fx-background-color: #1b8bc5");
         button.setStyle("-fx-background-color: #1b8bc5");
     }
+    protected void color1(){
+
+    }
+    protected void color2(){
+
+    }
+
 
     @Override
     public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
+
+        if (darkmode == true){
+            darkMode();
+        } else if (lightmode == true) {
+            lightMode();
+        } else if (colormode1 == true) {
+            color1();
+        } else if (colormode2 == true) {
+            color2();
+        }
+
 
     }
 

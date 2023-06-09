@@ -35,7 +35,7 @@
                 </Button>
                 <ImageView fitHeight="98.0" fitWidth="169.0" layoutX="199.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                     <image>
-                        <Image url="@icons/1683991597292.png" />
+                        <Image url="@icons/fullLogo.png" />
                     </image>
                 </ImageView>
                   <TextField fx:id="register_username" layoutX="441.0" layoutY="217.0" onAction="#submitRegistration" promptText="Username" />
