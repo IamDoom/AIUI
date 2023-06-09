@@ -263,6 +263,5 @@ public class mainController implements Initializable {
 
         // Laad de gesprekken
         loadConversation();
-
     }
 }
