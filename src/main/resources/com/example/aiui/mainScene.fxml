@@ -26,6 +26,8 @@
                         <Image url="@icons/fullLogo.png" />
                      </image>
                   </ImageView>
+                  <ListView fx:id="GesprekOnderwerpen" layoutX="36.0" layoutY="21.0" onMouseClicked="#SelecteerdChat" prefHeight="166.0" prefWidth="164.0" />
+                  <Button fx:id="NieuweGesprek" layoutX="73.0" layoutY="191.0" mnemonicParsing="false" onAction="#NieuwGesprek" text="Nieuw gesprek" />
                </children></Pane>
             <TextField fx:id="input" alignment="CENTER" layoutX="268.0" layoutY="365.0" onAction="#setOnKeyPressed" prefHeight="35.0" prefWidth="235.0" promptText="Typ uw vraag..." style="-fx-background-color: white; -fx-background-radius: 4; -fx-border-radius: 4; -fx-border-color: #0078D7;">
                <font>
