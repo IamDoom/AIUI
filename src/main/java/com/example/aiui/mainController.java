@@ -1,6 +1,4 @@
 package com.example.aiui;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,12 +11,10 @@ import javafx.scene.control.skin.ToggleButtonSkin;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.stage.Modality;
@@ -78,7 +74,9 @@ public class mainController implements Initializable {
     @FXML
     private Button advanced;
 
-    private ObservableList<String> conversation;
+
+
+
 
     private boolean FirstMessage = true;
 
@@ -149,24 +147,40 @@ public class mainController implements Initializable {
 
     @FXML
     public void setOnKeyPressed(ActionEvent Enter) {
+        //vind het juiste gesprek
+        Gesprek DitGesprek = getGesprek();
+
+        //Maak het onderwerp aan voor het gesprek
         String userMessage = input.getText();
-        if(FirstMessage){
+        if(DitGesprek.getGespreksData().isEmpty()){
             OnderwerpLabel.setText(userMessage);
+            DitGesprek.setOnderwerp(userMessage);
             FirstMessage = false;
+            toevoegenGesprekAanGesprekkenLijst(DitGesprek);
         }
 
         // Add user's message to the chat list
-        chatList.getItems().add("User: " + userMessage);
+        String localInput = "User: " + userMessage;
+        chatList.getItems().add(localInput);
+        DitGesprek.getGespreksData().add(localInput);
+
 
         // Generate an automatic response
         String automaticResponse = generateResponse(userMessage);
 
         // Add the automatic response to the chat list
-        chatList.getItems().add("AI: " + automaticResponse);
+        String localOutput = "AI: " + automaticResponse;
+        chatList.getItems().add(localOutput);
+        DitGesprek.getGespreksData().add(localOutput);
+
 
         // Clear the input field
         input.clear();
     }
+
+
+
+
 
     private String generateResponse(String userMessage) {
         // Replace this logic with your own or use an AI/chatbot API
@@ -202,51 +216,6 @@ public class mainController implements Initializable {
         }
     }
 
-    @FXML
-    public void LogoutButton(ActionEvent event) throws IOException {
-        // Stap 1: Het gesprek opslaan
-        saveConversation();
-
-        // Stap 2: Uitloggen en navigeren naar het startscherm
-        root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    private void saveConversation() {
-        // Stap 1: Implementeer hier je logica om het gesprek op te slaan
-        // In dit voorbeeld wordt het gesprek opgeslagen naar een tekstbestand met de naam "conversation.txt"
-        try {
-            FileWriter writer = new FileWriter("conversation.txt");
-            for (String message : conversation) {
-                writer.write(message + "\n");
-            }
-            writer.close();
-            System.out.println("Gesprek opgeslagen.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void loadConversation() {
-        try {
-            // Lees het tekstbestand "conversation.txt"
-            BufferedReader reader = new BufferedReader(new FileReader("conversation.txt"));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // Voeg elk bericht toe aan de gesprekkenlijst
-                conversation.add(line);
-            }
-
-            reader.close();
-            System.out.println("Gesprek geladen.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -258,10 +227,89 @@ public class mainController implements Initializable {
         edituser.setText(bundle.getString("edituser"));
         language.setText(bundle.getString("Taal"));
         setting_register.setText(bundle.getString("settingsregister"));
-        conversation = FXCollections.observableArrayList();
-        chatList.setItems(conversation);
 
-        // Laad de gesprekken
-        loadConversation();
+
+        Gesprekken = new ArrayList<Gesprek>();
+        Gesprek EersteGesprek = new Gesprek(GesprekIdCounter());
+        Gesprekken.add(EersteGesprek);
+
     }
+
+    //WIP
+    private ArrayList<Gesprek> Gesprekken;
+    private Gesprek LocaalGesprek;
+    private int GesprekId = 0;
+    private int gesprekidCounter = 0;
+    @FXML
+    private ListView<String> GesprekOnderwerpen;
+    @FXML
+    private Button NieuweGesprek;
+    public int GesprekIdCounter(){
+        int id = gesprekidCounter;
+        gesprekidCounter++;
+        return id;
+    }
+    public void NieuwGesprek(){
+        //maak een nieuw gesprek
+        Gesprek gesprek = new Gesprek(GesprekIdCounter());
+        //clear het label
+        OnderwerpLabel.setText("");
+        //Voeg het gesprek toe aan de lijst met gesprekken
+        Gesprekken.add(gesprek);
+        //verander het id van de chat voor de klasse zodat de juiste chat wordt geladen
+        this.GesprekId = gesprek.getId();
+        //"open" een gesprek door de vorige text te verwijderen
+        chatList.getItems().clear();
+
+
+    }
+    public void SelecteerdChat(){
+        String SelectedChat = GesprekOnderwerpen.getSelectionModel().getSelectedItem();
+        for(Gesprek gesprek : Gesprekken) {
+            if (SelectedChat.equals(gesprek.getOnderwerp())) {
+                //Selecteer gesprek gebaseerd op onderwerp
+                Gesprek CurrentGesprek = gesprek;
+                this.GesprekId = CurrentGesprek.getId();
+
+                //Laad de nieuwe chat
+                ArrayList<String> gespreksData = CurrentGesprek.getGespreksData();
+                Laadchat(gespreksData);
+                OnderwerpLabel.setText(CurrentGesprek.getOnderwerp());
+            }
+        }
+    }
+    public void Laadchat(ArrayList<String> gespreksData){
+        chatList.getItems().clear();
+        for (int i = 0; i < gespreksData.size(); i++) {
+            String str = gespreksData.get(i);
+            if (i % 2 == 0) {
+                chatList.getItems().add("gebruiker: " + str);
+            } else {
+                chatList.getItems().add("Ai: " + str);
+            }
+        }
+    }
+
+    public void toevoegenGesprekAanGesprekkenLijst(Gesprek gesprek){
+        GesprekOnderwerpen.getItems().add(gesprek.getOnderwerp());
+    }
+
+    public Gesprek getGesprek(){
+        Gesprek DitGesprek = null;
+        for(Gesprek gesprek : Gesprekken) {
+            if (gesprek.getId() == GesprekId) {
+                DitGesprek = gesprek;
+            }
+        }
+        return DitGesprek;
+    }
+    public void WeizigOnderwerp(){
+        //weizig het onderwerp code
+        GesprekOnderwerpen.refresh();
+
+    }
+
+
+
+
 }
