@@ -84,7 +84,7 @@ public class mainController implements Initializable, Observer {
     public mainController(){
 
     }
-    loginController loginController = new loginController();
+
     modesData modesData = new modesData();
 
 
@@ -119,9 +119,7 @@ public class mainController implements Initializable, Observer {
     }
 
 
-    /**
-     * Methode om de lichte modus in te schakelen
-     */
+
     protected void Lightmode() {
         Base.setStyle("-fx-background-color: #bcc1c4;");
         sidebar.setStyle("-fx-background-color: #307eb3;");
@@ -130,6 +128,7 @@ public class mainController implements Initializable, Observer {
     }
 
     protected void DarkMode() {
+        input.setStyle("-fx-text-fill: white;");
         Base.setStyle("-fx-background-color: #000000");
         sidebar.setStyle("-fx-background-color: #bcc1c4;");
         mode.setStyle("-fx-background-radius: 10; -fx-background-color: #b6b7ba; -fx-border-width: 0;");
@@ -177,23 +176,23 @@ public class mainController implements Initializable, Observer {
     }
 
     @Override
-    public boolean update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
+    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
         modesData.notifyObservers();
         if (darkmode == true) {
-            modesData.setmode(true, false , false, false);
+            modesData.setmode(true, false, false, false);
             DarkMode();
         } else if (lightmode == true) {
-            modesData.setmode(false, true , false, false);
+            modesData.setmode(false, true, false, false);
             Lightmode();
         } else if (colormode1 == true) {
-            modesData.setmode(false, false , true, false);
+            modesData.setmode(false, false, true, false);
             color1();
         } else if (colormode2 == true) {
-            modesData.setmode(false, false , false, true);
+            modesData.setmode(false, false, false, true);
             color2();
         }
-        loginController.update(darkmode, lightmode, colormode1, colormode2);
-        return darkmode;
+
+
     }
 
 
@@ -274,9 +273,6 @@ public class mainController implements Initializable, Observer {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        if (update(true, false, false, false)){
-            modesData.setmode(true, false , false, false);
-        }
 
     }
 

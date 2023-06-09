@@ -3,20 +3,24 @@ package com.example.aiui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 
-public class loginController implements Observer {
+public class loginController implements Observer, Initializable {
     Data DB = new Data();
 
     private Stage stage;
@@ -39,28 +43,90 @@ public class loginController implements Observer {
     private PasswordField password;
     @FXML
     private TextField username;
-    @FXML
-    private Label errorMessage;
     public loginController(){
 
     }
+    modesData modesData = new modesData();
 
-    /**
-     * Methode om tussen lichte en donkere modus te schakelen
-     */
+    protected void lightMode() {
+        username.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        password.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        leftPane.setStyle("-fx-background-color: #5bc3f0;");
+        rightPane.setStyle("-fx-background-color: #174694;");
+        mode.setText("Donkere modus");
+        mode.setStyle("-fx-background-color: #5BC3F0");
+        button.setStyle("-fx-background-color: #5BC3F0");
+    }
+
+@FXML
+    protected void darkMode() {
+        username.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        password.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        leftPane.setStyle("-fx-background-color: #1b8bc5;");
+        rightPane.setStyle("-fx-background-color: #174694;");
+        mode.setText("Lichte modus");
+        mode.setStyle("-fx-background-color: #1b8bc5");
+        button.setStyle("-fx-background-color: #1b8bc5");
+    }
+    @FXML
+    protected void color1(){
+
+
+    }
+    @FXML
+    protected void color2(){
+        darkMode();
+    }
+    @FXML
+    public void modes(){
+        update(modesData.getdarkmode(), modesData.getlightmode(), modesData.getcolor1(), modesData.getcolor2());
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
+        this.username = new TextField();
+        this.password = new PasswordField();
+        this.leftPane = new Pane();
+        this.rightPane = new Pane();
+        this.mode = new Button();
+        this.button = new Button();
+
+
+    }
+
+    @Override
+    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
+        modesData.notifyObservers();
+        if (darkmode == true){
+            modesData.setmode(true, false, false, false);
+            darkMode();
+        } else if (lightmode == true) {
+            modesData.setmode(false, true, false, false);
+            lightMode();
+        } else if (colormode1 == true) {
+            modesData.setmode(false, false, true, false);
+            color1();
+        } else if (colormode2 == true) {
+            modesData.setmode(false, false, false, true);
+            color2();
+        }
+
+    }
+
+
 
 
     /**
      * Methode om in te loggen na het indrukken van de login knop
      * @param event Het actie-evenement
+     *
      */
+
     @FXML
     protected void submitlogin(ActionEvent event) {
         String enteredPassword = password.getText();
         String enteredUsername = username.getText();
 
         if (enteredPassword.isEmpty() || enteredUsername.isEmpty()) {
-            errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
             System.out.println("Wachtwoord of gebruikersnaam incompleet");
             System.out.println(enteredUsername);
             System.out.println(enteredPassword);
@@ -70,7 +136,6 @@ public class loginController implements Observer {
             System.out.println(enteredPassword);
 
             if (user == null) {
-                errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
                 System.out.println("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
@@ -84,58 +149,10 @@ public class loginController implements Observer {
         }
     }
 
-    /**
-     * Methode om de lichte modus in te schakelen
-     */
-    protected void lightMode() {
-        username.setStyle("-fx-background-color: white; -fx-text-fill: black;");
-        password.setStyle("-fx-background-color: white; -fx-text-fill: black;");
-        leftPane.setStyle("-fx-background-color: #5bc3f0;");
-        rightPane.setStyle("-fx-background-color: #174694;");
-        mode.setText("Donkere modus");
-        mode.setStyle("-fx-background-color: #5BC3F0");
-        button.setStyle("-fx-background-color: #5BC3F0");
-    }
-
-    /**
-     * Methode om de donkere modus in te schakelen
-     */
-    protected void darkMode() {
-        username.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
-        password.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
-        leftPane.setStyle("-fx-background-color: #1b8bc5;");
-        rightPane.setStyle("-fx-background-color: #174694;");
-        mode.setText("Lichte modus");
-        mode.setStyle("-fx-background-color: #1b8bc5");
-        button.setStyle("-fx-background-color: #1b8bc5");
-    }
-    protected void color1(){
 
 
-    }
-    protected void color2(){
-
-    }
 
 
-    @Override
-    public boolean update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
-
-             if (darkmode == true){
-                 darkMode();
-             } else {
-            if (lightmode == true) {
-                lightMode();
-            } else if (colormode1 == true) {
-                color1();
-            } else if (colormode2 == true) {
-                color2();
-            }
-        }
-
-
-        return darkmode;
-    }
 
     /**
      * Methode om in te loggen en de hoofdscene te laden
@@ -151,3 +168,4 @@ public class loginController implements Observer {
         stage.show();
     }
 }
+

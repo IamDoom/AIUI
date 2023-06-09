@@ -19,6 +19,18 @@ public class modesData implements modes{
         this.colormode2 = colormode2;
         notifyObservers();
     }
+    public boolean getdarkmode() {
+        return true;
+    }
+    public boolean getlightmode() {
+        return lightmode;
+    }
+    public boolean getcolor1() {
+        return colormode1;
+    }
+    public boolean getcolor2() {
+        return colormode2;
+    }
     @Override
     public void registerObserver(Observer observer) {
         observers.add(observer);
