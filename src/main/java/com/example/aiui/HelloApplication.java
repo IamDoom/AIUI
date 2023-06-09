@@ -15,7 +15,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) {
         try {
             // Het laden van het FXML-bestand
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("startLogin.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainScene.fxml")));
 
             // Creëren van een scene
             Scene scene = new Scene(root);

@@ -19,18 +19,14 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-
 public class loginController implements Observer, Initializable {
     Data DB = new Data();
 
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private boolean lightMode = true;
 
-    @FXML
-    private Pane Base;
-    @FXML
-    private Button login;
     @FXML
     private Button mode;
     @FXML
@@ -43,60 +39,16 @@ public class loginController implements Observer, Initializable {
     private PasswordField password;
     @FXML
     private TextField username;
+    @FXML
+    private Label errorMessage;
     public loginController(){
 
     }
     modesData modesData = new modesData();
-
-    protected void lightMode() {
-        username.setStyle("-fx-background-color: white; -fx-text-fill: black;");
-        password.setStyle("-fx-background-color: white; -fx-text-fill: black;");
-        leftPane.setStyle("-fx-background-color: #5bc3f0;");
-        rightPane.setStyle("-fx-background-color: #174694;");
-        mode.setText("Donkere modus");
-        mode.setStyle("-fx-background-color: #5BC3F0");
-        button.setStyle("-fx-background-color: #5BC3F0");
-    }
-
-@FXML
-    protected void darkMode() {
-        username.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
-        password.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
-        leftPane.setStyle("-fx-background-color: #1b8bc5;");
-        rightPane.setStyle("-fx-background-color: #174694;");
-        mode.setText("Lichte modus");
-        mode.setStyle("-fx-background-color: #1b8bc5");
-        button.setStyle("-fx-background-color: #1b8bc5");
-    }
-    @FXML
-    protected void color1(){
-
-
-    }
-    @FXML
-    protected void color2(){
-        darkMode();
-    }
-    @FXML
-    public void modes(){
-        update(modesData.getdarkmode(), modesData.getlightmode(), modesData.getcolor1(), modesData.getcolor2());
-    }
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
-        this.username = new TextField();
-        this.password = new PasswordField();
-        this.leftPane = new Pane();
-        this.rightPane = new Pane();
-        this.mode = new Button();
-        this.button = new Button();
-
-
-    }
-
-    @Override
-    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
+    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2){
         modesData.notifyObservers();
-        if (darkmode == true){
+        if (darkmode == true) {
             modesData.setmode(true, false, false, false);
             darkMode();
         } else if (lightmode == true) {
@@ -109,17 +61,15 @@ public class loginController implements Observer, Initializable {
             modesData.setmode(false, false, false, true);
             color2();
         }
-
     }
-
-
-
-
-    /**
-     * Methode om in te loggen na het indrukken van de login knop
-     * @param event Het actie-evenement
-     *
-     */
+    @FXML
+    protected void Toggle() {
+update(modesData.getdarkmode(), modesData.getlightmode(), modesData.getcolor1(), modesData.getcolor2());
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    mode.fire();
+    }
 
     @FXML
     protected void submitlogin(ActionEvent event) {
@@ -127,6 +77,7 @@ public class loginController implements Observer, Initializable {
         String enteredUsername = username.getText();
 
         if (enteredPassword.isEmpty() || enteredUsername.isEmpty()) {
+            errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
             System.out.println("Wachtwoord of gebruikersnaam incompleet");
             System.out.println(enteredUsername);
             System.out.println(enteredPassword);
@@ -136,6 +87,7 @@ public class loginController implements Observer, Initializable {
             System.out.println(enteredPassword);
 
             if (user == null) {
+                errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
                 System.out.println("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
@@ -149,16 +101,44 @@ public class loginController implements Observer, Initializable {
         }
     }
 
+    protected void lightMode() {
+        username.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        password.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        leftPane.setStyle("-fx-background-color: #5bc3f0;");
+        rightPane.setStyle("-fx-background-color: #174694;");
+        mode.setText("Donkere modus");
+        mode.setStyle("-fx-background-color: #5BC3F0");
+        button.setStyle("-fx-background-color: #5BC3F0");
+    }
 
+    protected void darkMode() {
+        username.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        password.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        leftPane.setStyle("-fx-background-color: #1b8bc5;");
+        rightPane.setStyle("-fx-background-color: #174694;");
+        mode.setText("Lichte modus");
+        mode.setStyle("-fx-background-color: #1b8bc5");
+        button.setStyle("-fx-background-color: #1b8bc5");
+    }
+    protected void color1() {
+        username.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        password.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        leftPane.setStyle("-fx-background-color: #1b8bc5;");
+        rightPane.setStyle("-fx-background-color: #174694;");
+        mode.setText("Lichte modus");
+        mode.setStyle("-fx-background-color: #1b8bc5");
+        button.setStyle("-fx-background-color: #1b8bc5");
+    }
+    protected void color2() {
+        username.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        password.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
+        leftPane.setStyle("-fx-background-color: #1b8bc5;");
+        rightPane.setStyle("-fx-background-color: #174694;");
+        mode.setText("Lichte modus");
+        mode.setStyle("-fx-background-color: #1b8bc5");
+        button.setStyle("-fx-background-color: #1b8bc5");
+    }
 
-
-
-
-    /**
-     * Methode om in te loggen en de hoofdscene te laden
-     * @param event Het actie-evenement
-     * @throws IOException Als er een fout optreedt bij het laden van de fxml-bestanden
-     */
     @FXML
     public void login(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainScene.fxml")));
@@ -167,5 +147,7 @@ public class loginController implements Observer, Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+
 }
 
