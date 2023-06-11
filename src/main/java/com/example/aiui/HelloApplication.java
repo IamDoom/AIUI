@@ -12,7 +12,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) {
         DB.registerUser("john", "doe", "johndoe@emailadress.com","testusername", "securepassword", false);
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("StartLogin.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);

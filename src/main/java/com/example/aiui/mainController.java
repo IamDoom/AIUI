@@ -67,6 +67,7 @@ public class mainController {
 
     }
 
+
     protected void LightMode() {
         Base.setStyle("-fx-background-color: #bcc1c4;");
         sidebar.setStyle("-fx-background-color: #307eb3;");

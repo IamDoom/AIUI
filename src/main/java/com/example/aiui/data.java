@@ -134,10 +134,4 @@ class chatHistory{
         System.out.println("no user matches the given credentials");
         return null; //login credentials match no user
     }
-
-
-    public static void main(String[] args) {
-
-    }
-
 }

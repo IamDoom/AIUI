@@ -59,7 +59,6 @@ public class loginController {
         }
 
     }
-
     @FXML
     protected void submitlogin(ActionEvent event) {
         String password = Password.getText();
@@ -76,7 +75,6 @@ public class loginController {
                 errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
-
                     System.out.println("login succesfull");
                     login(event);
                 } catch (IOException e) {
@@ -102,7 +100,7 @@ public class loginController {
 
     @FXML
     public void login(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("main-scene.fxml"));
+        root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
