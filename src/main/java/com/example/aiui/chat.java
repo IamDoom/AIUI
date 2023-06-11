@@ -32,19 +32,11 @@ class tempUser {
         messageReceiver.receiveMessage(message);
     }
 }
-
-class chat{
-
-
-}
-
-
 public class chat{
             tempUser tempuser = new tempUser();
             tempBot tempbot = new tempBot();
 
-            tempuser.setMessageReceiver(tempBot);
-
-            tempuser.sendMessage("Hello, bot!");
+            //tempuser.setMessageReceiver(tempBot);
+            //tempuser.sendMessage("Hello, bot!");
 
 }

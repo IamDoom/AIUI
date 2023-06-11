@@ -1,5 +1,6 @@
 package com.example.aiui;
 import java.sql.*;
+import java.util.ArrayList;
 
 interface messageReceiver{
     void receiveMessage(String message);
@@ -23,7 +24,8 @@ class Bot implements messageReceiver{
     }
 
 }
-class User{
+
+abstract class User{
     private static int IDcounter = 1;
     private String firstName;
     private String lastName;
@@ -31,19 +33,10 @@ class User{
     private String Username;
     private int employeeID;
     private String Email;
-    private boolean admin;
+    protected String type;
 
-    public User(String firstName, String lastName, String password, String username, int employeeID, String email, boolean admin) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        Username = username;
-        this.employeeID = employeeID;
-        Email = email;
-        this.admin = admin;
-    }
 
-    public User(String firstName, String lastName, String password, String username, String email, boolean admin) {
+    public User(String firstName, String lastName, String email, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -51,15 +44,8 @@ class User{
         this.IDcounter += 1;
         this.employeeID = IDcounter;
         this.Email = email;
-        this.admin = admin;
     }
 
-    public boolean isAdmin() {
-        return admin;
-    }
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
     public String getFirstName() {
         return firstName;
     }
@@ -95,170 +81,60 @@ class User{
     }
 
 }
+class Employee extends User{
+    Employee(String firstName, String lastName, String email, String username, String password){
+        super(firstName,lastName,email,username,password);
+        super.type = "employee";
+    }
+}
+
+class Administrator extends User{
+    Administrator(String firstName, String lastName, String email, String username, String password){
+        super(firstName,lastName,email,username,password);
+        super.type = "admin";
+    }
+}
+
+class UserDB{
+    private ArrayList<User> users = new ArrayList<>();
+
+    public void addUser(User user){
+        users.add(user);
+    }
+    public ArrayList<User> getUsers(){
+        return users;
+    }
+
+}
+
+class chatHistory{
+    private ArrayList<String> chat = new ArrayList<>();
+
+}
 
  class data {
-    public String dbClass = "com.mysql.cj.jdbc.Driver";
-    public String employeesUrl = "jdbc:mysql://localhost:3307/employees";
-    public String dbUsername = "root";
-    public String dbPassword ="";
-    public boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password,boolean admin){
-        User newEmployee = new User(firstname, lastname, emailaddress, username, password, admin);
-        try {
-            // Load the driver
-            Class.forName(dbClass);
-            // Establish the connection
-            Connection connection = DriverManager.getConnection(employeesUrl, dbUsername, dbPassword);
-            // Create an employee
-            String insertQuery = "INSERT INTO employees (firstname, lastname, emailaddress, username, password, employeeID, administrator) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private UserDB UserDB = new UserDB();
+    public void registerUser(String firstname, String lastname, String emailaddress, String username, String password,boolean administrator){
+        if (administrator) {
+            Administrator NewAdmin = new Administrator(firstname,lastname,emailaddress,username,password);
+            UserDB.addUser(NewAdmin);
+        }else{
+            Employee newEmployee = new Employee(firstname,lastname,emailaddress,username,password);
+            UserDB.addUser(newEmployee);
 
-            // Prepare the statement with the employee details
-            PreparedStatement statement = connection.prepareStatement(insertQuery);
-            statement.setString(1, newEmployee.getFirstName());
-            statement.setString(2, newEmployee.getLastName());
-            statement.setString(3, newEmployee.getEmail());
-            statement.setString(4, newEmployee.getUsername());
-            statement.setString(5, newEmployee.getPassword());
-            statement.setInt(6, newEmployee.getEmployeeID());
-            statement.setBoolean(7,newEmployee.isAdmin());
-
-            // Execute the insert statement
-            int rowsAffected = statement.executeUpdate();
-            System.out.println(rowsAffected+" "+newEmployee.getFirstName()+" "+newEmployee.getLastName()+": "+newEmployee.getEmployeeID()+" is succesvol aangemaakt");
-
-            // Close the statement and connection
-            statement.close();
-            connection.close();
-            return true;
-        } catch (ClassNotFoundException e) {
-            System.out.println("Failed to load the database driver.");
-            e.getMessage();
-            return false;
-        } catch (SQLException e) {
-            System.out.println("Failed to create an employee.");
-            e.getMessage();
-            return false;
         }
     }
-
-    public User retrieveEmployee(User testEmployee) {
-        return testEmployee;
-    }
-
 
     public User login(String username, String password) {
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(employeesUrl, dbUsername, dbPassword);
-            String query = "SELECT * FROM employees WHERE username = ? AND password = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, username);
-            statement.setString(2, password);
-            ResultSet resultset = statement.executeQuery();
-            if (resultset.next()) {
-                String firstName = resultset.getString("firstname");
-                String lastName = resultset.getString("lastname");
-                String email = resultset.getString("emailaddress");
-                int employeeID = resultset.getInt("employeeID");
-                boolean admin = resultset.getBoolean("administrator");
-                User user = new User(firstName, lastName, password, username, employeeID, email, admin);
+        for(User user: UserDB.getUsers()){
+            if(username.equals(user.getUsername()) && password.equals(user.getPassword())){
                 return user;
-            } else {
-                System.out.println("No matching user found for the given credentials.");
             }
-        } catch (ClassNotFoundException e) {
-            System.out.println("Failed to load the database driver.");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            System.out.println("Failed to execute the login query.");
-            e.printStackTrace();
         }
-        System.out.println("User login failed");
-        return null;
+        System.out.println("no user matches the given credentials");
+        return null; //login credentials match no user
     }
 
-    public  void createChatDB(){
-        try {
-            // Load the driver
-            Class.forName(dbClass);
-
-            // Establish the connection
-            Connection connection = DriverManager.getConnection(employeesUrl, dbUsername, dbPassword);
-
-            // Create a new database
-            Statement statement = connection.createStatement();
-            String databaseName = "chats";
-            String createDatabaseQuery = "CREATE DATABASE " + databaseName;
-            statement.executeUpdate(createDatabaseQuery);
-            System.out.println("Database created successfully!");
-
-            // Switch to the new database
-            statement.execute("USE " + databaseName);
-
-            // Create a new table
-            String createTableQuery = "CREATE TABLE chats (" +
-                    "id INT PRIMARY KEY AUTO_INCREMENT," +
-                    "username VARCHAR(50) NOT NULL," +
-                    "message VARCHAR(250) NOT NULL," +
-                    ")";
-            statement.executeUpdate(createTableQuery);
-            System.out.println("Table created successfully!");
-
-            // Close the statement and connection
-            statement.close();
-            connection.close();
-        } catch (ClassNotFoundException e) {
-            System.out.println("Failed to load the database driver.");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            System.out.println("Failed to create the database or table.");
-            e.printStackTrace();
-        }
-    }
-
-    public  void createDB(){
-        try {
-            // Load the driver
-            Class.forName(dbClass);
-
-            // Establish the connection
-            Connection connection = DriverManager.getConnection(employeesUrl, dbUsername, dbPassword);
-
-            // Create a new database
-            Statement statement = connection.createStatement();
-            String databaseName = "employees";
-            String createDatabaseQuery = "CREATE DATABASE " + databaseName;
-            statement.executeUpdate(createDatabaseQuery);
-            System.out.println("Database created successfully!");
-
-            // Switch to the new database
-            statement.execute("USE " + databaseName);
-
-            // Create a new table
-            String createTableQuery = "CREATE TABLE employees (" +
-                    "id INT PRIMARY KEY AUTO_INCREMENT," +
-                    "firstname VARCHAR(50) NOT NULL," +
-                    "lastname VARCHAR(50) NOT NULL," +
-                    "emailaddress VARCHAR(100) NOT NULL," +
-                    "username VARCHAR(50) NOT NULL UNIQUE,"+
-                    "password VARCHAR(50) NOT NULL," +
-                    "employeeID INT NOT NULL UNIQUE," +
-                    "administrator BOOLEAN NOT NULL,"+
-                    ")";
-            statement.executeUpdate(createTableQuery);
-            System.out.println("Table created successfully!");
-
-            // Close the statement and connection
-            statement.close();
-            connection.close();
-        } catch (ClassNotFoundException e) {
-            System.out.println("Failed to load the database driver.");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            System.out.println("Failed to create the database or table.");
-            e.printStackTrace();
-        }
-    }
 
     public static void main(String[] args) {
 

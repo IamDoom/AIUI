@@ -17,8 +17,10 @@ import java.util.Objects;
 
 
 public class loginController {
-    data DB = new data();
-
+    data DB;
+    public void setDB(data DB){
+        this.DB = DB;
+    }
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -57,6 +59,7 @@ public class loginController {
         }
 
     }
+
     @FXML
     protected void submitlogin(ActionEvent event) {
         String password = Password.getText();
@@ -73,6 +76,7 @@ public class loginController {
                 errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
+
                     System.out.println("login succesfull");
                     login(event);
                 } catch (IOException e) {
