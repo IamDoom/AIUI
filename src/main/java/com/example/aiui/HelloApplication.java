@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import java.util.Observer;
 
 public class HelloApplication extends Application {
-    Data DB = new Data();
+    data DB = new data();
     @Override
     public void start(Stage stage) {
         DB.registerUser("john", "doe", "johndoe@emailadress.com","testusername", "securepassword", false);

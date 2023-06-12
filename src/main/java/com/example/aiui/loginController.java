@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -22,8 +23,8 @@ import java.util.ResourceBundle;
 
 
 public class loginController implements observer, Initializable {
-    Data DB;
-    public void setDB(Data DB){
+    data DB;
+    public void setDB(data DB){
         this.DB = DB;
     }
 

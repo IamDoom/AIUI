@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 import javafx.stage.Modality;
 
 public class mainController implements observer,  Initializable{
-    Data DB = new Data();
+    data DB = new data();
     private Stage stage;
     private Scene scene;
     private Parent root;
