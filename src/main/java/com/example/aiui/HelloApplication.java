@@ -6,31 +6,19 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 
-import java.util.Objects;
-
 public class HelloApplication extends Application {
-    Data DB = new Data();
-
+    data DB = new data();
     @Override
     public void start(Stage stage) {
+        DB.registerUser("john", "doe", "johndoe@emailadress.com","testusername", "securepassword", false);
         try {
-            // Het laden van het FXML-bestand
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainScene.fxml")));
-
-            // Creëren van een scene
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
+            Parent root = loader.load();
             Scene scene = new Scene(root);
-
-            // Het instellen van de scene op het podium
             stage.setScene(scene);
-
-            // Database en testmedewerker aanmaken
-            DB.createDB();
-            DB.createTestEmployee();
-
-            // Het instellen van de titel van het venster
             stage.setTitle("AIUI: Login");
-
-            // Het tonen van het venster
+            loginController loginController = loader.getController();
+            loginController.setDB(DB);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,3 +36,8 @@ public class HelloApplication extends Application {
 
     }
 }
+=======
+        launch(args);
+    }
+}
+>>>>>>> hamza

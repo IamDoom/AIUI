@@ -8,6 +8,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -21,8 +26,8 @@ import java.util.ResourceBundle;
 
 import javafx.stage.Modality;
 
-public class mainController implements Initializable, Observer {
-    Data DB = new Data();
+public class mainController {
+    data DB = new data();
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -52,6 +57,10 @@ public class mainController implements Initializable, Observer {
 
     @FXML
     private Button closeSettings;
+
+    @FXML
+    private Button newChat;
+
 
     @FXML
     private Pane settingspane;
@@ -207,6 +216,9 @@ public class mainController implements Initializable, Observer {
         }
 
 
+    @FXML
+    public void setOnKeyPressed(ActionEvent Enter) {
+        String userMessage = input.getText();
         @FXML
         public void setOnKeyPressed (ActionEvent Enter){
             String userMessage = input.getText();
@@ -323,7 +335,5 @@ public class mainController implements Initializable, Observer {
         conversation = FXCollections.observableArrayList();
         chatList.setItems(conversation);
 
-        // Laad de gesprekken
-        loadConversation();
     }
 }

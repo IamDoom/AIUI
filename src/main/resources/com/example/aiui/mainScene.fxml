@@ -51,7 +51,7 @@
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="language" defaultButton="true" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onAction="#Togglelang" prefHeight="28.0" prefWidth="150.0" style="-fx-background-color: #307eb3;" text="language: ">
+                  <Button fx:id="language" defaultButton="true" layoutX="10.0" layoutY="12.0" mnemonicParsing="false"  prefHeight="28.0" prefWidth="150.0" style="-fx-background-color: #307eb3;" text="language: ">
                      <font>
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>

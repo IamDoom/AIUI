@@ -15,17 +15,24 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
 
+
+public class loginController {
+    data DB;
+    public void setDB(data DB){
+        this.DB = DB;
+    }
 public class loginController implements Observer, Initializable {
     Data DB = new Data();
 
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private boolean lightMode = true;
+    boolean Lightmode = true;
+    @FXML
+    private Pane Base;
+    @FXML
+    private Button login;
 
     @FXML
     private Button mode;
@@ -40,8 +47,7 @@ public class loginController implements Observer, Initializable {
     @FXML
     private TextField username;
     @FXML
-    private Label errorMessage;
-    public loginController(){
+    private Label errorMessage = new Label();
 
     }
     modesData modesData = new modesData();
@@ -70,28 +76,25 @@ update(modesData.getdarkmode(), modesData.getlightmode(), modesData.getcolor1(),
     public void initialize(URL url, ResourceBundle resourceBundle) {
     mode.fire();
     }
-
     @FXML
     protected void submitlogin(ActionEvent event) {
-        String enteredPassword = password.getText();
-        String enteredUsername = username.getText();
-
-        if (enteredPassword.isEmpty() || enteredUsername.isEmpty()) {
+        String password = Password.getText();
+        String username = Username.getText();
+        if (password.isEmpty() || username.isEmpty()) {
             errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
             System.out.println("Wachtwoord of gebruikersnaam incompleet");
-            System.out.println(enteredUsername);
-            System.out.println(enteredPassword);
+            System.out.println(username);
+            System.out.println(password);
         } else {
-            User user = DB.login(enteredUsername, enteredPassword);
-            System.out.println(enteredUsername);
-            System.out.println(enteredPassword);
-
-            if (user == null) {
+            User user = DB.login(username,password);
+            System.out.println(username);
+            System.out.println(password);
+            if (user == null){
                 errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
                 System.out.println("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
-                    System.out.println("Login succesvol");
+                    System.out.println("login succesfull");
                     login(event);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -141,13 +144,10 @@ update(modesData.getdarkmode(), modesData.getlightmode(), modesData.getcolor1(),
 
     @FXML
     public void login(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainScene.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-
-
 }
-
