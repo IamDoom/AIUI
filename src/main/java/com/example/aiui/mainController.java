@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import javafx.stage.Modality;
@@ -74,10 +75,6 @@ public class mainController implements Initializable {
     @FXML
     private Button advanced;
 
-
-
-
-
     private boolean FirstMessage = true;
 
     @FXML
@@ -91,7 +88,6 @@ public class mainController implements Initializable {
         }
 
     }
-
 
     public void Togglelang(ActionEvent event){ // voor taal switchen
         if (EnglishIsActive){
@@ -121,8 +117,6 @@ public class mainController implements Initializable {
         }
 
     }
-
-
 
     protected void LightMode() {
         Base.setStyle("-fx-background-color: #bcc1c4;");
@@ -160,7 +154,7 @@ public class mainController implements Initializable {
         }
 
         // Add user's message to the chat list
-        String localInput = "User: " + userMessage;
+        String localInput = "You: " + userMessage;
         chatList.getItems().add(localInput);
         DitGesprek.getGespreksData().add(localInput);
 
@@ -177,10 +171,6 @@ public class mainController implements Initializable {
         // Clear the input field
         input.clear();
     }
-
-
-
-
 
     private String generateResponse(String userMessage) {
         // Replace this logic with your own or use an AI/chatbot API
@@ -283,9 +273,9 @@ public class mainController implements Initializable {
         for (int i = 0; i < gespreksData.size(); i++) {
             String str = gespreksData.get(i);
             if (i % 2 == 0) {
-                chatList.getItems().add("gebruiker: " + str);
+                chatList.getItems().add(str);
             } else {
-                chatList.getItems().add("Ai: " + str);
+                chatList.getItems().add(str);
             }
         }
     }
@@ -306,10 +296,14 @@ public class mainController implements Initializable {
     public void WeizigOnderwerp(){
         //weizig het onderwerp code
         GesprekOnderwerpen.refresh();
-
     }
 
-
-
-
+    @FXML
+    public void loguit(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("startLogin.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
