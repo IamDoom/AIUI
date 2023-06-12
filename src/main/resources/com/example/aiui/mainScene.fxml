@@ -1,39 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.mainController">
    <children>
       <Pane fx:id="Base" layoutX="3.0" prefHeight="406.4" prefWidth="603.0" style="-fx-background-color: #174694;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="showSettings" layoutX="253.0" layoutY="14.0" mnemonicParsing="false" onAction="#displaySettings" prefHeight="19.0" prefWidth="75.0" style="-fx-background-radius: 100; -fx-background-color: white;" text="settings">
+            <Button fx:id="showSettings" layoutX="243.0" layoutY="15.0" mnemonicParsing="false" onAction="#displaySettings" prefHeight="9.0" prefWidth="52.0" style="-fx-background-radius: 100; -fx-background-color: white;" text="settings">
                <font>
                   <Font size="9.0" />
                </font>
             </Button>
-            <Pane fx:id="sidebar" prefHeight="407.0" prefWidth="241.0" style="-fx-background-color: #5bc3f0;">
+            <Pane fx:id="sidebar" layoutX="-6.0" prefHeight="407.0" prefWidth="241.0" style="-fx-background-color: #5bc3f0;">
                <children>
-                  <ImageView fitHeight="125.0" fitWidth="216.0" layoutX="13.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/fullLogo.png" />
-                     </image>
-                  </ImageView>
-                  <ListView layoutX="11.0" layoutY="14.0" prefHeight="220.0" prefWidth="203.0" />
+                  <ListView fx:id="GesprekOnderwerpen" layoutX="38.0" layoutY="46.0" onMouseClicked="#SelecteerdChat" prefHeight="315.0" prefWidth="165.0" />
+                  <Button fx:id="NieuweGesprek" layoutX="73.0" layoutY="14.0" mnemonicParsing="false" onAction="#NieuwGesprek" text="Nieuw gesprek" />
+                  <Button layoutX="10.0" layoutY="369.0" mnemonicParsing="false" onAction="#loguit" text="Logout" />
                </children></Pane>
-            <TextField fx:id="input" alignment="CENTER" layoutX="261.0" layoutY="365.0" onAction="#setOnKeyPressed" prefHeight="35.0" prefWidth="247.0" promptText="Typ uw vraag..." style="-fx-background-color: white; -fx-background-radius: 4; -fx-border-radius: 4; -fx-border-color: #0078D7;">
+            <TextField fx:id="input" alignment="CENTER" layoutX="268.0" layoutY="365.0" onAction="#setOnKeyPressed" prefHeight="35.0" prefWidth="235.0" promptText="Typ uw vraag..." style="-fx-background-color: white; -fx-background-radius: 4; -fx-border-radius: 4; -fx-border-color: #0078D7;">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </TextField>
-            <Button fx:id="submit" alignment="CENTER" contentDisplay="CENTER" layoutX="533.0" layoutY="426.0" mnemonicParsing="false" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4;" text="Submit" textFill="WHITE">
+            <Button fx:id="Submit" alignment="CENTER" contentDisplay="CENTER" layoutX="533.0" layoutY="370.0" mnemonicParsing="false" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4;" text="Submit" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="13.0" />
                </font>
@@ -43,7 +35,7 @@
                   <Font name="Segoe UI Bold" size="10.0" />
                </font>
             </Button>
-            <ListView fx:id="chatList" layoutX="241.0" layoutY="50.0" prefHeight="306.0" prefWidth="362.0" />
+            <ListView fx:id="chatList" layoutX="235.0" layoutY="50.0" prefHeight="306.0" prefWidth="368.0" />
             <Pane fx:id="settingspane" layoutX="269.0" layoutY="8.0" prefHeight="285.0" prefWidth="258.0" style="-fx-background-color: #307eb3; -fx-opacity: 70%; -fx-border-color: black; -fx-border-width: 5px;" visible="false">
                <children>
                   <Button fx:id="closeSettings" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#displaySettings" style="-fx-background-color: #307eb3;" text="close" textAlignment="CENTER" textOverrun="CLIP">
@@ -56,7 +48,7 @@
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="language" defaultButton="true" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" style="-fx-background-color: #307eb3;" text="language: ">
+                  <Button fx:id="language" defaultButton="true" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onAction="#Togglelang" prefHeight="28.0" prefWidth="115.0" style="-fx-background-color: #307eb3;" text="language: ">
                      <font>
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>
@@ -98,7 +90,6 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="476.0" layoutY="10.0" mnemonicParsing="false" onAction="#LogoutButton" text="log uit" />
          </children>
       </Pane>
    </children>
