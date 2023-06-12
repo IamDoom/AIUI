@@ -1,4 +1,5 @@
 package com.example.aiui;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -26,7 +26,7 @@ import javafx.stage.Modality;
 
 public class mainController implements Initializable{
     User user;
-    data DB = new data();
+    data DB;
     public void setmainController(data DB, User user){
         this.DB = DB;
         this.user = user;
@@ -40,6 +40,7 @@ public class mainController implements Initializable{
 
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
     private boolean EnglishIsActive = true;
+    Gesprek DitGesprek;
 
     @FXML
     private ListView<String> chatList;
@@ -180,7 +181,7 @@ public class mainController implements Initializable{
     @FXML
     public void setOnKeyPressed(ActionEvent Enter) {
         //vind het juiste gesprek
-        Gesprek DitGesprek = getGesprek();
+        DitGesprek = getGesprek();
 
         //Maak het onderwerp aan voor het gesprek
         String userMessage = input.getText();
@@ -198,7 +199,7 @@ public class mainController implements Initializable{
 
 
         // Generate an automatic response
-        String automaticResponse = generateResponse(userMessage);
+        String automaticResponse = DitGesprek.generateResponse(userMessage);
 
         // Add the automatic response to the chat list
         String localOutput = "AI: " + automaticResponse;
@@ -210,16 +211,7 @@ public class mainController implements Initializable{
         input.clear();
     }
 
-    private String generateResponse(String userMessage) {
-        // Replace this logic with your own or use an AI/chatbot API
-        if (userMessage.equalsIgnoreCase("hello")) {
-            return "Hi! How can I assist you?";
-        } else if (userMessage.equalsIgnoreCase("How are you?") || userMessage.toLowerCase().startsWith("how are you")) {
-            return "As an AI, I don't have feelings or emotions, but I'm functioning as intended and ready to help you. How can I assist you today?";
-        } else {
-            return "I don't have an answer for that now";
-        }
-    }
+
     @FXML
     protected void registerEmployee(ActionEvent event) throws IOException{
         Stage stage = (Stage) setting_register.getScene().getWindow();
@@ -248,7 +240,7 @@ public class mainController implements Initializable{
     @FXML
     public void LogoutButton(ActionEvent event) throws IOException {
         // Stap 1: Het gesprek opslaan
-        saveConversation();
+        DitGesprek.saveConversation(conversation);
 
         // Stap 2: Uitloggen en navigeren naar het startscherm
         root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
@@ -259,20 +251,7 @@ public class mainController implements Initializable{
 
     }
 
-    private void saveConversation() {
-        // Stap 1: Implementeer hier je logica om het gesprek op te slaan
-        // In dit voorbeeld wordt het gesprek opgeslagen naar een tekstbestand met de naam "conversation.txt"
-        try {
-            FileWriter writer = new FileWriter("conversation.txt");
-            for (String message : conversation) {
-                writer.write(message + "\n");
-            }
-            writer.close();
-            System.out.println("Gesprek opgeslagen.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     private void loadConversation() {
         try {
@@ -324,6 +303,7 @@ public class mainController implements Initializable{
         gesprekidCounter++;
         return id;
     }
+
     public void NieuwGesprek(){
         //maak een nieuw gesprek
         Gesprek gesprek = new Gesprek(GesprekIdCounter());
