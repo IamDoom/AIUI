@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 import javafx.stage.Modality;
 
-public class mainController implements observer,  Initializable{
+public class mainController implements Initializable{
     data DB = new data();
     private Stage stage;
     private Scene scene;
@@ -52,7 +52,7 @@ public class mainController implements observer,  Initializable{
     private Button showSettings;
 
     @FXML
-    private Button Submit;
+    private Button submit;
 
     @FXML
     private Button closeSettings;
@@ -89,8 +89,6 @@ public class mainController implements observer,  Initializable{
 
     }
 
-    modesData modesData = new modesData();
-
 
 
 
@@ -100,7 +98,7 @@ public class mainController implements observer,  Initializable{
             bundle = ResourceBundle.getBundle("com.example.aiui.Nederlands");
             showSettings.setText(bundle.getString("Settings"));
             input.setPromptText(bundle.getString("PromptText"));
-            Submit.setText(bundle.getString("Submit"));
+            submit.setText(bundle.getString("Submit"));
             closeSettings.setText(bundle.getString("closesettings"));
             advanced.setText(bundle.getString("advanced"));
             edituser.setText(bundle.getString("edituser"));
@@ -113,7 +111,7 @@ public class mainController implements observer,  Initializable{
             bundle = ResourceBundle.getBundle("com.example.aiui.English");
             showSettings.setText(bundle.getString("Settings"));
             input.setPromptText(bundle.getString("PromptText"));
-            Submit.setText(bundle.getString("Submit"));
+            submit.setText(bundle.getString("Submit"));
             closeSettings.setText(bundle.getString("closesettings"));
             advanced.setText(bundle.getString("advanced"));
             edituser.setText(bundle.getString("edituser"));
@@ -149,55 +147,31 @@ public class mainController implements observer,  Initializable{
     }
     @FXML
     public void darkKlick() {
-        boolean darkmode = true;
-        boolean lightmode = false;
-        boolean colormode1 =  false;
-        boolean colormode2 = false;
         update(true, false, false, false);
     }
     @FXML
     public void lightKlick() {
-        boolean darkmode = false;
-        boolean lightmode = true;
-        boolean colormode1 =  false;
-        boolean colormode2 = false;
         update(false, true, false, false);
     }
     @FXML
     public void color1Klick() {
-        boolean darkmode = false;
-        boolean lightmode = false;
-        boolean colormode1 =  true;
-        boolean colormode2 = false;
         update(false, false, true, false);
     }
     @FXML
     public void color2Klick() {
-        boolean darkmode = false;
-        boolean lightmode = false;
-        boolean colormode1 =  false;
-        boolean colormode2 = true;
         update(false, false, false, true);
     }
 
-    @Override
+
     public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
-        observer logincontroller = new loginController();
-        observer maincontroller = new mainController();
-        modesData.registerObserver(maincontroller);
-        modesData.registerObserver(logincontroller);
-        modesData.notifyObservers();
+
         if (darkmode == true) {
-            modesData.setmode(true, false, false, false);
             DarkMode();
         } else if (lightmode == true) {
-            modesData.setmode(false, true, false, false);
             Lightmode();
         } else if (colormode1 == true) {
-            modesData.setmode(false, false, true, false);
             color1();
         } else if (colormode2 == true) {
-            modesData.setmode(false, false, false, true);
             color2();
         }
 
@@ -335,7 +309,7 @@ public class mainController implements observer,  Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showSettings.setText(bundle.getString("Settings"));
         input.setPromptText(bundle.getString("PromptText"));
-        Submit.setText(bundle.getString("Submit"));
+        submit.setText(bundle.getString("Submit"));
         closeSettings.setText(bundle.getString("closesettings"));
         advanced.setText(bundle.getString("advanced"));
         edituser.setText(bundle.getString("edituser"));

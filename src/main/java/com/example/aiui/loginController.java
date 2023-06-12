@@ -22,7 +22,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 
-public class loginController implements observer, Initializable {
+public class loginController implements Initializable {
     data DB;
     public void setDB(data DB){
         this.DB = DB;
@@ -50,34 +50,14 @@ public class loginController implements observer, Initializable {
     private TextField Username;
     @FXML
     private Label errorMessage;
-    public loginController(){
 
-    }
-    modesData modesData = new modesData();
-    @Override
-    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2){
-        modesData.notifyObservers();
-        if (darkmode == true) {
-            modesData.setmode(true, false, false, false);
-            darkMode();
-        } else if (lightmode == true) {
-            modesData.setmode(false, true, false, false);
-            lightMode();
-        } else if (colormode1 == true) {
-            modesData.setmode(false, false, true, false);
-            color1();
-        } else if (colormode2 == true) {
-            modesData.setmode(false, false, false, true);
-            color2();
-        }
-    }
-    @FXML
-    protected void Toggle() {
-update(modesData.getdarkmode(), modesData.getlightmode(), modesData.getcolor1(), modesData.getcolor2());
-    }
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    mode.fire();
+
     }
 
     @FXML
@@ -104,44 +84,6 @@ update(modesData.getdarkmode(), modesData.getlightmode(), modesData.getcolor1(),
                 }
             }
         }
-    }
-
-    protected void lightMode() {
-        Username.setStyle("-fx-background-color: white; -fx-text-fill: black;");
-        Password.setStyle("-fx-background-color: white; -fx-text-fill: black;");
-        leftPane.setStyle("-fx-background-color: #5bc3f0;");
-        rightPane.setStyle("-fx-background-color: #174694;");
-        mode.setText("Donkere modus");
-        mode.setStyle("-fx-background-color: #5BC3F0");
-        button.setStyle("-fx-background-color: #5BC3F0");
-    }
-
-    protected void darkMode() {
-        Username.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
-        Password.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
-        leftPane.setStyle("-fx-background-color: #1b8bc5;");
-        rightPane.setStyle("-fx-background-color: #174694;");
-        mode.setText("Lichte modus");
-        mode.setStyle("-fx-background-color: #1b8bc5");
-        button.setStyle("-fx-background-color: #1b8bc5");
-    }
-    protected void color1() {
-        Username.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
-        Password.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
-        leftPane.setStyle("-fx-background-color: #1b8bc5;");
-        rightPane.setStyle("-fx-background-color: #174694;");
-        mode.setText("Lichte modus");
-        mode.setStyle("-fx-background-color: #1b8bc5");
-        button.setStyle("-fx-background-color: #1b8bc5");
-    }
-    protected void color2() {
-        Username.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
-        Password.setStyle("-fx-background-color: #1b8bc5; -fx-text-fill: white;");
-        leftPane.setStyle("-fx-background-color: #1b8bc5;");
-        rightPane.setStyle("-fx-background-color: #174694;");
-        mode.setText("Lichte modus");
-        mode.setStyle("-fx-background-color: #1b8bc5");
-        button.setStyle("-fx-background-color: #1b8bc5");
     }
 
     @FXML
