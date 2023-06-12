@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.mainController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.mainController">
    <children>
       <Pane fx:id="Base" layoutX="3.0" prefHeight="406.4" prefWidth="603.0" style="-fx-background-color: #174694;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="showSettings" layoutX="243.0" layoutY="14.0" mnemonicParsing="false" onAction="#displaySettings" prefHeight="19.0" prefWidth="73.0" style="-fx-background-radius: 100; -fx-background-color: white;" text="settings">
+            <Button fx:id="showSettings" layoutX="180.0" layoutY="14.0" mnemonicParsing="false" onAction="#displaySettings" prefHeight="9.0" prefWidth="52.0" style="-fx-background-radius: 100; -fx-background-color: white;" text="settings">
                <font>
                   <Font size="9.0" />
                </font>
@@ -28,7 +28,9 @@
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </TextField>
-            <Button fx:id="Submit" alignment="CENTER" contentDisplay="CENTER" layoutX="517.0" layoutY="370.0" mnemonicParsing="false" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4;" text="Submit" textFill="WHITE">
+
+            <Button fx:id="submit" alignment="CENTER" contentDisplay="CENTER" layoutX="533.0" layoutY="426.0" mnemonicParsing="false" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4;" text="Submit" textFill="WHITE">
+
                <font>
                   <Font name="Segoe UI Bold" size="13.0" />
                </font>
@@ -88,11 +90,21 @@
                   </Button>
                </children>
             </Pane>
-            <Label fx:id="OnderwerpLabel" layoutX="321.0" layoutY="10.0" prefHeight="27.0" prefWidth="129.0">
+            <Label fx:id="OnderwerpLabel" layoutX="384.0" layoutY="16.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
+         </children>
+      </Pane>
+      <Pane prefHeight="480.0" prefWidth="160.0" style="-fx-background-color: #5bc3f0;">
+         <children>
+            <ImageView fitHeight="61.0" fitWidth="121.0" layoutX="27.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/fullLogo.png" />
+               </image>
+            </ImageView>
+            <ListView layoutX="8.0" layoutY="87.0" prefHeight="306.0" prefWidth="144.0" />
          </children>
       </Pane>
    </children>
