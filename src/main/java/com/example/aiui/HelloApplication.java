@@ -27,11 +27,7 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-    modesData modesData = new modesData();
-    observer logincontroller = new loginController();
-    observer maincontroller = new mainController();
-    modesData.registerObserver(maincontroller);
-    modesData.registerObserver(logincontroller);
+
         // Starten van de JavaFX-toepassing
         launch(args);
 

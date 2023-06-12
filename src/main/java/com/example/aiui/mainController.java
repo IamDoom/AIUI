@@ -93,6 +93,7 @@ public class mainController implements observer,  Initializable{
 
 
 
+
     public void Togglelang(ActionEvent event){ // voor taal switchen
         if (EnglishIsActive){
             EnglishIsActive = false;
@@ -181,6 +182,10 @@ public class mainController implements observer,  Initializable{
 
     @Override
     public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
+        observer logincontroller = new loginController();
+        observer maincontroller = new mainController();
+        modesData.registerObserver(maincontroller);
+        modesData.registerObserver(logincontroller);
         modesData.notifyObservers();
         if (darkmode == true) {
             modesData.setmode(true, false, false, false);
