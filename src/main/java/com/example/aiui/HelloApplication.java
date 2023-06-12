@@ -14,13 +14,12 @@ public class HelloApplication extends Application {
     public void start(Stage stage) {
         DB.registerUser("john", "doe", "johndoe@emailadress.com","testusername", "securepassword", false);
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            FXMLLoader fxmlLoader = new FXMLLoader(com.example.aiui.HelloApplication.class.getResource("startLogin.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 320, 240);
             stage.setTitle("AIUI: Login");
-            loginController loginController = loader.getController();
+            loginController loginController = fxmlLoader.getController();
             loginController.setDB(DB);
+            stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
