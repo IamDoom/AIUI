@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 
 public class loginController implements Initializable {
     data DB;
+    User user;
     public void setDB(data DB){
         this.DB = DB;
     }
@@ -45,15 +46,11 @@ public class loginController implements Initializable {
     @FXML
     private Pane rightPane;
     @FXML
-    private PasswordField Password;
+    private PasswordField Password = new PasswordField();
     @FXML
-    private TextField Username;
+    private TextField Username = new TextField();
     @FXML
-    private Label errorMessage;
-
-
-
-
+    private Label errorMessage = new Label();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -94,8 +91,4 @@ public class loginController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-
 }
-
-
