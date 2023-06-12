@@ -13,7 +13,6 @@ import javafx.scene.control.skin.ToggleButtonSkin;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -26,7 +25,13 @@ import java.util.ResourceBundle;
 import javafx.stage.Modality;
 
 public class mainController implements Initializable{
+    User user;
     data DB = new data();
+    public void setmainController(data DB, User user){
+        this.DB = DB;
+        this.user = user;
+    }
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -52,7 +57,7 @@ public class mainController implements Initializable{
     private Button showSettings;
 
     @FXML
-    private Button submit;
+    private Button Submit;
 
     @FXML
     private Button closeSettings;
@@ -98,7 +103,7 @@ public class mainController implements Initializable{
             bundle = ResourceBundle.getBundle("com.example.aiui.Nederlands");
             showSettings.setText(bundle.getString("Settings"));
             input.setPromptText(bundle.getString("PromptText"));
-            submit.setText(bundle.getString("Submit"));
+            Submit.setText(bundle.getString("Submit"));
             closeSettings.setText(bundle.getString("closesettings"));
             advanced.setText(bundle.getString("advanced"));
             edituser.setText(bundle.getString("edituser"));
@@ -111,7 +116,7 @@ public class mainController implements Initializable{
             bundle = ResourceBundle.getBundle("com.example.aiui.English");
             showSettings.setText(bundle.getString("Settings"));
             input.setPromptText(bundle.getString("PromptText"));
-            submit.setText(bundle.getString("Submit"));
+            Submit.setText(bundle.getString("Submit"));
             closeSettings.setText(bundle.getString("closesettings"));
             advanced.setText(bundle.getString("advanced"));
             edituser.setText(bundle.getString("edituser"));
@@ -249,6 +254,7 @@ public class mainController implements Initializable{
 
             // Access the controller of the loaded FXML file if needed
             registrationController registrationController = fxmlLoader.getController();
+            registrationController.setregistrationController(DB);
             registrationController.setStage();
             // Show the popup window
             popupStage.showAndWait();
@@ -309,7 +315,7 @@ public class mainController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showSettings.setText(bundle.getString("Settings"));
         input.setPromptText(bundle.getString("PromptText"));
-        submit.setText(bundle.getString("Submit"));
+        //Submit.setText(bundle.getString("Submit"));
         closeSettings.setText(bundle.getString("closesettings"));
         advanced.setText(bundle.getString("advanced"));
         edituser.setText(bundle.getString("edituser"));

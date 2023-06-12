@@ -1,5 +1,4 @@
 package com.example.aiui;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,9 +18,9 @@ public class HelloApplication extends Application {
 
             Scene scene = new Scene(root);
             stage.setTitle("AIUI: Login");
-            stage.setScene(scene);
-            loginController loginController = new loginController();
+            loginController loginController = loader.getController();
             loginController.setDB(DB);
+            stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -29,7 +28,6 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-
         // Starten van de JavaFX-toepassing
         launch(args);
 

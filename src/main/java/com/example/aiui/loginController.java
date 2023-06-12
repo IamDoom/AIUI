@@ -7,23 +7,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 
 public class loginController implements Initializable {
-    data DB;
+    data DB = new data();
+    User user;
     public void setDB(data DB){
         this.DB = DB;
     }
@@ -31,11 +28,13 @@ public class loginController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
     @FXML
     private Pane Base;
     @FXML
     private Button login;
-
+    @FXML
+    private Button Submit;
     @FXML
     private Button mode;
     @FXML
@@ -45,11 +44,11 @@ public class loginController implements Initializable {
     @FXML
     private Pane rightPane;
     @FXML
-    private PasswordField Password;
+    private PasswordField Password = new PasswordField();
     @FXML
-    private TextField Username;
+    private TextField Username = new TextField();
     @FXML
-    private Label errorMessage;
+    private Label errorMessage = new Label();
 
 
 
@@ -69,7 +68,7 @@ public class loginController implements Initializable {
             System.out.println(username);
             System.out.println(password);
         } else {
-            User user = DB.login(username,password);
+            user = DB.login(username,password);
             System.out.println(username);
             System.out.println(password);
             if (user == null){
@@ -88,14 +87,14 @@ public class loginController implements Initializable {
 
     @FXML
     public void login(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainScene.fxml"));
+        root = loader.load();
+        mainController mainController = loader.getController();
+        mainController.setmainController(DB,user);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle(user.getFirstName()+" "+user.getLastName());
         stage.show();
     }
-
-
 }
-
-
