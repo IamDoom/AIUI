@@ -41,6 +41,7 @@ public class mainController implements Initializable{
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
     private boolean EnglishIsActive = true;
     Gesprek DitGesprek;
+    gespreksManager Manager;
 
     @FXML
     private ListView<String> chatList;
@@ -284,7 +285,7 @@ public class mainController implements Initializable{
         setting_register.setText(bundle.getString("settingsregister"));
 
         Gesprekken = new ArrayList<Gesprek>();
-        Gesprek EersteGesprek = new Gesprek(GesprekIdCounter());
+        Gesprek EersteGesprek = new Gesprek();
         Gesprekken.add(EersteGesprek);
 
     }
@@ -306,7 +307,7 @@ public class mainController implements Initializable{
 
     public void NieuwGesprek(){
         //maak een nieuw gesprek
-        Gesprek gesprek = new Gesprek(GesprekIdCounter());
+        Gesprek gesprek = Manager.newGesprek();
         //clear het label
         OnderwerpLabel.setText("");
         //Voeg het gesprek toe aan de lijst met gesprekken

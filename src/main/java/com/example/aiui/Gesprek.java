@@ -38,13 +38,26 @@ class conceptResponseGenerator implements ResponseGenerator{
 
 }
 
+class gespreksManager{
+    private ArrayList<Gesprek> gesprekken;
+    public Gesprek newGesprek(){
+        Gesprek gesprek = new Gesprek();
+        gesprekken.add(gesprek);
+        return gesprek;
+    }
+
+    public ArrayList<Gesprek> getGesprekken() {
+        return gesprekken;
+    }
+}
+
 public class Gesprek {
     private String Onderwerp;
     private ArrayList<String> GespreksData;
     private ResponseGenerator responseGenerator = new conceptResponseGenerator();
-    private int id;
-    public Gesprek(int id){
-        this.id = id;
+    private static int id = 0;
+    public Gesprek(){
+        this.id ++;
         GespreksData = new ArrayList<String>();
         Onderwerp = "Leeg onderwerp";
     }
