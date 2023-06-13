@@ -10,6 +10,9 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.ToggleButtonSkin;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -36,8 +39,6 @@ public class mainController implements Initializable{
     private Stage stage;
     private Scene scene;
     private Parent root;
-
-    boolean Lightmode = true;
 
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
     private boolean EnglishIsActive = true;
@@ -109,7 +110,7 @@ public class mainController implements Initializable{
             bundle = ResourceBundle.getBundle("com.example.aiui.English");
             showSettings.setText(bundle.getString("Settings"));
             input.setPromptText(bundle.getString("PromptText"));
-            Submit.setText(bundle.getString("Submit"));
+            Submit.setText(bundle.getString("submit"));
             closeSettings.setText(bundle.getString("closesettings"));
             advanced.setText(bundle.getString("advanced"));
             edituser.setText(bundle.getString("edituser"));
@@ -158,13 +159,13 @@ public class mainController implements Initializable{
 
     public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
 
-        if (darkmode == true) {
+        if (darkmode) {
             DarkMode();
-        } else if (lightmode == true) {
+        } else if (lightmode) {
             LightMode();
-        } else if (colormode1 == true) {
+        } else if (colormode1) {
             color1();
-        } else if (colormode2 == true) {
+        } else if (colormode2) {
             color2();
         }
     }
@@ -298,7 +299,7 @@ public class mainController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showSettings.setText(bundle.getString("Settings"));
         input.setPromptText(bundle.getString("PromptText"));
-        //Submit.setText(bundle.getString("Submit"));
+        Submit.setText(bundle.getString("Submit"));
         closeSettings.setText(bundle.getString("closesettings"));
         advanced.setText(bundle.getString("advanced"));
         edituser.setText(bundle.getString("edituser"));
@@ -344,13 +345,12 @@ public class mainController implements Initializable{
         for(Gesprek gesprek : Gesprekken) {
             if (SelectedChat.equals(gesprek.getOnderwerp())) {
                 //Selecteer gesprek gebaseerd op onderwerp
-                Gesprek CurrentGesprek = gesprek;
-                this.GesprekId = CurrentGesprek.getId();
+                this.GesprekId = gesprek.getId();
 
                 //Laad de nieuwe chat
-                ArrayList<String> gespreksData = CurrentGesprek.getGespreksData();
+                ArrayList<String> gespreksData = gesprek.getGespreksData();
                 Laadchat(gespreksData);
-                OnderwerpLabel.setText(CurrentGesprek.getOnderwerp());
+                OnderwerpLabel.setText(gesprek.getOnderwerp());
             }
         }
     }

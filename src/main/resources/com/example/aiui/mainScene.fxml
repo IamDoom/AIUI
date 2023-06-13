@@ -1,95 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.mainController">
    <children>
-      <Pane fx:id="Base" layoutX="3.0" prefHeight="406.4" prefWidth="603.0" style="-fx-background-color: #174694;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="OnderwerpLabel" layoutX="384.0" layoutY="16.0" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="18.0" />
+         </font>
+      </Label>
+      <Pane fx:id="rightPane" layoutX="-1.0" layoutY="-9.0" minHeight="576.0" minWidth="1024.0" style="-fx-background-color: linear-gradient(to right, #5bc3f0, #174694);;">
          <children>
-            <Button fx:id="showSettings" layoutX="243.0" layoutY="15.0" mnemonicParsing="false" onAction="#displaySettings" prefHeight="9.0" prefWidth="52.0" style="-fx-background-radius: 100; -fx-background-color: white;" text="settings">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Button>
-            <Pane fx:id="sidebar" layoutX="-6.0" prefHeight="407.0" prefWidth="241.0" style="-fx-background-color: #5bc3f0;">
-               <children>
-                  <ListView fx:id="GesprekOnderwerpen" layoutX="38.0" layoutY="46.0" onMouseClicked="#SelecteerdChat" prefHeight="315.0" prefWidth="165.0" />
-                  <Button fx:id="NieuweGesprek" layoutX="73.0" layoutY="14.0" mnemonicParsing="false" onAction="#NieuwGesprek" text="Nieuw gesprek" />
-                  <Button layoutX="10.0" layoutY="369.0" mnemonicParsing="false" onAction="#loguit" text="Logout" />
-               </children></Pane>
-            <TextField fx:id="input" alignment="CENTER" layoutX="268.0" layoutY="365.0" onAction="#setOnKeyPressed" prefHeight="35.0" prefWidth="235.0" promptText="Typ uw vraag..." style="-fx-background-color: white; -fx-background-radius: 4; -fx-border-radius: 4; -fx-border-color: #0078D7;">
-               <font>
-                  <Font name="Segoe UI" size="12.0" />
-               </font>
-            </TextField>
-            <Button fx:id="Submit" alignment="CENTER" contentDisplay="CENTER" layoutX="533.0" layoutY="370.0" mnemonicParsing="false" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4;" text="Submit" textFill="WHITE">
+            <Button fx:id="Submit" alignment="CENTER" contentDisplay="CENTER" layoutX="895.0" layoutY="511.0" mnemonicParsing="false" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4;" text="Submit" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="mode" layoutX="533.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-radius: 4; -fx-background-color: #5BC3F0;" text="Darkmode" textFill="WHITE">
+            <TextField fx:id="input" alignment="CENTER" layoutX="652.0" layoutY="511.0" minHeight="25.0" minWidth="225.0" onAction="#setOnKeyPressed" promptText="Typ uw vraag..." style="-fx-background-color: white; -fx-background-radius: 4; -fx-border-radius: 4; -fx-border-color: #0078D7;">
                <font>
-                  <Font name="Segoe UI Bold" size="10.0" />
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </TextField>
+            <ListView fx:id="chatList" layoutX="536.0" layoutY="90.0" minHeight="400.0" minWidth="450.0" style="-fx-background-radius: 24px;" />
+            <Button fx:id="mode" layoutX="42.0" layoutY="509.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#darkKlick" style="-fx-background-radius: 4; -fx-background-color: #5BC3F0;" text="Darkmode" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="13.0" />
                </font>
             </Button>
-            <ListView fx:id="chatList" layoutX="235.0" layoutY="50.0" prefHeight="306.0" prefWidth="368.0" />
-            <Pane fx:id="settingspane" layoutX="269.0" layoutY="8.0" prefHeight="285.0" prefWidth="258.0" style="-fx-background-color: #307eb3; -fx-opacity: 70%; -fx-border-color: black; -fx-border-width: 5px;" visible="false">
-               <children>
-                  <Button fx:id="closeSettings" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#displaySettings" style="-fx-background-color: #307eb3;" text="close" textAlignment="CENTER" textOverrun="CLIP">
-                     <font>
-                        <Font name="Century Gothic Bold" size="13.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="setting_register" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" onAction="#registerEmployee" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="register user (admin)" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-                     <font>
-                        <Font name="Franklin Gothic Demi" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="language" defaultButton="true" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onAction="#Togglelang" prefHeight="28.0" prefWidth="115.0" style="-fx-background-color: #307eb3;" text="language: ">
-                     <font>
-                        <Font name="Franklin Gothic Demi" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="edituser" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="82.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="edit user" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-                     <font>
-                        <Font name="Franklin Gothic Demi" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="advanced" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="110.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="advanced (admin)" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-                     <font>
-                        <Font name="Franklin Gothic Demi" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="darkmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="138.0" mnemonicParsing="false" onAction="#darkKlick" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="darkmode" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-                     <font>
-                        <Font name="Franklin Gothic Demi" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="lightmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="166.0" mnemonicParsing="false" onAction="#lightKlick" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="lightmode" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-                     <font>
-                        <Font name="Franklin Gothic Demi" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="colormode1" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="192.0" mnemonicParsing="false" onAction="#color1Klick" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="color 1" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-                     <font>
-                        <Font name="Franklin Gothic Demi" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="colormode2" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="220.0" mnemonicParsing="false" onAction="#color2Klick" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3;" text="color 2" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-                     <font>
-                        <Font name="Franklin Gothic Demi" size="15.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Pane>
-            <Label fx:id="OnderwerpLabel" layoutX="384.0" layoutY="16.0">
+            <Button fx:id="showSettings" layoutX="221.0" layoutY="509.0" minHeight="25.0" mnemonicParsing="false" onAction="#displaySettings" style="-fx-background-radius: 4; -fx-background-color: #5BC3F0;" text="Settings" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Segoe UI Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="572.0" layoutY="510.0" minHeight="0.0" mnemonicParsing="false" onAction="#loguit" style="-fx-background-radius: 4px; -fx-background-color: #5BC3F0;" text="Logout" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="NieuweGesprek" layoutX="139.0" layoutY="509.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#NieuwGesprek" prefHeight="22.0" prefWidth="62.0" style="-fx-background-radius: 4px; -fx-background-color: #5BC3F0;" text="New" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="13.0" />
+               </font>
+               <padding>
+                  <Insets left="20.0" right="5.0" />
+               </padding>
+            </Button>
+            <ListView fx:id="GesprekOnderwerpen" layoutX="42.0" layoutY="90.0" minHeight="400.0" minWidth="200.0" onMouseClicked="#SelecteerdChat" style="-fx-background-radius: 24px;" />
+            <ImageView fitHeight="12.0" fitWidth="11.0" layoutX="150.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/plus.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="720.0" layoutY="34.0" text="AIUI" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="40.0" />
                </font>
             </Label>
+            <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="221.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/geschiedenis.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="34.0" text="History" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="40.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="179.0" fitWidth="186.0" layoutX="338.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="settingspane" layoutX="375.0" layoutY="100.0" minHeight="300.0" minWidth="300.0" style="-fx-background-color: white; -fx-background-radius: 32px; -fx-opacity: 90%;" visible="false">
+         <children>
+            <Button fx:id="closeSettings" alignment="CENTER" contentDisplay="CENTER" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#displaySettings" style="-fx-background-color: #5BC3F0; -fx-opacity: 100%; -fx-background-radius: 4px;" text="Close" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" />
+               </padding>
+            </Button>
+            <Button fx:id="setting_register" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" onAction="#registerEmployee" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Register user (admin)" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" />
+               </padding>
+            </Button>
+            <Button fx:id="language" alignment="CENTER" defaultButton="true" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onAction="#Togglelang" prefHeight="28.0" prefWidth="115.0" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Language" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" />
+               </padding>
+            </Button>
+            <Button fx:id="edituser" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="82.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Edit user" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" />
+               </padding>
+            </Button>
+            <Button fx:id="advanced" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="110.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Advanced (admin)" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" />
+               </padding>
+            </Button>
+            <Button fx:id="darkmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="138.0" mnemonicParsing="false" onAction="#darkKlick" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Dark mode" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" />
+               </padding>
+            </Button>
+            <Button fx:id="lightmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="166.0" mnemonicParsing="false" onAction="#lightKlick" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #307eb3; -fx-background-radius: 4px;" text="Light mode" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" />
+               </padding>
+            </Button>
+            <Button fx:id="colormode1" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="192.0" mnemonicParsing="false" onAction="#color1Klick" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Theme 1" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" />
+               </padding>
+            </Button>
+            <Button fx:id="colormode2" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="12.0" layoutY="220.0" mnemonicParsing="false" onAction="#color2Klick" prefHeight="28.0" prefWidth="235.0" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Theme 2" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" />
+               </padding>
+            </Button>
          </children>
       </Pane>
    </children>
