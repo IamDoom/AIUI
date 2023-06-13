@@ -40,8 +40,7 @@ public class mainController implements Initializable{
 
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
     private boolean EnglishIsActive = true;
-    Gesprek DitGesprek;
-    gespreksManager Manager;
+
 
     @FXML
     private ListView<String> chatList;
@@ -179,36 +178,12 @@ public class mainController implements Initializable{
     }
 
 
+
     @FXML
     public void setOnKeyPressed(ActionEvent Enter) {
-        //vind het juiste gesprek
-        DitGesprek = getGesprek();
-
-        //Maak het onderwerp aan voor het gesprek
         String userMessage = input.getText();
-        if(DitGesprek.getGespreksData().isEmpty()){
-            OnderwerpLabel.setText(userMessage);
-            DitGesprek.setOnderwerp(userMessage);
-            FirstMessage = false;
-            toevoegenGesprekAanGesprekkenLijst(DitGesprek);
-        }
-
-        // Add user's message to the chat list
-        String localInput = "User: " + userMessage;
-        chatList.getItems().add(localInput);
-        DitGesprek.getGespreksData().add(localInput);
-
-
-        // Generate an automatic response
-        String automaticResponse = DitGesprek.generateResponse(userMessage);
-
-        // Add the automatic response to the chat list
-        String localOutput = "AI: " + automaticResponse;
-        chatList.getItems().add(localOutput);
-        DitGesprek.getGespreksData().add(localOutput);
-
-
-        // Clear the input field
+        String Response = user.getGespreksManager().GenerateResponseJuisteGesprek(currentGesprek, userMessage);
+        chatList.getItems().addAll(userMessage, Response);
         input.clear();
     }
 
@@ -241,7 +216,7 @@ public class mainController implements Initializable{
     @FXML
     public void LogoutButton(ActionEvent event) throws IOException {
         // Stap 1: Het gesprek opslaan
-        DitGesprek.saveConversation(conversation);
+
 
         // Stap 2: Uitloggen en navigeren naar het startscherm
         root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
@@ -250,26 +225,6 @@ public class mainController implements Initializable{
         stage.setScene(scene);
         stage.show();
 
-    }
-
-
-
-    private void loadConversation() {
-        try {
-            // Lees het tekstbestand "conversation.txt"
-            BufferedReader reader = new BufferedReader(new FileReader("conversation.txt"));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // Voeg elk bericht toe aan de gesprekkenlijst
-                conversation.add(line);
-            }
-
-            reader.close();
-            System.out.println("Gesprek geladen.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -284,53 +239,34 @@ public class mainController implements Initializable{
         language.setText(bundle.getString("Taal"));
         setting_register.setText(bundle.getString("settingsregister"));
 
-        Gesprekken = new ArrayList<Gesprek>();
-        Gesprek EersteGesprek = new Gesprek();
-        Gesprekken.add(EersteGesprek);
-
+        this.currentGesprek = user.getGespreksManager().getGesprek(0);
+        Laadchat(user.getGespreksManager().getGesprek(0).getGespreksData());
+        OnderwerpLabel.setText(user.getGespreksManager().getGesprek(0).getOnderwerp());
+        GesprekOnderwerpen.getItems().addAll(user.getGespreksManager().getOnderwerpen());
     }
 
     //WIP
-    private ArrayList<Gesprek> Gesprekken;
-    private Gesprek LocaalGesprek;
-    private int GesprekId = 0;
-    private int gesprekidCounter = 0;
+
+
     @FXML
     private ListView<String> GesprekOnderwerpen;
     @FXML
     private Button NieuweGesprek;
-    public int GesprekIdCounter(){
-        int id = gesprekidCounter;
-        gesprekidCounter++;
-        return id;
-    }
+    private Gesprek currentGesprek;
 
     public void NieuwGesprek(){
-        //maak een nieuw gesprek
-        Gesprek gesprek = Manager.newGesprek();
-        //clear het label
-        OnderwerpLabel.setText("");
-        //Voeg het gesprek toe aan de lijst met gesprekken
-        Gesprekken.add(gesprek);
-        //verander het id van de chat voor de klasse zodat de juiste chat wordt geladen
-        this.GesprekId = gesprek.getId();
-        //"open" een gesprek door de vorige text te verwijderen
+        Gesprek gesprek = user.getGespreksManager().newGesprek();
+        OnderwerpLabel.setText(gesprek.getOnderwerp());
+        currentGesprek = gesprek;
         chatList.getItems().clear();
-
-
     }
+
     public void SelecteerdChat(){
         String SelectedChat = GesprekOnderwerpen.getSelectionModel().getSelectedItem();
-        for(Gesprek gesprek : Gesprekken) {
+        for(Gesprek gesprek : user.getGespreksManager().getGesprekken()) {
             if (SelectedChat.equals(gesprek.getOnderwerp())) {
-                //Selecteer gesprek gebaseerd op onderwerp
-                Gesprek CurrentGesprek = gesprek;
-                this.GesprekId = CurrentGesprek.getId();
-
-                //Laad de nieuwe chat
-                ArrayList<String> gespreksData = CurrentGesprek.getGespreksData();
-                Laadchat(gespreksData);
-                OnderwerpLabel.setText(CurrentGesprek.getOnderwerp());
+                currentGesprek = gesprek;
+                Laadchat(currentGesprek.getGespreksData());
             }
         }
     }
@@ -344,21 +280,11 @@ public class mainController implements Initializable{
                 chatList.getItems().add(str);
             }
         }
+        OnderwerpLabel.setText(currentGesprek.getOnderwerp());
     }
 
-    public void toevoegenGesprekAanGesprekkenLijst(Gesprek gesprek){
-        GesprekOnderwerpen.getItems().add(gesprek.getOnderwerp());
-    }
 
-    public Gesprek getGesprek(){
-        Gesprek DitGesprek = null;
-        for(Gesprek gesprek : Gesprekken) {
-            if (gesprek.getId() == GesprekId) {
-                DitGesprek = gesprek;
-            }
-        }
-        return DitGesprek;
-    }
+
     public void WeizigOnderwerp(){
         //weizig het onderwerp code
         GesprekOnderwerpen.refresh();

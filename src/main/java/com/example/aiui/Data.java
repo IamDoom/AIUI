@@ -26,6 +26,7 @@ class Bot implements messageReceiver{
 }
 
 abstract class User{
+    private gespreksManager gespreksManager;
     private static int IDcounter = 1;
     private String firstName;
     private String lastName;
@@ -44,6 +45,7 @@ abstract class User{
         this.IDcounter += 1;
         this.employeeID = IDcounter;
         this.Email = email;
+        this.gespreksManager = new gespreksManager();
     }
 
     public String getFirstName() {
@@ -80,6 +82,13 @@ abstract class User{
         Email = email;
     }
 
+    public com.example.aiui.gespreksManager getGespreksManager() {
+        return gespreksManager;
+    }
+
+    public void setGespreksManager(com.example.aiui.gespreksManager gespreksManager) {
+        this.gespreksManager = gespreksManager;
+    }
 }
 class Employee extends User{
     Employee(String firstName, String lastName, String email, String username, String password){

@@ -22,6 +22,7 @@ public class HelloApplication extends Application {
             loginController.setDB(DB);
             stage.setScene(scene);
             stage.show();
+            loader.setController(loginController);
         } catch (Exception e) {
             e.printStackTrace();
         }
