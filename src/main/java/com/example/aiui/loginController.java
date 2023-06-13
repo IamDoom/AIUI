@@ -54,12 +54,9 @@ public class loginController implements Initializable {
     @FXML
     private Label errorMessage = new Label();
 
-
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.DB = new data();
 
     }
 

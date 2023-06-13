@@ -11,7 +11,7 @@ public class HelloApplication extends Application {
     data DB = new data();
     @Override
     public void start(Stage stage) {
-        DB.registerUser("john", "doe", "johndoe@emailadress.com","testusername", "securepassword", false);
+        //DB.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", false);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
             Parent root = loader.load();
@@ -19,7 +19,7 @@ public class HelloApplication extends Application {
             Scene scene = new Scene(root);
             stage.setTitle("AIUI: Login");
             loginController loginController = loader.getController();
-            loginController.setDB(DB);
+            //loginController.setDB(DB);
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {

@@ -114,6 +114,10 @@ class chatHistory{
 
 class data {
     private UserDB UserDB = new UserDB();
+    public data(){
+        this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", false);
+    }
+
     public void registerUser(String firstname, String lastname, String emailaddress, String username, String password,boolean administrator){
         if (administrator) {
             Administrator NewAdmin = new Administrator(firstname,lastname,emailaddress,username,password);
