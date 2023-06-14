@@ -22,6 +22,24 @@ class Bot implements messageReceiver{
         return "This is the bot's reply to: " + message;
     }
 }
+interface UserFactory{
+    User createUser(String firstName, String lastName, String email, String username, String password);
+}
+
+class administratorFactory implements UserFactory{
+    @Override
+    public User createUser(String firstName, String lastName, String email, String username, String password) {
+        return new Administrator(firstName, lastName, email, username, password);
+    }
+}
+class employeeFactory implements UserFactory{
+    @Override
+    public User createUser(String firstName, String lastName, String email, String username, String password) {
+        return new Employee(firstName, lastName, email, username, password);
+    }
+}
+
+
 abstract class User{
     private gespreksManager gespreksManager;
     private static int IDcounter = 0;
@@ -78,11 +96,11 @@ abstract class User{
         Email = email;
     }
 
-    public com.example.aiui.gespreksManager getGespreksManager() {
+    public gespreksManager getGespreksManager() {
         return gespreksManager;
     }
 
-    public void setGespreksManager(com.example.aiui.gespreksManager gespreksManager) {
+    public void setGespreksManager(gespreksManager gespreksManager) {
         this.gespreksManager = gespreksManager;
     }
 }
@@ -126,15 +144,16 @@ class data {
     }
 
     public void registerUser(String firstname, String lastname, String emailaddress, String username, String password,  boolean administrator){
+        UserFactory userFactory;
         if (administrator) {
-            Administrator NewAdmin = new Administrator(firstname,lastname,emailaddress,username,password);
-            UserDB.addUser(NewAdmin);
+            userFactory = new administratorFactory();
         }else{
-            Employee newEmployee = new Employee(firstname,lastname,emailaddress,username,password);
-            UserDB.addUser(newEmployee);
-
+            userFactory = new employeeFactory();
         }
+        User newUser = userFactory.createUser(firstname,lastname,emailaddress,username,password);
+        UserDB.addUser(newUser);
     }
+
 
     public com.example.aiui.UserDB getUserDB() {
         return UserDB;

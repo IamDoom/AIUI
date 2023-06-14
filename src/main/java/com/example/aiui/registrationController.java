@@ -15,8 +15,8 @@ import java.util.Arrays;
 public class registrationController {
     private Stage stage;
     data DB;
-    public void setregistrationController(data DB){
-        DB = DB;
+    registrationController(data DB){
+        this.DB = DB;
     }
     @FXML private Pane Base;
     @FXML private Button cancel;

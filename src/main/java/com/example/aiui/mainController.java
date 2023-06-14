@@ -148,8 +148,9 @@ public class mainController implements Initializable{
         Stage stage = (Stage) setting_register.getScene().getWindow();
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register.fxml"));
-            Parent root = fxmlLoader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("register.fxml"));
+            loader.setControllerFactory(type -> new registrationController(DB));
+            Parent root = loader.load();
 
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -158,8 +159,7 @@ public class mainController implements Initializable{
             popupStage.setScene(new Scene(root));
 
             // Access the controller of the loaded FXML file if needed
-            registrationController registrationController = fxmlLoader.getController();
-            registrationController.setregistrationController(DB);
+            registrationController registrationController = loader.getController();
             registrationController.setStage();
             // Show the popup window
             popupStage.showAndWait();
