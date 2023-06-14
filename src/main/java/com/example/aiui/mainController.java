@@ -36,61 +36,31 @@ public class mainController implements Initializable{
     private Scene scene;
     private Parent root;
 
-
-    boolean Lightmode = true;
-
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
     private boolean EnglishIsActive = true;
-
-
-    @FXML
-    private ListView<String> chatList;
-
-    @FXML
-    private Pane Base;
-
-    @FXML
-    private Button mode;
-
-    @FXML
-    private Label OnderwerpLabel;
-
-    @FXML
-    private Button showSettings;
-
-    @FXML
-    private Button Submit;
-
-    @FXML
-    private Button closeSettings;
-
-    @FXML
-    private Pane settingspane;
+    private Button NieuweGesprek;
+    private boolean firstMessage = true;
+    private int currentGesprekId = 0;
+    ArrayList<String> Onderwerpen;
     boolean settings = false;
 
-    @FXML
-    private Button setting_register;
+    @FXML private ListView<String> chatList;
+    @FXML private Pane Base;
+    @FXML private Button mode;
+    @FXML private Label OnderwerpLabel;
+    @FXML private Button showSettings;
+    @FXML private Button Submit;
+    @FXML private Button closeSettings;
+    @FXML private Pane settingspane;
+    @FXML private Button setting_register;
+    @FXML private TextField input;
+    @FXML private Pane sidebar;
+    @FXML private Button edituser;
+    @FXML private Button language;
+    @FXML private Button advanced;
+    @FXML private ListView<String> GesprekOnderwerpen;
 
     @FXML
-    private TextField input;
-
-
-    @FXML
-    private Pane sidebar;
-
-    @FXML
-    private Button edituser;
-
-    @FXML
-    private Button language;
-
-    @FXML
-    private Button advanced;
-
-    private ObservableList<String> conversation;
-
-    private boolean FirstMessage = true;
-
     public void Togglelang(ActionEvent event){ // voor taal switchen
         if (EnglishIsActive){
             EnglishIsActive = false;
@@ -103,8 +73,6 @@ public class mainController implements Initializable{
             edituser.setText(bundle.getString("edituser"));
             language.setText(bundle.getString("Taal"));
             setting_register.setText(bundle.getString("settingsregister"));
-
-
         } else {
             EnglishIsActive = true;
             bundle = ResourceBundle.getBundle("com.example.aiui.English");
@@ -117,7 +85,6 @@ public class mainController implements Initializable{
             language.setText(bundle.getString("Taal"));
             setting_register.setText(bundle.getString("settingsregister"));
         }
-
     }
 
     protected void LightMode() {
@@ -158,7 +125,6 @@ public class mainController implements Initializable{
 
 
     public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
-
         if (darkmode == true) {
             DarkMode();
         } else if (lightmode == true) {
@@ -170,15 +136,12 @@ public class mainController implements Initializable{
         }
     }
 
-
     @FXML
     protected void displaySettings(){
         settingspane.setVisible(!settings);
         showSettings.setVisible(settings);
         settings = !settings;
     }
-
-
 
     @FXML
     protected void registerEmployee(ActionEvent event) throws IOException{
@@ -205,21 +168,6 @@ public class mainController implements Initializable{
         }
     }
 
-    @FXML
-    public void LogoutButton(ActionEvent event) throws IOException {
-        // Stap 1: Het gesprek opslaan
-
-
-        // Stap 2: Uitloggen en navigeren naar het startscherm
-        root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showSettings.setText(bundle.getString("Settings"));
@@ -237,32 +185,23 @@ public class mainController implements Initializable{
         GesprekOnderwerpen.getItems().addAll(Onderwerpen);
     }
 
-    //WIP
-
-
-    @FXML
-    private ListView<String> GesprekOnderwerpen;
-    @FXML
-    private Button NieuweGesprek;
-    private Gesprek currentGesprek;
-    private boolean firstMessage = true;
-    private int currentGesprekId = 0;
-    ArrayList<String> Onderwerpen;
-
+    //hier beginnen de methodes voor de chatgeshiedenis
     @FXML
     public void setOnKeyPressed(ActionEvent Enter) {
         String userMessage = input.getText();
+        //Update het onderwerp als usermessage het eerste bericht it
         if(firstMessage){
             updateOnderwerp(userMessage);
             firstMessage=false;
         }
-
+        //genereer een response en sla hem op(gebeurt in generateResponseJuisteGesprek)
         String Response = user.getGespreksManager().GenerateResponseJuisteGesprek(user.getGespreksManager().getGesprek(currentGesprekId), userMessage);
+        //voeg het berricht toe en clear het textfield
         chatList.getItems().addAll(userMessage);
         chatList.getItems().addAll(Response);
         input.clear();
     }
-    public void updateOnderwerp(String onderwerp){
+    public void updateOnderwerp(String onderwerp){//methode voor updaten van het onderwerp van een chat en het veranderen van het onderwerp on ander plekken waar het wordt gebruikt
         user.getGespreksManager().getGesprek(currentGesprekId).setOnderwerp(onderwerp);
         OnderwerpLabel.setText(onderwerp);
         Onderwerpen.set(currentGesprekId, onderwerp);
@@ -271,7 +210,9 @@ public class mainController implements Initializable{
     }
 
     public void NieuwGesprek(){
+        //firstmessage belangrijk voor setonclick methode
         firstMessage = true;
+        //maak gesprek aan en vernieuw de chatgegevens
         Gesprek gesprek = user.getGespreksManager().newGesprek();
         GesprekOnderwerpen.getItems().add(gesprek.getOnderwerp());
         OnderwerpLabel.setText(gesprek.getOnderwerp());
@@ -280,7 +221,7 @@ public class mainController implements Initializable{
         chatList.getItems().clear();
     }
 
-    public void SelecteerdChat(){
+    public void SelecteerdChat(){//methode voor het klikken op textsfield, hij checkt welk gesprek je wil zien en laat de inhoud zien **Deze methode werkt alleen als de onderwerpen niet hetzelfde zijn
         chatList.getItems().clear();
         String SelectedChat = GesprekOnderwerpen.getSelectionModel().getSelectedItem();
         for(Gesprek gesprek : user.getGespreksManager().getGesprekken()) {
@@ -290,14 +231,14 @@ public class mainController implements Initializable{
             }
         }
     }
-    public void Laadchat(ArrayList<String> gespreksData){
+    public void Laadchat(ArrayList<String> gespreksData){//methode voor het laden van chats
         chatList.getItems().clear();
         for (int i = 0; i < gespreksData.size(); i++) {
             String str = gespreksData.get(i);
             if (i % 2 == 0) {
-                chatList.getItems().add(str);
+                chatList.getItems().add(user.getFirstName() + ": " + str);
             } else {
-                chatList.getItems().add(str);
+                chatList.getItems().add("Ai: " + str);
             }
         }
         OnderwerpLabel.setText(user.getGespreksManager().getGesprek(currentGesprekId).getOnderwerp());
@@ -309,7 +250,7 @@ public class mainController implements Initializable{
         //weizig het onderwerp code
         GesprekOnderwerpen.refresh();
     }
-    public void UserInfoUpdate(User UpdateUser){
+    public void UserInfoUpdate(User UpdateUser){//voor het opslaan van de chatData
         DB.getUserDB().getUsers().set(UpdateUser.getEmployeeID(), UpdateUser);
     }
 
