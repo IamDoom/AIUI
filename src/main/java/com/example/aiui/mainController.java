@@ -39,7 +39,9 @@ public class mainController implements Initializable {
     @FXML
     private Scale scale;
     @FXML
-    private Button zoom;
+    private Button Zoom;
+    @FXML
+    private Button Minus;
     @FXML
     private Pane achtergrond;
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
@@ -144,6 +146,7 @@ public class mainController implements Initializable {
         GesprekOnderwerpen.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black;");
         chatList.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black;");
         settingspane.setStyle("-fx-background-color: white");
+        input.setStyle("-fx-background-color: white; -fx-text-fill: black");
         Submit.setStyle("-fx-background-color:  #5BC3F0");
         showSettings.setStyle("-fx-background-color:  #5BC3F0");
         logUit.setStyle("-fx-background-color:  #5BC3F0");
@@ -157,6 +160,8 @@ public class mainController implements Initializable {
         colormode1.setStyle("-fx-background-color:  #5BC3F0");
         colormode2.setStyle("-fx-background-color:  #5BC3F0");
         closeSettings.setStyle("-fx-background-color: #5BC3F0");
+        Zoom.setStyle("-fx-background-color:  #5BC3F0");
+        Minus.setStyle("-fx-background-color:  #5BC3F0");
 
     }
     protected void DarkMode() {
@@ -164,6 +169,7 @@ public class mainController implements Initializable {
         GesprekOnderwerpen.setStyle("-fx-background-color: #8a8a8a; -fx-background-radius: 24px; -fx-text-fill: white");
         chatList.setStyle("-fx-background-color: #8a8a8a; -fx-background-radius: 24px; -fx-text-fill: white");
         settingspane.setStyle("-fx-background-color: black");
+        input.setStyle("-fx-background-color: white; -fx-text-fill: black");
         Submit.setStyle("-fx-background-color:  #5BC3F0");
         showSettings.setStyle("-fx-background-color:  #5BC3F0");
         logUit.setStyle("-fx-background-color:  #5BC3F0");
@@ -177,11 +183,14 @@ public class mainController implements Initializable {
         colormode1.setStyle("-fx-background-color:  #5BC3F0");
         colormode2.setStyle("-fx-background-color:  #5BC3F0");
         closeSettings.setStyle("-fx-background-color: #5BC3F0");
+        Zoom.setStyle("-fx-background-color:  #5BC3F0");
+        Minus.setStyle("-fx-background-color:  #5BC3F0");
     }
 
     protected void color1() {
         achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkgreen, lime)");
         settingspane.setStyle("-fx-background-color: darkgreen");
+        input.setStyle("-fx-background-color: darkgreen; -fx-text-fill: white");
         Submit.setStyle("-fx-background-color: green");
         showSettings.setStyle("-fx-background-color: green");
         logUit.setStyle("-fx-background-color: green");
@@ -193,13 +202,16 @@ public class mainController implements Initializable {
         darkmode.setStyle("-fx-background-color: green");
         lightmode.setStyle("-fx-background-color: green");
         colormode1.setStyle("-fx-background-color: green");
-        colormode2.setStyle("-fx-background-color: red");
-        closeSettings.setStyle("-fx-background-color: red");
+        colormode2.setStyle("-fx-background-color: green");
+        closeSettings.setStyle("-fx-background-color: green");
+        Zoom.setStyle("-fx-background-color:  green");
+        Minus.setStyle("-fx-background-color:  green");
     }
 
     protected void color2() {
         achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkred, red)");
         settingspane.setStyle("-fx-background-color: darkred");
+        input.setStyle("-fx-background-color: darkred; -fx-text-fill: white");
         Submit.setStyle("-fx-background-color: red");
         showSettings.setStyle("-fx-background-color: red");
         logUit.setStyle("-fx-background-color: red");
@@ -213,6 +225,8 @@ public class mainController implements Initializable {
         colormode1.setStyle("-fx-background-color: red");
         colormode2.setStyle("-fx-background-color: red");
         closeSettings.setStyle("-fx-background-color: red");
+        Zoom.setStyle("-fx-background-color:  red");
+        Minus.setStyle("-fx-background-color:  red");
     }
 
     @FXML
