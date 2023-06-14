@@ -1,27 +1,7 @@
 package com.example.aiui;
-import java.sql.*;
 import java.util.ArrayList;
 
-interface messageReceiver{
-    void receiveMessage(String message);
-}
-class Bot implements messageReceiver{
-    private final String name;
 
-    public Bot(String name){
-        this.name = name;
-    }
-    @Override
-    public void receiveMessage(String message) {
-        System.out.println("Bot received message: " + message);
-        String reply = generateReply(message);
-        System.out.println(this.name+": " + reply);
-    }
-    private String generateReply(String message) {
-
-        return "This is the bot's reply to: " + message;
-    }
-}
 interface UserFactory{
     User createUser(String firstName, String lastName, String email, String username, String password);
 }
@@ -155,7 +135,7 @@ class data {
     }
 
 
-    public com.example.aiui.UserDB getUserDB() {
+    public UserDB getUserDB() {
         return UserDB;
     }
 
