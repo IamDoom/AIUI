@@ -2,11 +2,16 @@ package com.example.aiui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class registrationController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class registrationController implements Initializable {
     private Stage stage;
     data DB;
     public void setregistrationController(data DB){
@@ -14,10 +19,18 @@ public class registrationController {
     }
 
     @FXML
-    private Pane Base;
+    private Pane achtergrond;
 
     @FXML
     private Button cancel;
+    @FXML
+    private Button submit;
+
+    @FXML
+    private Label titel;
+
+    @FXML
+    private VBox registerpanel;
 
     @FXML
     private Label errorMessage;
@@ -57,6 +70,41 @@ public class registrationController {
     public void setStage(){
         this.stage = stage;
     }
+
+    public void ThemaToepasser() {
+        if (ThemaBeheerder.isDarkMode()) {
+            achtergrond.setStyle("-fx-background-color: black");
+            registerpanel.setStyle("-fx-background-color: black; -fx-border-radius: 24px");
+            titel.setStyle("-fx-text-fill: lightgray");
+            submit.setStyle("-fx-background-color: black");
+            cancel.setStyle("-fx-background-color: black");
+        } else if (ThemaBeheerder.isLightMode()) {
+            achtergrond.setStyle("-fx-background-color:  linear-gradient(to right, #5bc3f0, #174694)");
+            registerpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+            titel.setStyle("-fx-text-fill: white");
+            submit.setStyle("-fx-background-color:  #5BC3F0");
+            cancel.setStyle("-fx-background-color:  #5BC3F0");
+        } else if (ThemaBeheerder.isColorMode1()) {
+            achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkgreen, lime)");
+            registerpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+            titel.setStyle("-fx-text-fill: white");
+            submit.setStyle("-fx-background-color: darkgreen");
+            cancel.setStyle("-fx-background-color: darkgreen");
+        } else if (ThemaBeheerder.isColorMode2()) {
+            achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkred, red)");
+            registerpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+            titel.setStyle("-fx-text-fill: white");
+            submit.setStyle("-fx-background-color: darkred");
+            cancel.setStyle("-fx-background-color: darkred");
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ThemaToepasser();
+    }
+
+
 
     private void closeStage(){
         if(stage != null) {

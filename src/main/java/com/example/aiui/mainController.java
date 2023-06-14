@@ -266,7 +266,12 @@ public class mainController implements Initializable {
 
 
     public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
+        ThemaBeheerder.setDarkMode(darkmode);
+        ThemaBeheerder.setLightMode(lightmode);
+        ThemaBeheerder.setColorMode1(colormode1);
+        ThemaBeheerder.setColorMode2(colormode2);
 
+        // Apply color changes based on the selected theme
         if (darkmode) {
             DarkMode();
         } else if (lightmode) {
@@ -277,6 +282,7 @@ public class mainController implements Initializable {
             color2();
         }
     }
+
 
 
     @FXML
