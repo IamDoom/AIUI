@@ -78,10 +78,8 @@ class gespreksManager {
     }
 
     public String GenerateResponseJuisteGesprek(Gesprek gesprek, String input) {
-        System.out.println("asdasd");
         for (Gesprek locaalgesprek : gesprekken) {
             if (locaalgesprek.equals(gesprek)) {
-                System.out.println(locaalgesprek.generateResponse(input));
                 return locaalgesprek.generateResponse(input);
             }
         }

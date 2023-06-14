@@ -7,7 +7,7 @@ interface messageReceiver{
 }
 class Bot implements messageReceiver{
 
-    private String name;
+    private final String name;
 
     Bot(String name){
         this.name = name;
@@ -27,12 +27,12 @@ class Bot implements messageReceiver{
 
 abstract class User{
     private gespreksManager gespreksManager;
-    private static int IDcounter = 1;
+    private static int IDcounter = 0;
     private String firstName;
     private String lastName;
     private String password;
     private String Username;
-    private int employeeID;
+    private final int employeeID;
     private String Email;
     protected String type;
 
@@ -42,8 +42,8 @@ abstract class User{
         this.lastName = lastName;
         this.password = password;
         this.Username = username;
-        this.IDcounter += 1;
         this.employeeID = IDcounter;
+        IDcounter += 1;
         this.Email = email;
         this.gespreksManager = new gespreksManager();
     }
@@ -105,7 +105,7 @@ class Administrator extends User{
 }
 
 class UserDB{
-    private ArrayList<User> users;
+    private final ArrayList<User> users;
 
     public UserDB(){
         users = new ArrayList<>();
@@ -118,15 +118,17 @@ class UserDB{
         return users;
     }
 
+
+
 }
 
 class chatHistory{
-    private ArrayList<String> chat = new ArrayList<>();
+    private final ArrayList<String> chat = new ArrayList<>();
 
 }
 
 class data {
-    private UserDB UserDB;
+    private final UserDB UserDB;
     public data(){
         UserDB = new UserDB();
         this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", true);
@@ -140,6 +142,10 @@ class data {
             UserDB.addUser(newEmployee);
 
         }
+    }
+
+    public com.example.aiui.UserDB getUserDB() {
+        return UserDB;
     }
 
     public User login(String username, String password) {

@@ -29,6 +29,9 @@ public class loginController implements Initializable {
     public void setDB(data DB){
         this.DB = DB;
     }
+    public void UserInfoUpdate(User UpdateUser){
+        DB.getUserDB().getUsers().set(UpdateUser.getEmployeeID(), UpdateUser);
+    }
 
     private Stage stage;
     private Scene scene;
@@ -54,8 +57,6 @@ public class loginController implements Initializable {
     private TextField Username = new TextField();
     @FXML
     private Label errorMessage = new Label();
-
-
 
 
 
@@ -93,7 +94,7 @@ public class loginController implements Initializable {
     @FXML
     public void login(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainScene.fxml"));
-        loader.setControllerFactory(type -> new mainController(DB,user));
+        loader.setControllerFactory(type -> new mainController(DB, user));
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

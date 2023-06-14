@@ -181,16 +181,6 @@ public class mainController implements Initializable{
 
 
     @FXML
-    public void setOnKeyPressed(ActionEvent Enter) {
-        String userMessage = input.getText();
-        String Response = user.getGespreksManager().GenerateResponseJuisteGesprek(currentGesprek, userMessage);
-        chatList.getItems().addAll(userMessage);
-        chatList.getItems().addAll(Response);
-        input.clear();
-    }
-
-
-    @FXML
     protected void registerEmployee(ActionEvent event) throws IOException{
         Stage stage = (Stage) setting_register.getScene().getWindow();
 
@@ -234,17 +224,17 @@ public class mainController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showSettings.setText(bundle.getString("Settings"));
         input.setPromptText(bundle.getString("PromptText"));
-        //Submit.setText(bundle.getString("Submit"));
+        Submit.setText(bundle.getString("Submit"));
         closeSettings.setText(bundle.getString("closesettings"));
         advanced.setText(bundle.getString("advanced"));
         edituser.setText(bundle.getString("edituser"));
         language.setText(bundle.getString("Taal"));
         setting_register.setText(bundle.getString("settingsregister"));
 
-        this.currentGesprek = user.getGespreksManager().getGesprek(0);
+        Onderwerpen = user.getGespreksManager().getOnderwerpen();
         Laadchat(user.getGespreksManager().getGesprek(0).getGespreksData());
         OnderwerpLabel.setText(user.getGespreksManager().getGesprek(0).getOnderwerp());
-        GesprekOnderwerpen.getItems().addAll(user.getGespreksManager().getOnderwerpen());
+        GesprekOnderwerpen.getItems().addAll(Onderwerpen);
     }
 
     //WIP
@@ -255,20 +245,48 @@ public class mainController implements Initializable{
     @FXML
     private Button NieuweGesprek;
     private Gesprek currentGesprek;
+    private boolean firstMessage = true;
+    private int currentGesprekId = 0;
+    ArrayList<String> Onderwerpen;
+
+    @FXML
+    public void setOnKeyPressed(ActionEvent Enter) {
+        String userMessage = input.getText();
+        if(firstMessage){
+            updateOnderwerp(userMessage);
+            firstMessage=false;
+        }
+
+        String Response = user.getGespreksManager().GenerateResponseJuisteGesprek(user.getGespreksManager().getGesprek(currentGesprekId), userMessage);
+        chatList.getItems().addAll(userMessage);
+        chatList.getItems().addAll(Response);
+        input.clear();
+    }
+    public void updateOnderwerp(String onderwerp){
+        user.getGespreksManager().getGesprek(currentGesprekId).setOnderwerp(onderwerp);
+        OnderwerpLabel.setText(onderwerp);
+        Onderwerpen.set(currentGesprekId, onderwerp);
+        GesprekOnderwerpen.getItems().clear();
+        GesprekOnderwerpen.getItems().addAll(Onderwerpen);
+    }
 
     public void NieuwGesprek(){
+        firstMessage = true;
         Gesprek gesprek = user.getGespreksManager().newGesprek();
+        GesprekOnderwerpen.getItems().add(gesprek.getOnderwerp());
         OnderwerpLabel.setText(gesprek.getOnderwerp());
-        currentGesprek = gesprek;
+        Onderwerpen.add(gesprek.getOnderwerp());
+        currentGesprekId = gesprek.getId();
         chatList.getItems().clear();
     }
 
     public void SelecteerdChat(){
+        chatList.getItems().clear();
         String SelectedChat = GesprekOnderwerpen.getSelectionModel().getSelectedItem();
         for(Gesprek gesprek : user.getGespreksManager().getGesprekken()) {
             if (SelectedChat.equals(gesprek.getOnderwerp())) {
-                currentGesprek = gesprek;
-                Laadchat(currentGesprek.getGespreksData());
+                currentGesprekId = gesprek.getId();
+                Laadchat(gesprek.getGespreksData());
             }
         }
     }
@@ -282,7 +300,7 @@ public class mainController implements Initializable{
                 chatList.getItems().add(str);
             }
         }
-        OnderwerpLabel.setText(currentGesprek.getOnderwerp());
+        OnderwerpLabel.setText(user.getGespreksManager().getGesprek(currentGesprekId).getOnderwerp());
     }
 
 
