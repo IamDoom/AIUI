@@ -27,7 +27,7 @@ import javafx.stage.Modality;
 public class mainController implements Initializable{
     User user;
     data DB;
-    public void setmainController(data DB, User user){
+    public mainController(data DB, User user){
         this.DB = DB;
         this.user = user;
     }
@@ -184,7 +184,8 @@ public class mainController implements Initializable{
     public void setOnKeyPressed(ActionEvent Enter) {
         String userMessage = input.getText();
         String Response = user.getGespreksManager().GenerateResponseJuisteGesprek(currentGesprek, userMessage);
-        chatList.getItems().addAll(userMessage, Response);
+        chatList.getItems().addAll(userMessage);
+        chatList.getItems().addAll(Response);
         input.clear();
     }
 
@@ -240,10 +241,10 @@ public class mainController implements Initializable{
         language.setText(bundle.getString("Taal"));
         setting_register.setText(bundle.getString("settingsregister"));
 
-        //this.currentGesprek = user.getGespreksManager().getGesprek(0);
-        //Laadchat(user.getGespreksManager().getGesprek(0).getGespreksData());
-        //OnderwerpLabel.setText(user.getGespreksManager().getGesprek(0).getOnderwerp());
-        //GesprekOnderwerpen.getItems().addAll(user.getGespreksManager().getOnderwerpen());
+        this.currentGesprek = user.getGespreksManager().getGesprek(0);
+        Laadchat(user.getGespreksManager().getGesprek(0).getGespreksData());
+        OnderwerpLabel.setText(user.getGespreksManager().getGesprek(0).getOnderwerp());
+        GesprekOnderwerpen.getItems().addAll(user.getGespreksManager().getOnderwerpen());
     }
 
     //WIP

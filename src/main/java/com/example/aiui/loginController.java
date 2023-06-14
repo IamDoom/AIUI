@@ -19,7 +19,10 @@ import java.util.ResourceBundle;
 
 
 public class loginController implements Initializable {
-    data DB = new data();
+    public loginController(){
+        DB = new data();
+    }
+    data DB;
     User user;
     public void setDB(data DB){
         this.DB = DB;
@@ -89,8 +92,8 @@ public class loginController implements Initializable {
     public void login(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainScene.fxml"));
         root = loader.load();
-        mainController mainController = loader.getController();
-        mainController.setmainController(DB,user);
+        mainController mainController = new mainController(DB, user);
+        mainController = loader.getController();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

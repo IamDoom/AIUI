@@ -105,7 +105,11 @@ class Administrator extends User{
 }
 
 class UserDB{
-    private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<User> users;
+
+    public UserDB(){
+        users = new ArrayList<>();
+    }
 
     public void addUser(User user){
         users.add(user);
@@ -122,7 +126,11 @@ class chatHistory{
 }
 
 class data {
-    private UserDB UserDB = new UserDB();
+    private UserDB UserDB;
+    public data(){
+        UserDB = new UserDB();
+        this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", true);
+    }
     public void registerUser(String firstname, String lastname, String emailaddress, String username, String password,boolean administrator){
         if (administrator) {
             Administrator NewAdmin = new Administrator(firstname,lastname,emailaddress,username,password);
