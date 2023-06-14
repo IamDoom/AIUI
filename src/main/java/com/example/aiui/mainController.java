@@ -240,10 +240,10 @@ public class mainController implements Initializable{
         language.setText(bundle.getString("Taal"));
         setting_register.setText(bundle.getString("settingsregister"));
 
-        this.currentGesprek = user.getGespreksManager().getGesprek(0);
-        Laadchat(user.getGespreksManager().getGesprek(0).getGespreksData());
-        OnderwerpLabel.setText(user.getGespreksManager().getGesprek(0).getOnderwerp());
-        GesprekOnderwerpen.getItems().addAll(user.getGespreksManager().getOnderwerpen());
+        //this.currentGesprek = user.getGespreksManager().getGesprek(0);
+        //Laadchat(user.getGespreksManager().getGesprek(0).getGespreksData());
+        //OnderwerpLabel.setText(user.getGespreksManager().getGesprek(0).getOnderwerp());
+        //GesprekOnderwerpen.getItems().addAll(user.getGespreksManager().getOnderwerpen());
     }
 
     //WIP

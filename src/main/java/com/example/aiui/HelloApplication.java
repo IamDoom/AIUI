@@ -11,7 +11,7 @@ public class HelloApplication extends Application {
     data DB = new data();
     @Override
     public void start(Stage stage) {
-        DB.registerUser("john", "doe", "johndoe@emailadress.com","testusername", "securepassword", false);
+        DB.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", true);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
             Parent root = loader.load();
