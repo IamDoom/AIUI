@@ -36,6 +36,7 @@ public class mainController implements Initializable{
     private Scene scene;
     private Parent root;
 
+
     boolean Lightmode = true;
 
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
