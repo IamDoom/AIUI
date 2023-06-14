@@ -309,13 +309,20 @@ public class mainController implements Initializable{
         //weizig het onderwerp code
         GesprekOnderwerpen.refresh();
     }
+    public void UserInfoUpdate(User UpdateUser){
+        DB.getUserDB().getUsers().set(UpdateUser.getEmployeeID(), UpdateUser);
+    }
 
     @FXML
     public void loguit(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("startLogin.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        this.UserInfoUpdate(user);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
+        loader.setControllerFactory(type -> new loginController(DB));
+        root = loader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle(user.getFirstName()+" "+user.getLastName());
         stage.show();
     }
 }

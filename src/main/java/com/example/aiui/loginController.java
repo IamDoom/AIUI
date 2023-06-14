@@ -21,17 +21,11 @@ import java.util.ResourceBundle;
 
 
 public class loginController implements Initializable {
-    public loginController(){
-        DB = new data();
+    public loginController(data DB){
+        this.DB = DB;
     }
     data DB;
     User user;
-    public void setDB(data DB){
-        this.DB = DB;
-    }
-    public void UserInfoUpdate(User UpdateUser){
-        DB.getUserDB().getUsers().set(UpdateUser.getEmployeeID(), UpdateUser);
-    }
 
     private Stage stage;
     private Scene scene;
