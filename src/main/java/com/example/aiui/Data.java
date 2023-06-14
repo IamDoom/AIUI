@@ -6,10 +6,9 @@ interface messageReceiver{
     void receiveMessage(String message);
 }
 class Bot implements messageReceiver{
-
     private final String name;
 
-    Bot(String name){
+    public Bot(String name){
         this.name = name;
     }
     @Override
@@ -22,9 +21,7 @@ class Bot implements messageReceiver{
 
         return "This is the bot's reply to: " + message;
     }
-
 }
-
 abstract class User{
     private gespreksManager gespreksManager;
     private static int IDcounter = 0;
@@ -35,7 +32,6 @@ abstract class User{
     private final int employeeID;
     private String Email;
     protected String type;
-
 
     public User(String firstName, String lastName, String email, String username, String password) {
         this.firstName = firstName;
@@ -106,20 +102,15 @@ class Administrator extends User{
 
 class UserDB{
     private final ArrayList<User> users;
-
     public UserDB(){
         users = new ArrayList<>();
     }
-
     public void addUser(User user){
         users.add(user);
     }
     public ArrayList<User> getUsers(){
         return users;
     }
-
-
-
 }
 
 class chatHistory{
@@ -133,7 +124,8 @@ class data {
         UserDB = new UserDB();
         this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", true);
     }
-    public void registerUser(String firstname, String lastname, String emailaddress, String username, String password,boolean administrator){
+
+    public void registerUser(String firstname, String lastname, String emailaddress, String username, String password,  boolean administrator){
         if (administrator) {
             Administrator NewAdmin = new Administrator(firstname,lastname,emailaddress,username,password);
             UserDB.addUser(NewAdmin);

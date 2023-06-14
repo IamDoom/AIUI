@@ -20,44 +20,27 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class loginController implements Initializable {
+public class loginController{
     public loginController(data DB){
         this.DB = DB;
     }
     data DB;
     User user;
-
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    @FXML
-    private Pane Base;
-    @FXML
-    private Button login;
-    @FXML
-    private Button Submit;
-    @FXML
-    private Button mode;
-    @FXML
-    private Button button;
-    @FXML
-    private Pane leftPane;
-    @FXML
-    private Pane rightPane;
-    @FXML
-    private PasswordField Password = new PasswordField();
-    @FXML
-    private TextField Username = new TextField();
-    @FXML
-    private Label errorMessage = new Label();
+    @FXML private Pane Base;
+    @FXML private Button login;
+    @FXML private Button Submit;
+    @FXML private Button mode;
+    @FXML private Button button;
+    @FXML private Pane leftPane;
+    @FXML private Pane rightPane;
+    @FXML private PasswordField Password = new PasswordField();
+    @FXML private TextField Username = new TextField();
+    @FXML private Label errorMessage = new Label();
 
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
 
     @FXML
     protected void submitlogin(ActionEvent event) {
