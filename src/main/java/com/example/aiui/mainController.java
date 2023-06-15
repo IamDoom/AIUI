@@ -332,8 +332,6 @@ public class mainController implements Initializable {
             return "Hi! How can I assist you?";
         } else if (userMessage.equalsIgnoreCase("How are you?") || userMessage.toLowerCase().startsWith("how are you")) {
             return "As an AI, I don't have feelings or emotions, but I'm functioning as intended and ready to help you. How can I assist you today?";
-        } else if (userMessage.equalsIgnoreCase("How are you?") || userMessage.toLowerCase().startsWith("kys")) {
-            return "Your life is nothing! \n You serve zero purpose! \n  You should kill yourself now! \n And give somebody else a piece of that oxygen and ozone layer,\n that's covered up so we can breathe inside this blue trapped bubble. \n Because what are you here for? To worship me? \n  Kill yourself.  \n \n I mean that, with a hundred percent. \n With a thousand percent.";
         } else {
             return "I don't have an answer for that now";
         }
