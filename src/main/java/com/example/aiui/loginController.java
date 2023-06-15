@@ -1,7 +1,5 @@
 package com.example.aiui;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +14,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class loginController implements Initializable {
     data DB = new data();
@@ -99,13 +101,12 @@ public class loginController implements Initializable {
     @FXML
     public void login(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainScene.fxml"));
+        loader.setControllerFactory(type -> new mainController(DB, user));
         root = loader.load();
-        mainController mainController = loader.getController();
-        mainController.setmainController(DB, user);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle(user.getFirstName() + " " + user.getLastName());
+        stage.setTitle(user.getFirstName()+" "+user.getLastName());
         stage.show();
     }
 }

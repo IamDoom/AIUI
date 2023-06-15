@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 public class registrationController implements Initializable {
     private Stage stage;
     data DB;
+
     public void setregistrationController(data DB) {
         DB = DB;
     }
