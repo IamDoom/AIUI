@@ -19,11 +19,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class loginController implements Initializable {
-    data DB = new data();
+public class LoginController implements Initializable {
+    Data db = new Data();
     User user;
-    public  loginController(data DB) {
-        this.DB = DB;
+    public LoginController(Data DB) {
+        this.db = DB;
     }
 
     private Stage stage;
@@ -38,26 +38,26 @@ public class loginController implements Initializable {
     @FXML private Button mode;
     @FXML private Button button;
     @FXML private Pane achtergrond;
-    @FXML private PasswordField Password = new PasswordField();
-    @FXML private TextField Username = new TextField();
+    @FXML private PasswordField password = new PasswordField();
+    @FXML private TextField username = new TextField();
     @FXML private Label errorMessage = new Label();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ThemaToepasser();
-        this.DB = DB;
+        this.db = db;
     }
 
     @FXML
     protected void submitlogin(ActionEvent event) {
-        String password = Password.getText();
-        String username = Username.getText();
+        String password = this.password.getText();
+        String username = this.username.getText();
         if (password.isEmpty() || username.isEmpty()) {
             errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
             System.out.println(username);
             System.out.println(password);
         } else {
-            user = DB.login(username, password);
+            user = db.login(username, password);
             System.out.println(username);
             System.out.println(password);
             if (user == null) {
@@ -101,7 +101,7 @@ public class loginController implements Initializable {
     @FXML
     public void login(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainScene.fxml"));
-        loader.setControllerFactory(type -> new mainController(DB, user));
+        loader.setControllerFactory(type -> new mainController(db, user));
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

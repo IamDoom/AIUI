@@ -116,9 +116,9 @@ class chatHistory{
 
 }
 
-class data {
+class Data {
     private final UserDB UserDB;
-    public data(){
+    public Data(){
         UserDB = new UserDB();
         this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", true);
     }

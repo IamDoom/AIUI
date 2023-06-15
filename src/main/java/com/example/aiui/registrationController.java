@@ -12,9 +12,9 @@ import javafx.stage.Stage;
 
 public class registrationController implements Initializable {
     private Stage stage;
-    data DB;
+    Data DB;
 
-    public registrationController(data DB1) {
+    public registrationController(Data DB1) {
         this.DB = DB1;
     }
 

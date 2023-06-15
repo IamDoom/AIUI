@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 public class mainController implements Initializable {
     User user;
-    data DB;
+    Data DB;
     ArrayList<String> Onderwerpen;
 
     private Stage stage;
@@ -91,7 +91,7 @@ public class mainController implements Initializable {
     private Label Titel;
     @FXML
     private Label HisLabel;
-    public mainController(data DB, User user) {
+    public mainController(Data DB, User user) {
         this.DB = DB;
         this.user = user;
     }
@@ -414,7 +414,7 @@ public class mainController implements Initializable {
     public void loguit(ActionEvent event) throws IOException {
         this.UserInfoUpdate(user);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
-        loader.setControllerFactory(type -> new loginController(DB));
+        loader.setControllerFactory(type -> new LoginController(DB));
         root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

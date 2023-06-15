@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.loginController">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.LoginController">
     <children>
         <Pane fx:id="achtergrond" minHeight="576.0" minWidth="1024.0" style="-fx-background-color: linear-gradient(to right, #5bc3f0, #174694);;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -57,7 +57,7 @@
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                            <TextField fx:id="Username" alignment="CENTER" minHeight="20.0" minWidth="300.0" onAction="#submitlogin" promptText="Username" style="-fx-background-radius: 4px;">
+                            <TextField fx:id="username" alignment="CENTER" minHeight="20.0" minWidth="300.0" onAction="#submitlogin" promptText="Username" style="-fx-background-radius: 4px;">
                                 <font>
                                     <Font name="Segoe UI" size="12.0" />
                                 </font>
@@ -80,7 +80,7 @@
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                            <PasswordField fx:id="Password" alignment="CENTER" minHeight="20.0" minWidth="300.0" onAction="#submitlogin" promptText="Password" style="-fx-background-radius: 4px;">
+                            <PasswordField fx:id="password" alignment="CENTER" minHeight="20.0" minWidth="300.0" onAction="#submitlogin" promptText="Password" style="-fx-background-radius: 4px;">
                                 <font>
                                     <Font name="Segoe UI" size="12.0" />
                                 </font>
