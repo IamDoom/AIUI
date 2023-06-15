@@ -11,5 +11,5 @@ jobs:
         run: "git clone https://github.com/Software-Improvement-Group/sigridci.git sigridci"
       - name: "Run Sigrid CI" 
         env:
-          SIGRID_CI_TOKEN: "${{ secrets.SIGRID_CI_TOKEN }}"
+          SIGRID_CI_TOKEN: "${{ secrets.SIGRID_CI_TOKEN_SALIH }}"
         run: "./sigridci/sigridci/sigridci.py --customer hhsproject2 --system 2023-Projectgroep-H-1-SE-4d --source ."
