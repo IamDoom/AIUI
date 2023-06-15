@@ -5,8 +5,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 
-import java.util.Observer;
-
 public class HelloApplication extends Application {
     data DB = new data();
     @Override
@@ -15,7 +13,6 @@ public class HelloApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
             Parent root = loader.load();
-
             Scene scene = new Scene(root);
             stage.setTitle("AIUI: Login");
             loginController loginController = loader.getController();
@@ -30,6 +27,5 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         // Starten van de JavaFX-toepassing
         launch(args);
-
     }
 }

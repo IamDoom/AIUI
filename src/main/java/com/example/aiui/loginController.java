@@ -1,6 +1,4 @@
-
 package com.example.aiui;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,16 +13,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 public class loginController implements Initializable {
     data DB = new data();
     User user;
-    public void setDB(data DB){
+    public void setDB(data DB) {
         this.DB = DB;
     }
 
@@ -55,10 +51,6 @@ public class loginController implements Initializable {
     @FXML
     private Label errorMessage = new Label();
 
-
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ThemaToepasser();
@@ -74,10 +66,10 @@ public class loginController implements Initializable {
             System.out.println(username);
             System.out.println(password);
         } else {
-            user = DB.login(username,password);
+            user = DB.login(username, password);
             System.out.println(username);
             System.out.println(password);
-            if (user == null){
+            if (user == null) {
                 errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
@@ -120,11 +112,11 @@ public class loginController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainScene.fxml"));
         root = loader.load();
         mainController mainController = loader.getController();
-        mainController.setmainController(DB,user);
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        mainController.setmainController(DB, user);
+        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle(user.getFirstName()+" "+user.getLastName());
+        stage.setTitle(user.getFirstName() + " " + user.getLastName());
         stage.show();
     }
 }
