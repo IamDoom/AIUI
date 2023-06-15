@@ -38,19 +38,10 @@ class conceptResponseGenerator implements ResponseGenerator{
 
 }
 
-class gespreksManager {
+class gespreksManager{
     private ArrayList<Gesprek> gesprekken;
-
-    public gespreksManager() {
-        gesprekken = new ArrayList<Gesprek>();
-        Gesprek EersteGesprek = new Gesprek();
-        EersteGesprek.setId(0);
-        gesprekken.add(EersteGesprek);
-    }
-
-    public Gesprek newGesprek() {
+    public Gesprek newGesprek(){
         Gesprek gesprek = new Gesprek();
-        gesprek.setId(gesprekken.size());
         gesprekken.add(gesprek);
         return gesprek;
     }
@@ -58,53 +49,39 @@ class gespreksManager {
     public ArrayList<Gesprek> getGesprekken() {
         return gesprekken;
     }
-
-    public Gesprek getGesprek(int gesprekId) {
-        Gesprek DitGesprek = null;
-        for (Gesprek gesprek : gesprekken) {
-            if (gesprek.getId() == gesprekId) {
-                DitGesprek = gesprek;
-            }
-        }
-        return DitGesprek;
-    }
-
-    public ArrayList<String> getOnderwerpen() {
-        ArrayList<String> Onderwerpen = new ArrayList<String>();
-        for (Gesprek gesprek : gesprekken) {
-            Onderwerpen.add(gesprek.getOnderwerp());
-        }
-        return Onderwerpen;
-    }
-
-    public String GenerateResponseJuisteGesprek(Gesprek gesprek, String input) {
-        for (Gesprek locaalgesprek : gesprekken) {
-            if (locaalgesprek.equals(gesprek)) {
-                return locaalgesprek.generateResponse(input);
-            }
-        }
-        return null;
-    }
 }
 
 public class Gesprek {
     private String Onderwerp;
     private ArrayList<String> GespreksData;
     private ResponseGenerator responseGenerator = new conceptResponseGenerator();
-    private int id = 0;
+    private static int id = 0;
     public Gesprek(){
+        this.id ++;
         GespreksData = new ArrayList<String>();
-        Onderwerp = "Geen onderwerp";
+        Onderwerp = "Leeg onderwerp";
     }
+
     public String generateResponse(String userMessage) {
-        String response = responseGenerator.messageReceiver(userMessage);
-        this.OnthoudData(userMessage, response);
-        return response;
+        // Replace this logic with your own or use an AI/chatbot API
+        return responseGenerator.messageReceiver(userMessage);
     }
-    public void OnthoudData(String data1, String data2){
-        GespreksData.add(data1);
-        GespreksData.add(data2);
+
+    public void saveConversation(ObservableList<String> conversation) {
+        // Stap 1: Implementeer hier je logica om het gesprek op te slaan
+        // In dit voorbeeld wordt het gesprek opgeslagen naar een tekstbestand met de naam "conversation.txt"
+        try {
+            FileWriter writer = new FileWriter("conversation.txt");
+            for (String message : conversation) {
+                writer.write(message + "\n");
+            }
+            writer.close();
+            System.out.println("Gesprek opgeslagen.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     public ArrayList<String> getGespreksData() {
         return GespreksData;
@@ -116,10 +93,6 @@ public class Gesprek {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setOnderwerp(String onderwerp) {

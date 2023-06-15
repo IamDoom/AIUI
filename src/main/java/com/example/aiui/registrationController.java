@@ -1,5 +1,7 @@
 package com.example.aiui;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,66 +10,46 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 public class registrationController implements Initializable {
     private Stage stage;
     data DB;
-    public void setregistrationController(data DB){
+    public void setregistrationController(data DB) {
         DB = DB;
     }
 
-    @FXML
-    private Pane achtergrond;
+    @FXML private Pane achtergrond;
+
+    @FXML private Button cancel;
+    @FXML private Button submit;
+
+    @FXML private Label titel;
+
+    @FXML private VBox registerpanel;
+
+    @FXML private Label errorMessage;
+
+    @FXML private Button login;
+
+    @FXML private Button mode;
+
+    @FXML private CheckBox register_admin = new CheckBox();
+
+    @FXML private TextField register_emailadress = new TextField();
+
+    @FXML private TextField register_firstname = new TextField();
+
+    @FXML private TextField register_lastname = new TextField();
+
+    @FXML private PasswordField register_password = new PasswordField();
+
+    @FXML private TextField register_username = new TextField();
+
+    @FXML private Pane sidebar;
 
     @FXML
-    private Button cancel;
-    @FXML
-    private Button submit;
+    void Toggle(ActionEvent event) {}
 
-    @FXML
-    private Label titel;
-
-    @FXML
-    private VBox registerpanel;
-
-    @FXML
-    private Label errorMessage;
-
-    @FXML
-    private Button login;
-
-    @FXML
-    private Button mode;
-
-    @FXML
-    private CheckBox register_admin = new CheckBox();
-
-    @FXML
-    private TextField register_emailadress = new TextField();
-
-    @FXML
-    private TextField register_firstname = new TextField();
-
-    @FXML
-    private TextField register_lastname = new TextField();
-
-    @FXML
-    private PasswordField register_password = new PasswordField();
-
-    @FXML
-    private TextField register_username = new TextField();
-
-    @FXML
-    private Pane sidebar;
-
-    @FXML
-    void Toggle(ActionEvent event) {
-
-    }
-
-    public void setStage(){
+    public void setStage() {
         this.stage = stage;
     }
 
@@ -104,46 +86,54 @@ public class registrationController implements Initializable {
         ThemaToepasser();
     }
 
-
-
-    private void closeStage(){
-        if(stage != null) {
+    private void closeStage() {
+        if (stage != null) {
             stage.close();
         }
     }
 
-    protected boolean isFilledin(){
+    protected boolean isFilledin() {
         String firstname = register_firstname.getText();
         String lastname = register_lastname.getText();
         String email = register_emailadress.getText();
         String username = register_username.getText();
         String password = register_password.getText();
-        if (firstname.isEmpty()){return false;}
-        if (lastname.isEmpty()){return false;}
-        if (email.isEmpty()){return false;}
-        if (username.isEmpty()){return false;}
-        if (password.isEmpty()){return false;}
+        if (firstname.isEmpty()) {
+            return false;
+        }
+        if (lastname.isEmpty()) {
+            return false;
+        }
+        if (email.isEmpty()) {
+            return false;
+        }
+        if (username.isEmpty()) {
+            return false;
+        }
+        if (password.isEmpty()) {
+            return false;
+        }
         return true;
     }
 
     @FXML
-    protected void submitRegistration(){
-        if (!isFilledin()){
+    protected void submitRegistration() {
+        if (!isFilledin()) {
             errorMessage.setText("voer aub alles in!");
-        }else{
+        } else {
             String firstname = register_firstname.getText();
             String lastname = register_lastname.getText();
             String email = register_emailadress.getText();
             String username = register_username.getText();
             String password = register_password.getText();
             boolean admin = register_admin.isSelected();
-            DB.registerUser(firstname,lastname,email,username,password,admin);
+            DB.registerUser(firstname, lastname, email, username, password, admin);
             closeStage();
         }
     }
 
     @FXML
-    protected void Cancel(){
+    protected void Cancel() {
         System.out.println("canceling registration");
         closeStage();
     }

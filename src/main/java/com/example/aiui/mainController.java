@@ -1,16 +1,4 @@
 package com.example.aiui;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.transform.Scale;
-import javafx.stage.Stage;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,7 +6,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.transform.Scale;
 import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class mainController implements Initializable {
     User user;
@@ -38,71 +38,46 @@ public class mainController implements Initializable {
     private boolean EnglishIsActive = true;
     private static final double ZZOOM = 1.109375;
     private static final double SMALL = 0.78125;
-    @FXML
-    private ListView < String > chatList;
+    @FXML private ListView<String> chatList;
 
-    @FXML
-    private Pane Base;
-    @FXML
-    private Button darkmode;
-    @FXML
-    private Button mode;
-    @FXML
-    private Scale scale;
-    @FXML
-    private Button Zoom;
-    @FXML
-    private Button Minus;
-    @FXML
-    private Pane achtergrond;
-    @FXML
-    private Label OnderwerpLabel;
+    @FXML private Pane Base;
+    @FXML private Button darkmode;
+    @FXML private Button mode;
+    @FXML private Scale scale;
+    @FXML private Button Zoom;
+    @FXML private Button Minus;
+    @FXML private Pane achtergrond;
+    @FXML private Label OnderwerpLabel;
 
-    @FXML
-    private Button showSettings;
+    @FXML private Button showSettings;
 
-    @FXML
-    private Button Submit;
+    @FXML private Button Submit;
 
-    @FXML
-    private Button closeSettings;
+    @FXML private Button closeSettings;
 
-    @FXML
-    private Pane settingspane;
+    @FXML private Pane settingspane;
     boolean settings = false;
 
-    @FXML
-    private Button setting_register;
+    @FXML private Button setting_register;
 
-    @FXML
-    private TextField input;
+    @FXML private TextField input;
 
-    @FXML
-    private Pane sidebar;
+    @FXML private Pane sidebar;
 
-    @FXML
-    private Button edituser;
+    @FXML private Button edituser;
 
-    @FXML
-    private Button language;
+    @FXML private Button language;
 
-    @FXML
-    private Button advanced;
+    @FXML private Button advanced;
 
-    @FXML
-    private Button lightmode;
-    @FXML
-    private Button colormode1;
-    @FXML
-    private Button colormode2;
-    @FXML
-    private Button logUit;
-    @FXML
-    private Label Titel;
-    @FXML
-    private Label HisLabel;
+    @FXML private Button lightmode;
+    @FXML private Button colormode1;
+    @FXML private Button colormode2;
+    @FXML private Button logUit;
+    @FXML private Label Titel;
+    @FXML private Label HisLabel;
 
-    private ObservableList < String > conversation;
+    private ObservableList<String> conversation;
 
     private boolean FirstMessage = true;
 
@@ -131,13 +106,14 @@ public class mainController implements Initializable {
             language.setText(bundle.getString("Taal"));
             setting_register.setText(bundle.getString("settingsregister"));
         }
-
     }
 
     protected void LightMode() {
         achtergrond.setStyle("-fx-background-color:  linear-gradient(to right, #5bc3f0, #174694)");
-        GesprekOnderwerpen.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black;");
-        chatList.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black;");
+        GesprekOnderwerpen.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black;");
+        chatList.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black;");
         settingspane.setStyle("-fx-background-color: white; -fx-background-radius: 24px;");
         input.setStyle("-fx-background-color: white; -fx-text-fill: black");
         Submit.setStyle("-fx-background-color:  #5BC3F0");
@@ -158,8 +134,10 @@ public class mainController implements Initializable {
     }
     protected void DarkMode() {
         achtergrond.setStyle("-fx-background-color: black");
-        GesprekOnderwerpen.setStyle("-fx-background-color: #8a8a8a; -fx-background-radius: 24px; -fx-text-fill: white");
-        chatList.setStyle("-fx-background-color: #8a8a8a; -fx-background-radius: 24px; -fx-text-fill: white");
+        GesprekOnderwerpen.setStyle(
+                "-fx-background-color: #8a8a8a; -fx-background-radius: 24px; -fx-text-fill: white");
+        chatList.setStyle(
+                "-fx-background-color: #8a8a8a; -fx-background-radius: 24px; -fx-text-fill: white");
         settingspane.setStyle("-fx-background-color: grey; -fx-background-radius: 24px;");
         input.setStyle("-fx-background-color: darkgrey; -fx-text-fill: white");
         Submit.setStyle("-fx-background-color:   darkgrey");
@@ -183,8 +161,10 @@ public class mainController implements Initializable {
         achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkgreen, lime)");
         settingspane.setStyle("-fx-background-color: darkgreen; -fx-background-radius: 24px;");
         input.setStyle("-fx-background-color: darkgreen; -fx-text-fill: white");
-        GesprekOnderwerpen.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
-        chatList.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
+        GesprekOnderwerpen.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
+        chatList.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
         Submit.setStyle("-fx-background-color: green");
         showSettings.setStyle("-fx-background-color: green");
         logUit.setStyle("-fx-background-color: green");
@@ -205,8 +185,10 @@ public class mainController implements Initializable {
     protected void color2() {
         achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkred, red)");
         settingspane.setStyle("-fx-background-color: darkred; -fx-background-radius: 24px;");
-        GesprekOnderwerpen.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
-        chatList.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
+        GesprekOnderwerpen.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
+        chatList.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
         input.setStyle("-fx-background-color: darkred; -fx-text-fill: white");
         Submit.setStyle("-fx-background-color: red");
         showSettings.setStyle("-fx-background-color: red");
@@ -266,7 +248,6 @@ public class mainController implements Initializable {
         scale.setY(scale.getY() * SMALL);
     }
 
-
     public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
         ThemaBeheerder.setDarkMode(darkmode);
         ThemaBeheerder.setLightMode(lightmode);
@@ -294,10 +275,10 @@ public class mainController implements Initializable {
 
     @FXML
     public void setOnKeyPressed(ActionEvent Enter) {
-        //vind het juiste gesprek
+        // vind het juiste gesprek
         DitGesprek = getGesprek();
 
-        //Maak het onderwerp aan voor het gesprek
+        // Maak het onderwerp aan voor het gesprek
         String userMessage = input.getText();
         if (DitGesprek.getGespreksData().isEmpty()) {
             OnderwerpLabel.setText(userMessage);
@@ -354,11 +335,10 @@ public class mainController implements Initializable {
 
         // Stap 2: Uitloggen en navigeren naar het startscherm
         root = FXMLLoader.load(getClass().getResource("startLogin.fxml"));
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
 
     private void loadConversation() {
@@ -388,61 +368,57 @@ public class mainController implements Initializable {
         achtergrond.getTransforms().setAll(scale);
         showSettings.setText(bundle.getString("Settings"));
         input.setPromptText(bundle.getString("PromptText"));
-        //Submit.setText(bundle.getString("Submit"));
+        // Submit.setText(bundle.getString("Submit"));
         closeSettings.setText(bundle.getString("closesettings"));
         advanced.setText(bundle.getString("advanced"));
         edituser.setText(bundle.getString("edituser"));
         language.setText(bundle.getString("Taal"));
         setting_register.setText(bundle.getString("settingsregister"));
-        Gesprekken = new ArrayList < Gesprek > ();
+        Gesprekken = new ArrayList<Gesprek>();
         Gesprek EersteGesprek = new Gesprek();
         Gesprekken.add(EersteGesprek);
-
     }
 
-    //WIP
-    private ArrayList < Gesprek > Gesprekken;
+    // WIP
+    private ArrayList<Gesprek> Gesprekken;
     private Gesprek LocaalGesprek;
     private int GesprekId = 0;
     private int gesprekidCounter = 0;
-    @FXML
-    private ListView < String > GesprekOnderwerpen;
-    @FXML
-    private Button NieuweGesprek;
+    @FXML private ListView<String> GesprekOnderwerpen;
+    @FXML private Button NieuweGesprek;
     public int GesprekIdCounter() {
         int id = gesprekidCounter;
         gesprekidCounter++;
         return id;
     }
     public void NieuwGesprek() {
-        //maak een nieuw gesprek
+        // maak een nieuw gesprek
         Gesprek gesprek = Manager.newGesprek();
-        //clear het label
+        // clear het label
         OnderwerpLabel.setText("");
-        //Voeg het gesprek toe aan de lijst met gesprekken
+        // Voeg het gesprek toe aan de lijst met gesprekken
         Gesprekken.add(gesprek);
-        //verander het id van de chat voor de klasse zodat de juiste chat wordt geladen
+        // verander het id van de chat voor de klasse zodat de juiste chat wordt geladen
         this.GesprekId = gesprek.getId();
         //"open" een gesprek door de vorige text te verwijderen
         chatList.getItems().clear();
-
     }
     public void SelecteerdChat() {
         String SelectedChat = GesprekOnderwerpen.getSelectionModel().getSelectedItem();
-        for (Gesprek gesprek: Gesprekken) {
+        for (Gesprek gesprek : Gesprekken) {
             if (SelectedChat.equals(gesprek.getOnderwerp())) {
-                //Selecteer gesprek gebaseerd op onderwerp
+                // Selecteer gesprek gebaseerd op onderwerp
                 Gesprek CurrentGesprek = gesprek;
                 this.GesprekId = CurrentGesprek.getId();
 
-                //Laad de nieuwe chat
-                ArrayList < String > gespreksData = CurrentGesprek.getGespreksData();
+                // Laad de nieuwe chat
+                ArrayList<String> gespreksData = CurrentGesprek.getGespreksData();
                 Laadchat(gespreksData);
                 OnderwerpLabel.setText(CurrentGesprek.getOnderwerp());
             }
         }
     }
-    public void Laadchat(ArrayList < String > gespreksData) {
+    public void Laadchat(ArrayList<String> gespreksData) {
         chatList.getItems().clear();
         for (int i = 0; i < gespreksData.size(); i++) {
             String str = gespreksData.get(i);
@@ -460,7 +436,7 @@ public class mainController implements Initializable {
 
     public Gesprek getGesprek() {
         Gesprek DitGesprek = null;
-        for (Gesprek gesprek: Gesprekken) {
+        for (Gesprek gesprek : Gesprekken) {
             if (gesprek.getId() == GesprekId) {
                 DitGesprek = gesprek;
             }
@@ -468,14 +444,14 @@ public class mainController implements Initializable {
         return DitGesprek;
     }
     public void WeizigOnderwerp() {
-        //weizig het onderwerp code
+        // weizig het onderwerp code
         GesprekOnderwerpen.refresh();
     }
 
     @FXML
     public void loguit(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("startLogin.fxml")));
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

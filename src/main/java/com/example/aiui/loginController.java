@@ -1,4 +1,7 @@
 package com.example.aiui;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class loginController implements Initializable {
     data DB = new data();
@@ -28,28 +28,17 @@ public class loginController implements Initializable {
     private Scene scene;
     private Parent root;
 
-    @FXML
-    private Pane Base;
-    @FXML
-    private VBox loginpanel;
-    @FXML
-    private Label titel;
-    @FXML
-    private Button login;
-    @FXML
-    private Button Submit;
-    @FXML
-    private Button mode;
-    @FXML
-    private Button button;
-    @FXML
-    private Pane achtergrond;
-    @FXML
-    private PasswordField Password = new PasswordField();
-    @FXML
-    private TextField Username = new TextField();
-    @FXML
-    private Label errorMessage = new Label();
+    @FXML private Pane Base;
+    @FXML private VBox loginpanel;
+    @FXML private Label titel;
+    @FXML private Button login;
+    @FXML private Button Submit;
+    @FXML private Button mode;
+    @FXML private Button button;
+    @FXML private Pane achtergrond;
+    @FXML private PasswordField Password = new PasswordField();
+    @FXML private TextField Username = new TextField();
+    @FXML private Label errorMessage = new Label();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -113,7 +102,7 @@ public class loginController implements Initializable {
         root = loader.load();
         mainController mainController = loader.getController();
         mainController.setmainController(DB, user);
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle(user.getFirstName() + " " + user.getLastName());
