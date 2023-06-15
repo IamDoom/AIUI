@@ -14,8 +14,8 @@ public class registrationController implements Initializable {
     private Stage stage;
     data DB;
 
-    public void setregistrationController(data DB) {
-        DB = DB;
+    public registrationController(data DB1) {
+        this.DB = DB1;
     }
 
     @FXML private Pane achtergrond;

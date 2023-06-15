@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 public class loginController implements Initializable {
     data DB = new data();
     User user;
-    public void setDB(data DB) {
+    public  loginController(data DB) {
         this.DB = DB;
     }
 
