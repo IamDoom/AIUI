@@ -1,15 +1,25 @@
 name: sigrid-pullrequest
-on: [pull_request]
+on:
+  pull_request:
+    branches:
+      - "main"
 
 jobs:
   sigridci:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
+
       - name: Download Sigrid CI
-        run: "git clone https://github.com/Software-Improvement-Group/sigridci.git sigridci"
-      - name: "Run Sigrid CI" 
+        run: git clone https://github.com/Software-Improvement-Group/sigridci.git sigridci
+
+      - name: Run Sigrid CI
         env:
-          SIGRID_CI_TOKEN: eyJraWQiOiJzaWcta2V5IiwiYWxnIjoiUlMyNTYifQ.eyJqdGkiOiIxYzg1YmJhNS01N2VmLTQxNWItODZlNC02MjJkMjdhN2RjOWYiLCJzdWIiOiIwOGUxYWUxOS1kNjBlLTRkNDQtYWY3Yy1lYmRhZDRiNjYzYzIiLCJpc3MiOiJodHRwOi8vYXV0aGFwaTo4MDgwIiwiaWF0IjoxNjg2ODM0NjQ3LCJleHAiOjE3MTg0NTcwNDcsImNvZ25pdG86Z3JvdXBzIjpbImhoc3Byb2plY3QyIl0sInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiIiwidXNlcm5hbWUiOiIwOGUxYWUxOS1kNjBlLTRkNDQtYWY3Yy1lYmRhZDRiNjYzYzIifQ.bH6ljNqhqKnfTJ7PwzP2zQa6csG49osjzGa7pIU4bO_N6U7qMC7cpyXAkGbkK9mzlllx8nQOq5zZZC_EyAGVYKOhIVSL5oaMi1ZHCliYgWzQIWE0qHydSOEj1JMLj9tK1TjV6beXPGCikT2IMcqemPjcByVkAca6ZFeF24HTgvSemlchFu5UWUrobkHL5pAkKc5mx94Slw2mkZ7k7E_S42aUDRADZCse_h1NyhztI9jUrP7Kw_3v3enshQAL3uhDKg61PUI9pt2KMMYCMwXJT49IDqSRtRrhxCILCZ1GyPcllU-BHK9n7W8FCRKZzbdocT78u7yzGmzRN8hXdpSszQ
-        run: "./sigridci/sigridci/sigridci.py --customer hhsproject2 --system 2023-Projectgroep-H-1-SE-4d --source ."
+          SIGRID_CI_TOKEN: ${{ secrets.CI_TOKEN }}
+          # Or you can use CI_TOKEN_HILAS
+          # SIGRID_CI_TOKEN: ${{ secrets.CI_TOKEN_HILAS }}
+        run: |
+          cd sigridci/sigridci
+          python sigridci.py --customer hhsproject2 --system 2023-Projectgroep-H-1-SE-4d --source .
