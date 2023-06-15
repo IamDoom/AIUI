@@ -30,6 +30,7 @@ public class mainController implements Initializable{
 
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
     private boolean EnglishIsActive = true;
+    @FXML
     private Button NieuweGesprek;
     private boolean firstMessage = true;
     private int currentGesprekId = 0;
@@ -180,6 +181,21 @@ public class mainController implements Initializable{
     //hier beginnen de methodes voor de chatgeshiedenis
     @FXML
     public void setOnKeyPressed(ActionEvent Enter) {
+        String userMessage = input.getText();
+        //Update het onderwerp als usermessage het eerste bericht it
+        if(firstMessage){
+            updateOnderwerp(userMessage);
+            firstMessage=false;
+        }
+        //genereer een response en sla hem op(gebeurt in generateResponseJuisteGesprek)
+        String Response = user.getGespreksManager().GenerateResponseJuisteGesprek(user.getGespreksManager().getGesprek(currentGesprekId), userMessage);
+        //voeg het berricht toe en clear het textfield
+        chatList.getItems().addAll(userMessage);
+        chatList.getItems().addAll(Response);
+        input.clear();
+    }
+    @FXML
+    public void antwoord(){
         String userMessage = input.getText();
         //Update het onderwerp als usermessage het eerste bericht it
         if(firstMessage){
