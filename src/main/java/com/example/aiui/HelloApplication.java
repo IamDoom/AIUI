@@ -12,11 +12,10 @@ public class HelloApplication extends Application {
         // DB.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", false);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
+            loader.setControllerFactory(type -> new loginController(DB));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setTitle("AIUI: Login");
-            loginController loginController = loader.getController();
-            // loginController.setDB(DB);
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
