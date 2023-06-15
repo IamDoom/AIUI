@@ -1,3 +1,4 @@
+
 package com.example.aiui;
 
 import javafx.event.ActionEvent;
@@ -7,18 +8,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
+
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -36,6 +35,10 @@ public class loginController implements Initializable {
     @FXML
     private Pane Base;
     @FXML
+    private VBox loginpanel;
+    @FXML
+    private Label titel;
+    @FXML
     private Button login;
     @FXML
     private Button Submit;
@@ -44,9 +47,7 @@ public class loginController implements Initializable {
     @FXML
     private Button button;
     @FXML
-    private Pane leftPane;
-    @FXML
-    private Pane rightPane;
+    private Pane achtergrond;
     @FXML
     private PasswordField Password = new PasswordField();
     @FXML
@@ -54,10 +55,14 @@ public class loginController implements Initializable {
     @FXML
     private Label errorMessage = new Label();
 
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.DB = new data();
-
+        ThemaToepasser();
+        this.DB = DB;
     }
 
     @FXML
@@ -83,6 +88,30 @@ public class loginController implements Initializable {
                     throw new RuntimeException();
                 }
             }
+        }
+    }
+
+    public void ThemaToepasser() {
+        if (ThemaBeheerder.isDarkMode()) {
+            achtergrond.setStyle("-fx-background-color: black");
+            loginpanel.setStyle("-fx-background-color: black; -fx-border-radius: 24px");
+            titel.setStyle("-fx-text-fill: white");
+            button.setStyle("-fx-background-color: black");
+        } else if (ThemaBeheerder.isLightMode()) {
+            achtergrond.setStyle("-fx-background-color:  linear-gradient(to right, #5bc3f0, #174694)");
+            loginpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+            titel.setStyle("-fx-text-fill: linear-gradient(to right, #5bc3f0, #174694)");
+            button.setStyle("-fx-background-color:  #5BC3F0");
+        } else if (ThemaBeheerder.isColorMode1()) {
+            achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkgreen, lime)");
+            loginpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+            titel.setStyle("-fx-text-fill: linear-gradient(to right, darkgreen, lime)");
+            button.setStyle("-fx-background-color: darkgreen");
+        } else if (ThemaBeheerder.isColorMode2()) {
+            achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkred, red)");
+            loginpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+            titel.setStyle("-fx-text-fill: linear-gradient(to right, darkred, red)");
+            button.setStyle("-fx-background-color: darkred");
         }
     }
 
