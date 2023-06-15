@@ -7,58 +7,40 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
+import javafx.util.Callback;
+
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 
-public class loginController implements Initializable {
-    data DB = new data();
-    User user;
-    public void setDB(data DB){
+public class loginController{
+    public loginController(data DB){
         this.DB = DB;
     }
-
+    data DB;
+    User user;
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    @FXML
-    private Pane Base;
-    @FXML
-    private Button login;
-    @FXML
-    private Button Submit;
-    @FXML
-    private Button mode;
-    @FXML
-    private Button button;
-    @FXML
-    private Pane leftPane;
-    @FXML
-    private Pane rightPane;
-    @FXML
-    private PasswordField Password = new PasswordField();
-    @FXML
-    private TextField Username = new TextField();
-    @FXML
-    private Label errorMessage = new Label();
+    @FXML private Pane Base;
+    @FXML private Button login;
+    @FXML private Button Submit;
+    @FXML private Button mode;
+    @FXML private Button button;
+    @FXML private Pane leftPane;
+    @FXML private Pane rightPane;
+    @FXML private PasswordField Password = new PasswordField();
+    @FXML private TextField Username = new TextField();
+    @FXML private Label errorMessage = new Label();
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.DB = new data();
-
-    }
 
     @FXML
     protected void submitlogin(ActionEvent event) {
@@ -89,9 +71,8 @@ public class loginController implements Initializable {
     @FXML
     public void login(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainScene.fxml"));
+        loader.setControllerFactory(type -> new mainController(DB, user));
         root = loader.load();
-        mainController mainController = loader.getController();
-        mainController.setmainController(DB,user);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

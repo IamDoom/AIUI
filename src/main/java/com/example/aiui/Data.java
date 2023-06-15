@@ -1,49 +1,45 @@
 package com.example.aiui;
-import java.sql.*;
 import java.util.ArrayList;
 
-interface messageReceiver{
-    void receiveMessage(String message);
+
+interface UserFactory{
+    User createUser(String firstName, String lastName, String email, String username, String password);
 }
-class Bot implements messageReceiver{
 
-    private String name;
-
-    Bot(String name){
-        this.name = name;
-    }
+class administratorFactory implements UserFactory{
     @Override
-    public void receiveMessage(String message) {
-        System.out.println("Bot received message: " + message);
-        String reply = generateReply(message);
-        System.out.println(this.name+": " + reply);
+    public User createUser(String firstName, String lastName, String email, String username, String password) {
+        return new Administrator(firstName, lastName, email, username, password);
     }
-    private String generateReply(String message) {
-
-        return "This is the bot's reply to: " + message;
-    }
-
 }
+class employeeFactory implements UserFactory{
+    @Override
+    public User createUser(String firstName, String lastName, String email, String username, String password) {
+        return new Employee(firstName, lastName, email, username, password);
+    }
+}
+
 
 abstract class User{
-    private static int IDcounter = 1;
+    private gespreksManager gespreksManager;
+    private static int IDcounter = 0;
     private String firstName;
     private String lastName;
     private String password;
     private String Username;
-    private int employeeID;
+    private final int employeeID;
     private String Email;
     protected String type;
-
 
     public User(String firstName, String lastName, String email, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.Username = username;
-        this.IDcounter += 1;
         this.employeeID = IDcounter;
+        IDcounter += 1;
         this.Email = email;
+        this.gespreksManager = new gespreksManager();
     }
 
     public String getFirstName() {
@@ -80,6 +76,13 @@ abstract class User{
         Email = email;
     }
 
+    public gespreksManager getGespreksManager() {
+        return gespreksManager;
+    }
+
+    public void setGespreksManager(gespreksManager gespreksManager) {
+        this.gespreksManager = gespreksManager;
+    }
 }
 class Employee extends User{
     Employee(String firstName, String lastName, String email, String username, String password){
@@ -96,37 +99,44 @@ class Administrator extends User{
 }
 
 class UserDB{
-    private ArrayList<User> users = new ArrayList<>();
-
+    private final ArrayList<User> users;
+    public UserDB(){
+        users = new ArrayList<>();
+    }
     public void addUser(User user){
         users.add(user);
     }
     public ArrayList<User> getUsers(){
         return users;
     }
-
 }
 
 class chatHistory{
-    private ArrayList<String> chat = new ArrayList<>();
+    private final ArrayList<String> chat = new ArrayList<>();
 
 }
 
 class data {
-    private UserDB UserDB = new UserDB();
+    private final UserDB UserDB;
     public data(){
-        this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", false);
+        UserDB = new UserDB();
+        this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", true);
     }
 
-    public void registerUser(String firstname, String lastname, String emailaddress, String username, String password,boolean administrator){
+    public void registerUser(String firstname, String lastname, String emailaddress, String username, String password,  boolean administrator){
+        UserFactory userFactory;
         if (administrator) {
-            Administrator NewAdmin = new Administrator(firstname,lastname,emailaddress,username,password);
-            UserDB.addUser(NewAdmin);
+            userFactory = new administratorFactory();
         }else{
-            Employee newEmployee = new Employee(firstname,lastname,emailaddress,username,password);
-            UserDB.addUser(newEmployee);
-
+            userFactory = new employeeFactory();
         }
+        User newUser = userFactory.createUser(firstname,lastname,emailaddress,username,password);
+        UserDB.addUser(newUser);
+    }
+
+
+    public UserDB getUserDB() {
+        return UserDB;
     }
 
     public User login(String username, String password) {
