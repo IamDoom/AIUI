@@ -31,6 +31,7 @@ public class mainController implements Initializable{
 
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
     private boolean EnglishIsActive = true;
+    @FXML
     private Button NieuweGesprek;
     private boolean firstMessage = true;
     private int currentGesprekId = 0;
@@ -90,13 +91,11 @@ public class mainController implements Initializable{
             setting_register.setText(bundle.getString("settingsregister"));
         }
     }
-
+    @FXML
     protected void LightMode() {
         achtergrond.setStyle("-fx-background-color:  linear-gradient(to right, #5bc3f0, #174694)");
-        GesprekOnderwerpen.setStyle(
-                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black;");
-        chatList.setStyle(
-                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black;");
+        GesprekOnderwerpen.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black;");
+        chatList.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black;");
         settingspane.setStyle("-fx-background-color: white; -fx-background-radius: 24px;");
         input.setStyle("-fx-background-color: white; -fx-text-fill: black");
         Submit.setStyle("-fx-background-color:  #5BC3F0");
@@ -115,12 +114,11 @@ public class mainController implements Initializable{
         Zoom.setStyle("-fx-background-color:  #5BC3F0");
         Minus.setStyle("-fx-background-color:  #5BC3F0");
     }
+    @FXML
     protected void DarkMode() {
         achtergrond.setStyle("-fx-background-color: black");
-        GesprekOnderwerpen.setStyle(
-                "-fx-background-color: #8a8a8a; -fx-background-radius: 24px; -fx-text-fill: white");
-        chatList.setStyle(
-                "-fx-background-color: #8a8a8a; -fx-background-radius: 24px; -fx-text-fill: white");
+        GesprekOnderwerpen.setStyle("-fx-background-color: #8a8a8a; -fx-background-radius: 24px; -fx-text-fill: white");
+        chatList.setStyle("-fx-background-color: #8a8a8a; -fx-background-radius: 24px; -fx-text-fill: white");
         settingspane.setStyle("-fx-background-color: grey; -fx-background-radius: 24px;");
         input.setStyle("-fx-background-color: darkgrey; -fx-text-fill: white");
         Submit.setStyle("-fx-background-color:   darkgrey");
@@ -139,15 +137,14 @@ public class mainController implements Initializable{
         Zoom.setStyle("-fx-background-color:   darkgrey");
         Minus.setStyle("-fx-background-color:   darkgrey");
     }
+    @FXML
 
     protected void color1() {
         achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkgreen, lime)");
         settingspane.setStyle("-fx-background-color: darkgreen; -fx-background-radius: 24px;");
         input.setStyle("-fx-background-color: darkgreen; -fx-text-fill: white");
-        GesprekOnderwerpen.setStyle(
-                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
-        chatList.setStyle(
-                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
+        GesprekOnderwerpen.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
+        chatList.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
         Submit.setStyle("-fx-background-color: green");
         showSettings.setStyle("-fx-background-color: green");
         logUit.setStyle("-fx-background-color: green");
@@ -165,13 +162,12 @@ public class mainController implements Initializable{
         Minus.setStyle("-fx-background-color:  green");
     }
 
+    @FXML
     protected void color2() {
         achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkred, red)");
         settingspane.setStyle("-fx-background-color: darkred; -fx-background-radius: 24px;");
-        GesprekOnderwerpen.setStyle(
-                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
-        chatList.setStyle(
-                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
+        GesprekOnderwerpen.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
+        chatList.setStyle("-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
         input.setStyle("-fx-background-color: darkred; -fx-text-fill: white");
         Submit.setStyle("-fx-background-color: red");
         showSettings.setStyle("-fx-background-color: red");
@@ -375,4 +371,6 @@ public class mainController implements Initializable{
         stage.setTitle(user.getFirstName()+" "+user.getLastName());
         stage.show();
     }
+
+
 }

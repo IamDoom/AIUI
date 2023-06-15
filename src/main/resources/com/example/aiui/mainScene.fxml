@@ -131,7 +131,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="darkmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minWidth="175.0" mnemonicParsing="false" onAction="#darkKlick" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Dark mode" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                  <Button fx:id="darkmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minWidth="175.0" mnemonicParsing="false" onAction="#DarkMode" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Dark mode" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Segoe UI" size="13.0" />
                      </font>
@@ -142,7 +142,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="lightmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minWidth="175.0" mnemonicParsing="false" onAction="#lightKlick" style="-fx-background-color: #307eb3; -fx-background-radius: 4px;" text="Light mode" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                  <Button fx:id="lightmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minWidth="175.0" mnemonicParsing="false" onAction="#LightMode" style="-fx-background-color: #307eb3; -fx-background-radius: 4px;" text="Light mode" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Segoe UI" size="13.0" />
                      </font>
@@ -153,7 +153,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="colormode1" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minWidth="175.0" mnemonicParsing="false" onAction="#color1Klick" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Theme 1" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                  <Button fx:id="colormode1" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minWidth="175.0" mnemonicParsing="false" onAction="#color1" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Theme 1" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Segoe UI" size="13.0" />
                      </font>
@@ -164,7 +164,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="colormode2" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minWidth="175.0" mnemonicParsing="false" onAction="#color2Klick" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Theme 2" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                  <Button fx:id="colormode2" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minWidth="175.0" mnemonicParsing="false" onAction="#color2" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Theme 2" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Segoe UI" size="13.0" />
                      </font>
