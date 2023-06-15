@@ -29,7 +29,7 @@ public class mainController implements Initializable {
     private Scene scene;
     private Parent root;
     Gesprek DitGesprek;
-    gespreksManager Manager;
+    GespreksManager Manager;
     boolean settings = false;
     @FXML
     private Button NieuweGesprek;
@@ -334,7 +334,7 @@ public class mainController implements Initializable {
         setting_register.setText(bundle.getString("settingsregister"));
 
         Onderwerpen = user.getGespreksManager().getOnderwerpen();
-        Laadchat(user.getGespreksManager().getGesprek(0).getGespreksData());
+        Laadchat(user.getGespreksManager().getGesprek(0).getGesprekDataManager().getGespreksData());
         OnderwerpLabel.setText(user.getGespreksManager().getGesprek(0).getOnderwerp());
         GesprekOnderwerpen.getItems().addAll(Onderwerpen);
     }
@@ -349,7 +349,7 @@ public class mainController implements Initializable {
             firstMessage = false;
         }
         //genereer een response en sla hem op(gebeurt in generateResponseJuisteGesprek)
-        String Response = user.getGespreksManager().GenerateResponseJuisteGesprek(user.getGespreksManager().getGesprek(currentGesprekId), userMessage);
+        String Response = user.getGespreksManager().GenerateResponseVoorGesprek(user.getGespreksManager().getGesprek(currentGesprekId), userMessage);
         //voeg het berricht toe en clear het textfield
         chatList.getItems().addAll(userMessage);
         chatList.getItems().addAll(Response);
@@ -379,10 +379,10 @@ public class mainController implements Initializable {
     public void SelecteerdChat() {//methode voor het klikken op textsfield, hij checkt welk gesprek je wil zien en laat de inhoud zien **Deze methode werkt alleen als de onderwerpen niet hetzelfde zijn
         chatList.getItems().clear();
         String SelectedChat = GesprekOnderwerpen.getSelectionModel().getSelectedItem();
-        for (Gesprek gesprek : user.getGespreksManager().getGesprekken()) {
+        for (Gesprek gesprek : user.getGespreksManager().getGesprekkenLijst()) {
             if (SelectedChat.equals(gesprek.getOnderwerp())) {
                 currentGesprekId = gesprek.getId();
-                Laadchat(gesprek.getGespreksData());
+                Laadchat(gesprek.getGesprekDataManager().getGespreksData());
             }
         }
     }

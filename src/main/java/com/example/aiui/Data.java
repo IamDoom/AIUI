@@ -21,7 +21,7 @@ class employeeFactory implements UserFactory{
 
 
 abstract class User{
-    private gespreksManager gespreksManager;
+    private GespreksManager gespreksManager;
     private static int IDcounter = 0;
     private String firstName;
     private String lastName;
@@ -39,7 +39,7 @@ abstract class User{
         this.employeeID = IDcounter;
         IDcounter += 1;
         this.Email = email;
-        this.gespreksManager = new gespreksManager();
+        this.gespreksManager = new GespreksManager();
     }
 
     public String getFirstName() {
@@ -76,11 +76,11 @@ abstract class User{
         Email = email;
     }
 
-    public gespreksManager getGespreksManager() {
+    public GespreksManager getGespreksManager() {
         return gespreksManager;
     }
 
-    public void setGespreksManager(gespreksManager gespreksManager) {
+    public void setGespreksManager(GespreksManager gespreksManager) {
         this.gespreksManager = gespreksManager;
     }
 }
