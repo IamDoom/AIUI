@@ -6,13 +6,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class HelloApplication extends Application {
-    data DB = new data();
+    Data DB = new Data();
     @Override
     public void start(Stage stage) {
         // DB.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", false);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
-            loader.setControllerFactory(type -> new loginController(DB));
+            loader.setControllerFactory(type -> new LoginController(DB));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setTitle("AIUI: Login");
