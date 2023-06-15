@@ -389,7 +389,6 @@ public class mainController implements Initializable {
             e.printStackTrace();
         }
     }
-
     private void loadConversation() {
         try {
             // Lees het tekstbestand "conversation.txt"
