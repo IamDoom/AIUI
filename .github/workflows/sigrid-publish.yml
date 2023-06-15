@@ -3,7 +3,7 @@ name: sigrid-publish
 on:
   push:
     branches:
-      - "main"
+      - feature
 
 jobs:
   sigridci:
