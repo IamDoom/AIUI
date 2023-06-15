@@ -1,8 +1,6 @@
 name: sigrid-pullrequest
 on:
   pull_request:
-    branches:
-      - "main"
 
 jobs:
   sigridci:
