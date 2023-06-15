@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -20,7 +21,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class loginController{
+public class loginController implements Initializable {
     public loginController(data DB){
         this.DB = DB;
     }
@@ -40,10 +41,14 @@ public class loginController{
     @FXML private PasswordField Password = new PasswordField();
     @FXML private TextField Username = new TextField();
     @FXML private Label errorMessage = new Label();
+    @FXML private Pane achtergrond;
+    @FXML private VBox loginpanel;
+    @FXML private Label titel;
 
 
     @FXML
     protected void submitlogin(ActionEvent event) {
+
         String password = Password.getText();
         String username = Username.getText();
         if (password.isEmpty() || username.isEmpty()) {
@@ -78,5 +83,33 @@ public class loginController{
         stage.setScene(scene);
         stage.setTitle(user.getFirstName()+" "+user.getLastName());
         stage.show();
+    }
+    public void ThemaToepasser() {
+        if (ThemaBeheerder.isDarkMode()) {
+            achtergrond.setStyle("-fx-background-color: black");
+            loginpanel.setStyle("-fx-background-color: black; -fx-border-radius: 24px");
+            titel.setStyle("-fx-text-fill: white");
+            button.setStyle("-fx-background-color: black");
+        } else if (ThemaBeheerder.isLightMode()) {
+            achtergrond.setStyle("-fx-background-color:  linear-gradient(to right, #5bc3f0, #174694)");
+            loginpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+            titel.setStyle("-fx-text-fill: linear-gradient(to right, #5bc3f0, #174694)");
+            button.setStyle("-fx-background-color:  #5BC3F0");
+        } else if (ThemaBeheerder.isColorMode1()) {
+            achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkgreen, lime)");
+            loginpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+            titel.setStyle("-fx-text-fill: linear-gradient(to right, darkgreen, lime)");
+            button.setStyle("-fx-background-color: darkgreen");
+        } else if (ThemaBeheerder.isColorMode2()) {
+            achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkred, red)");
+            loginpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+            titel.setStyle("-fx-text-fill: linear-gradient(to right, darkred, red)");
+            button.setStyle("-fx-background-color: darkred");
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ThemaToepasser();
     }
 }

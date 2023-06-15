@@ -134,6 +134,11 @@ class data {
         UserDB.addUser(newUser);
     }
 
+    public String DeterminePasswordStrength(String password){
+        return null;
+
+    }
+
 
     public UserDB getUserDB() {
         return UserDB;

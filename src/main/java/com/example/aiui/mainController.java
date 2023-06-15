@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -35,6 +36,8 @@ public class mainController implements Initializable{
     private int currentGesprekId = 0;
     ArrayList<String> Onderwerpen;
     boolean settings = false;
+    private static final double ZZOOM = 1.109375;
+    private static final double SMALL = 0.78125;
 
     @FXML private ListView<String> chatList;
     @FXML private Pane Base;
@@ -51,6 +54,15 @@ public class mainController implements Initializable{
     @FXML private Button language;
     @FXML private Button advanced;
     @FXML private ListView<String> GesprekOnderwerpen;
+    @FXML private Pane achtergrond;
+    @FXML private Button darkmode;
+    @FXML private Button logUit;
+    @FXML private Button lightmode;
+    @FXML private Button colormode1;
+    @FXML private Button colormode2;
+    @FXML private Button Zoom;
+    @FXML private Button Minus;
+    @FXML private Scale scale;
 
     @FXML
     public void Togglelang(ActionEvent event){ // voor taal switchen
@@ -80,54 +92,145 @@ public class mainController implements Initializable{
     }
 
     protected void LightMode() {
-        Base.setStyle("-fx-background-color: #bcc1c4;");
-        sidebar.setStyle("-fx-background-color: #307eb3;");
-        mode.setStyle("-fx-background-radius: 10; -fx-background-color: white; -fx-border-width: 0;");
-        mode.setText("Darkmode");
+        achtergrond.setStyle("-fx-background-color:  linear-gradient(to right, #5bc3f0, #174694)");
+        GesprekOnderwerpen.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black;");
+        chatList.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black;");
+        settingspane.setStyle("-fx-background-color: white; -fx-background-radius: 24px;");
+        input.setStyle("-fx-background-color: white; -fx-text-fill: black");
+        Submit.setStyle("-fx-background-color:  #5BC3F0");
+        showSettings.setStyle("-fx-background-color:  #5BC3F0");
+        logUit.setStyle("-fx-background-color:  #5BC3F0");
+        NieuweGesprek.setStyle("-fx-background-color:  #5BC3F0");
+        setting_register.setStyle("-fx-background-color:  #5BC3F0");
+        language.setStyle("-fx-background-color:  #5BC3F0");
+        edituser.setStyle("-fx-background-color:  #5BC3F0");
+        advanced.setStyle("-fx-background-color:  #5BC3F0");
+        darkmode.setStyle("-fx-background-color:  #5BC3F0");
+        lightmode.setStyle("-fx-background-color:  #5BC3F0");
+        colormode1.setStyle("-fx-background-color:  #5BC3F0");
+        colormode2.setStyle("-fx-background-color:  #5BC3F0");
+        closeSettings.setStyle("-fx-background-color: #5BC3F0");
+        Zoom.setStyle("-fx-background-color:  #5BC3F0");
+        Minus.setStyle("-fx-background-color:  #5BC3F0");
     }
     protected void DarkMode() {
-        Base.setStyle("-fx-background-color: #000000");
-        sidebar.setStyle("-fx-background-color: #bcc1c4;");
-        mode.setStyle("-fx-background-radius: 10; -fx-background-color: #b6b7ba; -fx-border-width: 0;");
-        mode.setText("Lightmode");
+        achtergrond.setStyle("-fx-background-color: black");
+        GesprekOnderwerpen.setStyle(
+                "-fx-background-color: #8a8a8a; -fx-background-radius: 24px; -fx-text-fill: white");
+        chatList.setStyle(
+                "-fx-background-color: #8a8a8a; -fx-background-radius: 24px; -fx-text-fill: white");
+        settingspane.setStyle("-fx-background-color: grey; -fx-background-radius: 24px;");
+        input.setStyle("-fx-background-color: darkgrey; -fx-text-fill: white");
+        Submit.setStyle("-fx-background-color:   darkgrey");
+        showSettings.setStyle("-fx-background-color:   darkgrey");
+        logUit.setStyle("-fx-background-color:   darkgrey");
+        NieuweGesprek.setStyle("-fx-background-color:   darkgrey");
+        setting_register.setStyle("-fx-background-color:   darkgrey");
+        language.setStyle("-fx-background-color:   darkgrey");
+        edituser.setStyle("-fx-background-color:   darkgrey");
+        advanced.setStyle("-fx-background-color:   darkgrey");
+        darkmode.setStyle("-fx-background-color:   darkgrey");
+        lightmode.setStyle("-fx-background-color:   darkgrey");
+        colormode1.setStyle("-fx-background-color:   darkgrey");
+        colormode2.setStyle("-fx-background-color:   darkgrey");
+        closeSettings.setStyle("-fx-background-color:  darkgrey");
+        Zoom.setStyle("-fx-background-color:   darkgrey");
+        Minus.setStyle("-fx-background-color:   darkgrey");
     }
 
     protected void color1() {
+        achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkgreen, lime)");
+        settingspane.setStyle("-fx-background-color: darkgreen; -fx-background-radius: 24px;");
+        input.setStyle("-fx-background-color: darkgreen; -fx-text-fill: white");
+        GesprekOnderwerpen.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
+        chatList.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
+        Submit.setStyle("-fx-background-color: green");
+        showSettings.setStyle("-fx-background-color: green");
+        logUit.setStyle("-fx-background-color: green");
+        NieuweGesprek.setStyle("-fx-background-color: green");
+        setting_register.setStyle("-fx-background-color: green");
+        language.setStyle("-fx-background-color: green");
+        edituser.setStyle("-fx-background-color: green");
+        advanced.setStyle("-fx-background-color: green");
+        darkmode.setStyle("-fx-background-color: green");
+        lightmode.setStyle("-fx-background-color: green");
+        colormode1.setStyle("-fx-background-color: green");
+        colormode2.setStyle("-fx-background-color: green");
+        closeSettings.setStyle("-fx-background-color: green");
+        Zoom.setStyle("-fx-background-color:  green");
+        Minus.setStyle("-fx-background-color:  green");
     }
 
     protected void color2() {
+        achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkred, red)");
+        settingspane.setStyle("-fx-background-color: darkred; -fx-background-radius: 24px;");
+        GesprekOnderwerpen.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
+        chatList.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 24px; -fx-text-fill: black");
+        input.setStyle("-fx-background-color: darkred; -fx-text-fill: white");
+        Submit.setStyle("-fx-background-color: red");
+        showSettings.setStyle("-fx-background-color: red");
+        logUit.setStyle("-fx-background-color: red");
+        NieuweGesprek.setStyle("-fx-background-color: red");
+        setting_register.setStyle("-fx-background-color: red");
+        language.setStyle("-fx-background-color: red");
+        edituser.setStyle("-fx-background-color: red");
+        advanced.setStyle("-fx-background-color: red");
+        darkmode.setStyle("-fx-background-color: red");
+        lightmode.setStyle("-fx-background-color: red");
+        colormode1.setStyle("-fx-background-color: red");
+        colormode2.setStyle("-fx-background-color: red");
+        closeSettings.setStyle("-fx-background-color: red");
+        Zoom.setStyle("-fx-background-color:  red");
+        Minus.setStyle("-fx-background-color:  red");
     }
 
-    @FXML
-    public void darkKlick() {
-        update(true, false, false, false);
-    }
-    @FXML
-    public void lightKlick() {
-        update(false, true, false, false);
-    }
-    @FXML
-    public void color1Klick() {
-        update(false, false, true, false);
-    }
-    @FXML
-    public void color2Klick() {
-        update(false, false, false, true);
-    }
-
-
-    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
-        if (darkmode == true) {
-            DarkMode();
-        } else if (lightmode == true) {
+    public void ThemaToepasser() {
+        if (ThemaBeheerder.isDarkMode()) {
             LightMode();
-        } else if (colormode1 == true) {
+        } else if (ThemaBeheerder.isLightMode()) {
+            DarkMode();
+        } else if (ThemaBeheerder.isColorMode1()) {
             color1();
-        } else if (colormode2 == true) {
+        } else if (ThemaBeheerder.isColorMode2()) {
             color2();
         }
     }
 
+    @FXML
+    private void handleZoom() {
+        scale.setX(scale.getX() * ZZOOM);
+        scale.setY(scale.getY() * ZZOOM);
+    }
+
+    @FXML
+    private void handleMin() {
+        scale.setX(scale.getX() * SMALL);
+        scale.setY(scale.getY() * SMALL);
+    }
+
+    public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
+        ThemaBeheerder.setDarkMode(darkmode);
+        ThemaBeheerder.setLightMode(lightmode);
+        ThemaBeheerder.setColorMode1(colormode1);
+        ThemaBeheerder.setColorMode2(colormode2);
+
+        // Apply color changes based on the selected theme
+        if (darkmode) {
+            DarkMode();
+        } else if (lightmode) {
+            LightMode();
+        } else if (colormode1) {
+            color1();
+        } else if (colormode2) {
+            color2();
+        }
+    }
     @FXML
     protected void displaySettings(){
         settingspane.setVisible(!settings);
@@ -162,6 +265,20 @@ public class mainController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ThemaToepasser();
+        scale = new Scale();
+        scale.setX(1.0);
+        scale.setY(1.0);
+        achtergrond.getTransforms().setAll(scale);
+        showSettings.setText(bundle.getString("Settings"));
+        input.setPromptText(bundle.getString("PromptText"));
+        // Submit.setText(bundle.getString("Submit"));
+        closeSettings.setText(bundle.getString("closesettings"));
+        advanced.setText(bundle.getString("advanced"));
+        edituser.setText(bundle.getString("edituser"));
+        language.setText(bundle.getString("Taal"));
+        setting_register.setText(bundle.getString("settingsregister"));
+
         showSettings.setText(bundle.getString("Settings"));
         input.setPromptText(bundle.getString("PromptText"));
         Submit.setText(bundle.getString("Submit"));
