@@ -306,6 +306,23 @@ public class mainController implements Initializable{
         chatList.getItems().addAll(Response);
         input.clear();
     }
+
+    @FXML
+    public void Submit() {
+        String userMessage = input.getText();
+        //Update het onderwerp als usermessage het eerste bericht it
+        if(firstMessage){
+            updateOnderwerp(userMessage);
+            firstMessage=false;
+        }
+        //genereer een response en sla hem op(gebeurt in generateResponseJuisteGesprek)
+        String Response = user.getGespreksManager().GenerateResponseJuisteGesprek(user.getGespreksManager().getGesprek(currentGesprekId), userMessage);
+        //voeg het berricht toe en clear het textfield
+        chatList.getItems().addAll(userMessage);
+        chatList.getItems().addAll(Response);
+        input.clear();
+    }
+
     public void updateOnderwerp(String onderwerp){//methode voor updaten van het onderwerp van een chat en het veranderen van het onderwerp on ander plekken waar het wordt gebruikt
         user.getGespreksManager().getGesprek(currentGesprekId).setOnderwerp(onderwerp);
         OnderwerpLabel.setText(onderwerp);
