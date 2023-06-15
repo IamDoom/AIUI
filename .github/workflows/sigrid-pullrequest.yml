@@ -2,7 +2,7 @@ name: sigrid-pullrequest
 on:
   pull_request:
     branches:
-      - "main"
+      - feature
 
 jobs:
   sigridci:
