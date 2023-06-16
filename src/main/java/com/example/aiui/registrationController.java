@@ -1,10 +1,15 @@
 package com.example.aiui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -50,9 +55,6 @@ public class registrationController implements Initializable {
     @FXML
     void Toggle(ActionEvent event) {}
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
 
     public void ThemaToepasser() {
         if (ThemaBeheerder.isDarkMode()) {
@@ -87,10 +89,9 @@ public class registrationController implements Initializable {
         ThemaToepasser();
     }
 
-    private void closeStage() {
-        if (stage != null) {
-            stage.close();
-        }
+    public void closePopup() {
+        Stage stage = (Stage) cancel.getScene().getWindow();
+        stage.close();
     }
 
     protected boolean isFilledin() {
@@ -118,9 +119,9 @@ public class registrationController implements Initializable {
     }
 
     @FXML
-    protected void submitRegistration() {
+    protected void submitRegistration(ActionEvent event) throws IOException {
         if (!isFilledin()) {
-            errorMessage.setText("voer aub alles in!");
+            errorMessage.setText("Please fill in all fields!");
         } else {
             String firstname = register_firstname.getText();
             String lastname = register_lastname.getText();
@@ -129,13 +130,28 @@ public class registrationController implements Initializable {
             String password = register_password.getText();
             boolean admin = register_admin.isSelected();
             DB.registerUser(firstname, lastname, email, username, password, admin);
-            closeStage();
+
+            // Clear the text fields
+            register_firstname.clear();
+            register_lastname.clear();
+            register_emailadress.clear();
+            register_username.clear();
+            register_password.clear();
+
+            // Show the registration success message
+            String message = "User " + firstname + " " + lastname + " registered with username " + username;
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Registration Success");
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
         }
     }
+
 
     @FXML
     protected void Cancel() {
         System.out.println("canceling registration");
-        closeStage();
+        closePopup();
     }
 }
