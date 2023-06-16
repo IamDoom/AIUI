@@ -1,19 +1,17 @@
 package com.example.aiui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
-
-import java.util.Observer;
 
 public class HelloApplication extends Application {
-    data DB = new data();
+    Data DB = new Data();
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
-            loader.setControllerFactory(type -> new loginController(DB));
+            loader.setControllerFactory(type -> new LoginController(DB));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setTitle("AIUI: Login");
@@ -27,6 +25,5 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         // Starten van de JavaFX-toepassing
         launch(args);
-
     }
 }

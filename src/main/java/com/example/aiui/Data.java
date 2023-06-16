@@ -21,7 +21,7 @@ class employeeFactory implements UserFactory{
 
 
 abstract class User{
-    private gespreksManager gespreksManager;
+    private GespreksManager gespreksManager;
     private static int IDcounter = 0;
     private String firstName;
     private String lastName;
@@ -39,7 +39,7 @@ abstract class User{
         this.employeeID = IDcounter;
         IDcounter += 1;
         this.Email = email;
-        this.gespreksManager = new gespreksManager();
+        this.gespreksManager = new GespreksManager();
     }
 
     public String getFirstName() {
@@ -76,11 +76,11 @@ abstract class User{
         Email = email;
     }
 
-    public gespreksManager getGespreksManager() {
+    public GespreksManager getGespreksManager() {
         return gespreksManager;
     }
 
-    public void setGespreksManager(gespreksManager gespreksManager) {
+    public void setGespreksManager(GespreksManager gespreksManager) {
         this.gespreksManager = gespreksManager;
     }
 }
@@ -116,20 +116,24 @@ class chatHistory{
 
 }
 
-class data {
+class Data {
     private final UserDB UserDB;
-    public data(){
+    public Data(){
         UserDB = new UserDB();
         this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", true);
     }
 
     public void registerUser(String firstname, String lastname, String emailaddress, String username, String password,  boolean administrator){
+        //check password strenght
+        PasswordCheck passwordCheck = new PasswordCheck();
+        passwordCheck.WachtWoordStengthVerwerker(password);
         UserFactory userFactory;
         if (administrator) {
             userFactory = new administratorFactory();
         }else{
             userFactory = new employeeFactory();
         }
+
         User newUser = userFactory.createUser(firstname,lastname,emailaddress,username,password);
         UserDB.addUser(newUser);
     }

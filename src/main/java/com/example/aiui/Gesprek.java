@@ -1,21 +1,17 @@
 package com.example.aiui;
 
-import javafx.collections.ObservableList;
-
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
-interface ResponseGenerator{
+interface ResponseGenerator {
     String messageReceiver(String message);
 }
 
-class conceptResponseGenerator implements ResponseGenerator{
+class conceptResponseGenerator implements ResponseGenerator {
     private String defaultGreeting = "Hi! How can I assist you?";
     private String defaultHowAreYou = "As an AI, I don't have feelings or emotions, but I'm functioning as intended and ready to help you. How can I assist you today?";
     private String defaultFallback = "I don't have an answer for that now";
 
-    public String messageReceiver(String message){
+    public String messageReceiver(String message) {
         System.out.println("AI received message: " + message);
         String response = response(message);
         return response;
@@ -23,45 +19,46 @@ class conceptResponseGenerator implements ResponseGenerator{
 
     private String response(String userMessage) {
         // Replace this logic with your own or use an AI/chatbot API
-
-        if (userMessage.equalsIgnoreCase("hello")) {
-            System.out.println("Bot's reply: " + defaultGreeting);
-            return defaultGreeting;
-        } else if (userMessage.toLowerCase().startsWith("how are you")) {
-            System.out.println("Bot's reply: " + defaultHowAreYou);
-            return defaultHowAreYou;
-        } else {
-            System.out.println("Bot's reply: " + defaultFallback );
-            return defaultFallback;
+        switch (userMessage){
+            case "hello":
+                System.out.println("Bot's reply: " + defaultGreeting);
+                return defaultGreeting;
+            case "how are you":
+                System.out.println("Bot's reply: " + defaultHowAreYou);
+                return defaultHowAreYou;
+            default:
+                System.out.println("Bot's reply: " + defaultFallback );
+                return defaultFallback;
         }
     }
 
+
 }
 
-class gespreksManager {
-    private ArrayList<Gesprek> gesprekken;
+class GespreksManager {
+    private ArrayList<Gesprek> gesprekkenLijst;
 
-    public gespreksManager() {
-        gesprekken = new ArrayList<Gesprek>();
+    public GespreksManager() {
+        gesprekkenLijst = new ArrayList<Gesprek>();
         Gesprek EersteGesprek = new Gesprek();
         EersteGesprek.setId(0);
-        gesprekken.add(EersteGesprek);
+        gesprekkenLijst.add(EersteGesprek);
     }
 
     public Gesprek newGesprek() {
         Gesprek gesprek = new Gesprek();
-        gesprek.setId(gesprekken.size());
-        gesprekken.add(gesprek);
+        gesprek.setId(gesprekkenLijst.size());
+        gesprekkenLijst.add(gesprek);
         return gesprek;
     }
 
-    public ArrayList<Gesprek> getGesprekken() {
-        return gesprekken;
+    public ArrayList<Gesprek> getGesprekkenLijst() {
+        return gesprekkenLijst;
     }
 
     public Gesprek getGesprek(int gesprekId) {
         Gesprek DitGesprek = null;
-        for (Gesprek gesprek : gesprekken) {
+        for (Gesprek gesprek : gesprekkenLijst) {
             if (gesprek.getId() == gesprekId) {
                 DitGesprek = gesprek;
             }
@@ -71,16 +68,16 @@ class gespreksManager {
 
     public ArrayList<String> getOnderwerpen() {
         ArrayList<String> Onderwerpen = new ArrayList<String>();
-        for (Gesprek gesprek : gesprekken) {
+        for (Gesprek gesprek : gesprekkenLijst) {
             Onderwerpen.add(gesprek.getOnderwerp());
         }
         return Onderwerpen;
     }
 
-    public String GenerateResponseJuisteGesprek(Gesprek gesprek, String input) {
-        for (Gesprek locaalgesprek : gesprekken) {
+    public String GenerateResponseVoorGesprek(Gesprek gesprek, String input) {
+        for (Gesprek locaalgesprek : gesprekkenLijst) {
             if (locaalgesprek.equals(gesprek)) {
-                return locaalgesprek.generateResponse(input);
+                return locaalgesprek.getGesprekDataManager().generateResponse(input);
             }
         }
         return null;
@@ -89,13 +86,44 @@ class gespreksManager {
 
 public class Gesprek {
     private String Onderwerp;
+    private int id = 0;
+    private GesprekDataManager gesprekDataManager;
+    public Gesprek(){
+        Onderwerp = "Geen onderwerp";
+        gesprekDataManager = new GesprekDataManager();
+    }
+
+
+    public GesprekDataManager getGesprekDataManager() {
+        return gesprekDataManager;
+    }
+
+
+    public String getOnderwerp() {
+        return Onderwerp;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+    public void setOnderwerp(String onderwerp) {
+        Onderwerp = onderwerp;
+    }
+}
+class GesprekDataManager {
+    public GesprekDataManager(){
+        GespreksData = new ArrayList<String>();
+    }
     private ArrayList<String> GespreksData;
     private ResponseGenerator responseGenerator = new conceptResponseGenerator();
-    private int id = 0;
-    public Gesprek(){
-        GespreksData = new ArrayList<String>();
-        Onderwerp = "Geen onderwerp";
-    }
     public String generateResponse(String userMessage) {
         String response = responseGenerator.messageReceiver(userMessage);
         this.OnthoudData(userMessage, response);
@@ -105,24 +133,10 @@ public class Gesprek {
         GespreksData.add(data1);
         GespreksData.add(data2);
     }
-
     public ArrayList<String> getGespreksData() {
         return GespreksData;
     }
 
-    public String getOnderwerp() {
-        return Onderwerp;
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setOnderwerp(String onderwerp) {
-        Onderwerp = onderwerp;
-    }
 }
+

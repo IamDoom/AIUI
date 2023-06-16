@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.loginController">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.LoginController">
     <children>
         <Pane fx:id="achtergrond" minHeight="576.0" minWidth="1024.0" style="-fx-background-color: linear-gradient(to right, #5bc3f0, #174694);;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -16,87 +16,87 @@
                         <Image url="@icons/loginlogo.png" />
                     </image>
                 </ImageView>
-                <VBox fx:id="loginpanel" alignment="CENTER" layoutX="512.0" layoutY="88.0" minHeight="400.0" minWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 24px;">
-                    <children>
-                        <Label fx:id="titel" alignment="CENTER" contentDisplay="CENTER" text="LOGIN">
-                            <font>
-                                <Font name="Segoe UI Bold" size="40.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets />
-                            </VBox.margin>
-                            <textFill>
-                                <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0" startX="1.0">
-                                    <stops>
-                                        <Stop>
-                                            <color>
-                                                <Color red="0.25329434871673584" green="0.33914878964424133" blue="0.7684210538864136" />
-                                            </color>
-                                        </Stop>
-                                        <Stop offset="0.006729475100942127">
-                                            <color>
-                                                <Color red="0.35686275362968445" green="0.7647058963775635" blue="0.9411764740943909" />
-                                            </color>
-                                        </Stop>
-                                        <Stop offset="1.0">
-                                            <color>
-                                                <Color red="0.3003898561000824" green="0.4555912911891937" blue="0.7052631378173828" />
-                                            </color>
-                                        </Stop>
-                                    </stops>
-                                </LinearGradient>
-                            </textFill>
-                        </Label>
-                        <HBox minWidth="300.0">
-                            <children>
-                                <ImageView fitHeight="25.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@icons/user.png" />
-                                    </image>
-                                    <HBox.margin>
-                                        <Insets left="10.0" right="10.0" />
-                                    </HBox.margin>
-                                </ImageView>
-                                <TextField fx:id="Username" alignment="CENTER" minHeight="20.0" minWidth="300.0" onAction="#submitlogin" promptText="Username" style="-fx-background-radius: 4px;">
-                                    <font>
-                                        <Font name="Segoe UI" size="12.0" />
-                                    </font>
-                                    <HBox.margin>
-                                        <Insets />
-                                    </HBox.margin>
-                                </TextField>
-                            </children>
-                            <VBox.margin>
-                                <Insets bottom="32.0" top="42.0" />
-                            </VBox.margin>
-                        </HBox>
-                        <HBox>
-                            <children>
-                                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@icons/pass.png" />
-                                    </image>
-                                    <HBox.margin>
-                                        <Insets left="10.0" right="10.0" />
-                                    </HBox.margin>
-                                </ImageView>
-                                <PasswordField fx:id="Password" alignment="CENTER" minHeight="20.0" minWidth="300.0" onAction="#submitlogin" promptText="Password" style="-fx-background-radius: 4px;">
-                                    <font>
-                                        <Font name="Segoe UI" size="12.0" />
-                                    </font>
-                                </PasswordField>
-                            </children>
-                        </HBox>
-                        <Button fx:id="button" alignment="CENTER" contentDisplay="CENTER" minWidth="124.0" mnemonicParsing="false" onAction="#submitlogin" style="-fx-background-radius: 4px; -fx-background-color: #5BC3F0;" text="Log in" textFill="WHITE">
-                            <font>
-                                <Font name="Segoe UI Bold" size="15.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets right="10.0" top="32.0" />
-                            </VBox.margin>
-                        </Button>
-                    </children>
-                </VBox>
+            <VBox fx:id="loginpanel" alignment="CENTER" layoutX="512.0" layoutY="88.0" minHeight="400.0" minWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 24px;">
+               <children>
+                      <Label fx:id="titel" alignment="CENTER" contentDisplay="CENTER" text="LOGIN">
+                     <font>
+                        <Font name="Segoe UI Bold" size="40.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <textFill>
+                        <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0" startX="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.25329434871673584" green="0.33914878964424133" blue="0.7684210538864136" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.006729475100942127">
+                                 <color>
+                                    <Color red="0.35686275362968445" green="0.7647058963775635" blue="0.9411764740943909" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.3003898561000824" green="0.4555912911891937" blue="0.7052631378173828" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <HBox minWidth="300.0">
+                     <children>
+                        <ImageView fitHeight="25.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/user.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                            <TextField fx:id="username" alignment="CENTER" minHeight="20.0" minWidth="300.0" onAction="#submitlogin" promptText="Username" style="-fx-background-radius: 4px;">
+                                <font>
+                                    <Font name="Segoe UI" size="12.0" />
+                                </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                            </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="32.0" top="42.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/pass.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                            <PasswordField fx:id="password" alignment="CENTER" minHeight="20.0" minWidth="300.0" onAction="#submitlogin" promptText="Password" style="-fx-background-radius: 4px;">
+                                <font>
+                                    <Font name="Segoe UI" size="12.0" />
+                                </font>
+                            </PasswordField>
+                     </children>
+                  </HBox>
+                      <Button fx:id="button" alignment="CENTER" contentDisplay="CENTER" minWidth="124.0" mnemonicParsing="false" onAction="#submitlogin" style="-fx-background-radius: 4px; -fx-background-color: #5BC3F0;" text="Log in" textFill="WHITE">
+                          <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                          </font>
+                     <VBox.margin>
+                        <Insets right="10.0" top="32.0" />
+                     </VBox.margin>
+                      </Button>
+               </children>
+            </VBox>
             </children>
         </Pane>
     </children>
