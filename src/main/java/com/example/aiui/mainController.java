@@ -20,80 +20,58 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 public class mainController implements Initializable {
     User user;
     Data DB;
+    Gesprek DitGesprek;
+    GespreksManager Manager;
     ArrayList<String> Onderwerpen;
+    boolean settings = false;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
-    Gesprek DitGesprek;
-    GespreksManager Manager;
-    boolean settings = false;
-    @FXML
-    private Button NieuweGesprek;
+
+
+    @FXML  private Button NieuweGesprek;
     private boolean firstMessage = true;
     private int currentGesprekId = 0;
-    @FXML
-    private ListView<String> chatList;
+    @FXML private ListView<String> chatList;
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
     private boolean EnglishIsActive = true;
     private static final double ZZOOM = 1.109375;
     private static final double SMALL = 0.78125;
-    @FXML
-    private ListView<String> GesprekOnderwerpen;
-    @FXML
-    private Pane Base;
-    @FXML
-    private Button darkmode;
-    @FXML
-    private Button mode;
-    @FXML
-    private Scale scale;
-    @FXML
-    private Button Zoom;
-    @FXML
-    private Button Minus;
-    @FXML
-    private Pane achtergrond;
-    @FXML
-    private Label OnderwerpLabel;
-    @FXML
-    private Button showSettings;
-    @FXML
-    private Button Submit;
-    @FXML
-    private Button closeSettings;
-    @FXML
-    private Pane settingspane;
-    @FXML
-    private Button setting_register;
-    @FXML
-    private TextField input;
-    @FXML
-    private Pane sidebar;
-    @FXML
-    private Button edituser;
-    @FXML
-    private Button language;
-    @FXML
-    private Button advanced;
-    @FXML
-    private Button lightmode;
-    @FXML
-    private Button colormode1;
-    @FXML
-    private Button colormode2;
-    @FXML
-    private Button logUit;
-    @FXML
-    private Label Titel;
-    @FXML
-    private Label HisLabel;
+    @FXML private ListView<String> GesprekOnderwerpen;
+    @FXML private Pane Base;
+    @FXML private Button darkmode;
+    @FXML private Button mode;
+    @FXML private Scale scale;
+    @FXML private Button Zoom;
+    @FXML private Button Minus;
+    @FXML private Pane achtergrond;
+    @FXML private Label OnderwerpLabel;
+    @FXML private Button showSettings;
+    @FXML private Button Submit;
+    @FXML private Button closeSettings;
+    @FXML private Pane settingspane;
+    @FXML private Button setting_register;
+    @FXML private TextField input;
+    @FXML private Pane sidebar;
+    @FXML private Button edituser;
+    @FXML private Button language;
+    @FXML private Button advanced;
+    @FXML private Button lightmode;
+    @FXML private Button colormode1;
+    @FXML private Button colormode2;
+    @FXML private Button logUit;
+    @FXML private Label Titel;
+    @FXML private Label HisLabel;
+
     public mainController(Data DB, User user) {
         this.DB = DB;
         this.user = user;
+        Manager = user.getGespreksManager();
     }
 
     @FXML
@@ -356,9 +334,9 @@ public class mainController implements Initializable {
         colormode2.setText(bundle.getString("Thema2"));
         NieuweGesprek.setText(bundle.getString("nieuwGesprek"));
 
-        Onderwerpen = user.getGespreksManager().getOnderwerpen();
-        Laadchat(user.getGespreksManager().getGesprek(0).getGesprekDataManager().getGespreksData());
-        OnderwerpLabel.setText(user.getGespreksManager().getGesprek(0).getOnderwerp());
+        Onderwerpen = Manager.getOnderwerpen();
+        Laadchat(Manager.getGesprek(0).getGesprekDataManager().getGespreksData());
+        OnderwerpLabel.setText(Manager.getGesprek(0).getOnderwerp());
         GesprekOnderwerpen.getItems().addAll(Onderwerpen);
     }
 
@@ -372,7 +350,7 @@ public class mainController implements Initializable {
             firstMessage = false;
         }
         //genereer een response en sla hem op(gebeurt in generateResponseJuisteGesprek)
-        String Response = user.getGespreksManager().GenerateResponseVoorGesprek(user.getGespreksManager().getGesprek(currentGesprekId), userMessage);
+        String Response = Manager.GenerateResponseVoorGesprek(Manager.getGesprek(currentGesprekId), userMessage);
         //voeg het berricht toe en clear het textfield
         chatList.getItems().addAll(userMessage);
         chatList.getItems().addAll(Response);
@@ -380,7 +358,7 @@ public class mainController implements Initializable {
     }
 
     public void updateOnderwerp(String onderwerp) {//methode voor updaten van het onderwerp van een chat en het veranderen van het onderwerp on ander plekken waar het wordt gebruikt
-        user.getGespreksManager().getGesprek(currentGesprekId).setOnderwerp(onderwerp);
+        Manager.getGesprek(currentGesprekId).setOnderwerp(onderwerp);
         OnderwerpLabel.setText(onderwerp);
         Onderwerpen.set(currentGesprekId, onderwerp);
         GesprekOnderwerpen.getItems().clear();
@@ -389,7 +367,7 @@ public class mainController implements Initializable {
 
     public void NieuwGesprek() {
         //maak gesprek aan en vernieuw de chatgegevens
-        Gesprek gesprek = user.getGespreksManager().newGesprek();
+        Gesprek gesprek = Manager.newGesprek();
         GesprekOnderwerpen.getItems().add(gesprek.getOnderwerp());
         OnderwerpLabel.setText(gesprek.getOnderwerp());
         Onderwerpen.add(gesprek.getOnderwerp());
@@ -400,7 +378,7 @@ public class mainController implements Initializable {
     public void SelecteerdChat() {//methode voor het klikken op textsfield, hij checkt welk gesprek je wil zien en laat de inhoud zien **Deze methode werkt alleen als de onderwerpen niet hetzelfde zijn
         chatList.getItems().clear();
         String SelectedChat = GesprekOnderwerpen.getSelectionModel().getSelectedItem();
-        for (Gesprek gesprek : user.getGespreksManager().getGesprekkenLijst()) {
+        for (Gesprek gesprek : Manager.getGesprekkenLijst()) {
             if (SelectedChat.equals(gesprek.getOnderwerp())) {
                 currentGesprekId = gesprek.getId();
                 Laadchat(gesprek.getGesprekDataManager().getGespreksData());
@@ -418,7 +396,7 @@ public class mainController implements Initializable {
                 chatList.getItems().add("Ai: " + str);
             }
         }
-        OnderwerpLabel.setText(user.getGespreksManager().getGesprek(currentGesprekId).getOnderwerp());
+        OnderwerpLabel.setText(Manager.getGesprek(currentGesprekId).getOnderwerp());
     }
 
 
