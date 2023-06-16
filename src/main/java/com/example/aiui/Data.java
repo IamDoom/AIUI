@@ -129,16 +129,46 @@ class chatHistory{
 }
 
 class Data {
+    String tempfirstName;
+    String templastName;
+    String tempemail;
+    String tempusername;
+    String temppassword;
     private final UserDB UserDB;
     public Data(){
         UserDB = new UserDB();
-        this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "Lol123", true);
+        tempfirstName = "john";
+        templastName = "doe";
+        tempemail = "johndoe@emailadress.com";
+        temppassword = "Lol123";
+        tempusername = "abc";
+        this.registerUser(true);
     }
 
-    public Boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password,  boolean administrator) {
+    public void setTempfirstName(String tempfirstName) {
+        this.tempfirstName = tempfirstName;
+    }
+
+    public void setTemplastName(String templastName) {
+        this.templastName = templastName;
+    }
+
+    public void setTempemail(String tempemail) {
+        this.tempemail = tempemail;
+    }
+
+    public void setTempusername(String tempusername) {
+        this.tempusername = tempusername;
+    }
+
+    public void settempPassword(String password) {
+        this.temppassword = password;
+    }
+
+    public Boolean registerUser(boolean administrator) {
         //check password strenght
         PasswordCheck passwordCheck = new PasswordCheck();
-        if (passwordCheck.wachtwoordSterkteVerwerker(password)) {
+        if (passwordCheck.wachtwoordSterkteVerwerker(temppassword)) {
             UserFactory userFactory;
             if (administrator) {
                 userFactory = new administratorFactory();
@@ -146,7 +176,12 @@ class Data {
                 userFactory = new employeeFactory();
             }
 
-            userFactory.CreateAndAddUser(firstname,lastname,emailaddress,username,password, this.UserDB);
+            userFactory.CreateAndAddUser(tempfirstName,templastName,tempemail,tempusername,temppassword, this.UserDB);
+            tempfirstName = null;
+            templastName = null;
+            tempemail = null;
+            temppassword = null;
+            tempusername = null;
             return true;
         }
         else {

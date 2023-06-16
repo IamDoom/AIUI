@@ -142,8 +142,14 @@ public class registrationController implements Initializable {
             String email = register_emailadress.getText();
             String username = register_username.getText();
             String password = register_password.getText();
+
+            DB.setTempfirstName(firstname);
+            DB.setTemplastName(lastname);
+            DB.setTempemail(email);
+            DB.setTempusername(username);
+            DB.settempPassword(password);
             boolean admin = register_admin.isSelected();
-            if(DB.registerUser(firstname, lastname, email, username, password, admin)) {
+            if(DB.registerUser(admin)) {
 
                 // Clear the text fields
                 register_firstname.clear();
