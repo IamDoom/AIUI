@@ -74,27 +74,40 @@ public class LoginController implements Initializable {
         }
     }
 
+    public void darkmode(){
+        achtergrond.setStyle("-fx-background-color: black");
+        loginpanel.setStyle("-fx-background-color: black; -fx-border-radius: 24px");
+        titel.setStyle("-fx-text-fill: white");
+        button.setStyle("-fx-background-color: black");
+    }
+    public void lightmode(){
+        achtergrond.setStyle("-fx-background-color:  linear-gradient(to right, #5bc3f0, #174694)");
+        loginpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+        titel.setStyle("-fx-text-fill: linear-gradient(to right, #5bc3f0, #174694)");
+        button.setStyle("-fx-background-color:  #5BC3F0");
+    }
+    public void colormode1(){
+        achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkgreen, lime)");
+        loginpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+        titel.setStyle("-fx-text-fill: linear-gradient(to right, darkgreen, lime)");
+        button.setStyle("-fx-background-color: darkgreen");
+    }
+    public void colormode2(){
+        achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkred, red)");
+        loginpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+        titel.setStyle("-fx-text-fill: linear-gradient(to right, darkred, red)");
+        button.setStyle("-fx-background-color: darkred");
+    }
+
     public void ThemaToepasser() {
         if (ThemaBeheerder.isDarkMode()) {
-            achtergrond.setStyle("-fx-background-color: black");
-            loginpanel.setStyle("-fx-background-color: black; -fx-border-radius: 24px");
-            titel.setStyle("-fx-text-fill: white");
-            button.setStyle("-fx-background-color: black");
+            darkmode();
         } else if (ThemaBeheerder.isLightMode()) {
-            achtergrond.setStyle("-fx-background-color:  linear-gradient(to right, #5bc3f0, #174694)");
-            loginpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
-            titel.setStyle("-fx-text-fill: linear-gradient(to right, #5bc3f0, #174694)");
-            button.setStyle("-fx-background-color:  #5BC3F0");
+            lightmode();
         } else if (ThemaBeheerder.isColorMode1()) {
-            achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkgreen, lime)");
-            loginpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
-            titel.setStyle("-fx-text-fill: linear-gradient(to right, darkgreen, lime)");
-            button.setStyle("-fx-background-color: darkgreen");
+            colormode1();
         } else if (ThemaBeheerder.isColorMode2()) {
-            achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkred, red)");
-            loginpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
-            titel.setStyle("-fx-text-fill: linear-gradient(to right, darkred, red)");
-            button.setStyle("-fx-background-color: darkred");
+            colormode2();
         }
     }
 
