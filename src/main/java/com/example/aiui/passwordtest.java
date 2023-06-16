@@ -1,6 +1,7 @@
 package com.example.aiui;
 import org.junit.Test;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
