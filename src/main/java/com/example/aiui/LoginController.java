@@ -92,7 +92,6 @@ public class LoginController implements Initializable {
         titel.setStyle("-fx-text-fill: linear-gradient(to right, darkred, red)");
         button.setStyle("-fx-background-color: darkred");
     }
-
     public void ThemaToepasser() {
         if (ThemaBeheerder.isDarkMode()) {
             darkmode();

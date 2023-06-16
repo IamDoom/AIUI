@@ -148,7 +148,6 @@ class Data {
             } else {
                 userFactory = new employeeFactory();
             }
-
             userFactory.CreateAndAddUser(Userdata, this.UserDB);
             return true;
         }
