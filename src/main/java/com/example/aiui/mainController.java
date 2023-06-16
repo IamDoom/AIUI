@@ -225,9 +225,9 @@ public class mainController implements Initializable {
 
     public void ThemaToepasser() {
         if (ThemaBeheerder.isDarkMode()) {
-            LightMode();
-        } else if (ThemaBeheerder.isLightMode()) {
             DarkMode();
+        } else if (ThemaBeheerder.isLightMode()) {
+            LightMode();
         } else if (ThemaBeheerder.isColorMode1()) {
             color1();
         } else if (ThemaBeheerder.isColorMode2()) {
