@@ -120,22 +120,26 @@ class Data {
     private final UserDB UserDB;
     public Data(){
         UserDB = new UserDB();
-        this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", true);
+        this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "Lol123", true);
     }
 
-    public void registerUser(String firstname, String lastname, String emailaddress, String username, String password,  boolean administrator){
+    public Boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password,  boolean administrator) {
         //check password strenght
         PasswordCheck passwordCheck = new PasswordCheck();
-        passwordCheck.WachtWoordStengthVerwerker(password);
-        UserFactory userFactory;
-        if (administrator) {
-            userFactory = new administratorFactory();
-        }else{
-            userFactory = new employeeFactory();
+        if (passwordCheck.WachtWoordStengthVerwerker(password)) {
+            UserFactory userFactory;
+            if (administrator) {
+                userFactory = new administratorFactory();
+            } else {
+                userFactory = new employeeFactory();
+            }
+            User newUser = userFactory.createUser(firstname, lastname, emailaddress, username, password);
+            UserDB.addUser(newUser);
+            return true;
         }
-
-        User newUser = userFactory.createUser(firstname,lastname,emailaddress,username,password);
-        UserDB.addUser(newUser);
+        else {
+            return false;
+        }
     }
 
     public String DeterminePasswordStrength(String password){
