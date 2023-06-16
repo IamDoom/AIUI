@@ -340,7 +340,19 @@ public class mainController implements Initializable {
 
     //hier beginnen de methodes voor de chatgeshiedenis
     @FXML
-    public void setOnKeyPressed(ActionEvent Enter) {
+    public void HandleButtonPress(ActionEvent E){
+        if(!input.getText().isEmpty()){
+            this.HandleMessage();
+        }
+    }
+    public void SetOnKeyPressed(ActionEvent event) {
+        if (!input.getText().isEmpty()) {
+            this.HandleMessage();
+        }
+    }
+
+    @FXML
+    public void HandleMessage() {
         String userMessage = input.getText();
         //Update het onderwerp als usermessage het eerste bericht it
         if(Manager.getGesprek(currentGesprekId).getGesprekDataManager().getGespreksData().isEmpty()) {
