@@ -152,31 +152,29 @@ public class registrationController implements Initializable {
             boolean admin = register_admin.isSelected();
             ArrayList<String> UserInfo = ToArrayList();
             if(DB.registerUser(UserInfo, admin)) {
-
                 // Clear the text fields
-                register_firstname.clear();
-                register_lastname.clear();
-                register_emailadress.clear();
-                register_username.clear();
-                register_password.clear();
-
+                resetTextfields();
                 // Show the registration success message
-                String message = "User " + UserInfo.get(0) + " " + UserInfo.get(1) + " registered with username " + UserInfo.get(3);
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Registration Success");
-                alert.setHeaderText(null);
-                alert.setContentText(message);
-                alert.showAndWait();
+                ShowAlert("User"  + UserInfo.get(0) +  UserInfo.get(1) +  "registered with username"  + UserInfo.get(3),"Registration failed");
             }
             else {
-                String message = "PasswordStrength is too low";
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Registration failed");
-                alert.setHeaderText(null);
-                alert.setContentText(message);
-                alert.showAndWait();
+               ShowAlert("PasswordStrength is too low","Registration failed");
             }
         }
+    }
+    public void resetTextfields(){
+        register_firstname.clear();
+        register_lastname.clear();
+        register_emailadress.clear();
+        register_username.clear();
+        register_password.clear();
+    }
+    public void ShowAlert(String Message, String Title){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(Title);
+        alert.setHeaderText(null);
+        alert.setContentText(Message);
+        alert.showAndWait();
     }
 
 
