@@ -267,6 +267,8 @@ public class mainController implements Initializable {
         scale.setY(scale.getY() * SMALL);
     }
 
+
+
     public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
         ThemaBeheerder.setDarkMode(darkmode);
         ThemaBeheerder.setLightMode(lightmode);
