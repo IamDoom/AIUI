@@ -26,6 +26,7 @@ abstract class User{
     private String firstName;
     private String lastName;
     private String password;
+    private String passwordstrength;
     private String Username;
     private final int employeeID;
     private String Email;
@@ -69,6 +70,14 @@ abstract class User{
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getPasswordstrength() {
+        return passwordstrength;
+    }
+
+    public void setPasswordstrength(String passwordstrength) {
+        this.passwordstrength = passwordstrength;
+    }
+
     public String getEmail() {
         return Email;
     }
@@ -134,10 +143,7 @@ class data {
         UserDB.addUser(newUser);
     }
 
-    public String DeterminePasswordStrength(String password){
-        return null;
 
-    }
 
 
     public UserDB getUserDB() {

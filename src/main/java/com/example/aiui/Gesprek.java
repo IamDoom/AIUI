@@ -38,7 +38,7 @@ class GesprekManager {
     private final ArrayList<Gesprek> GesprekkenLijst;
 
     public GesprekManager() {
-        GesprekkenLijst = new ArrayList<Gesprek>();
+        GesprekkenLijst = new ArrayList<>();
         Gesprek EersteGesprek = new Gesprek();
         EersteGesprek.setId(0);
         GesprekkenLijst.add(EersteGesprek);
@@ -81,6 +81,8 @@ class GesprekManager {
         }
         return null;
     }
+
+
 }
 
 public class Gesprek {
@@ -112,21 +114,26 @@ public class Gesprek {
         Onderwerp = onderwerp;
     }
 }
+
+
 class GesprekDataManager {
     public GesprekDataManager(){
         GespreksData = new ArrayList<String>();
     }
     private ArrayList<String> GespreksData;
     private ResponseGenerator responseGenerator = new conceptResponseGenerator();
+
     public String generateResponse(String userMessage) {
         String response = responseGenerator.messageReceiver(userMessage);
         this.OnthoudData(userMessage, response);
         return response;
     }
+
     public void OnthoudData(String data1, String data2){
         GespreksData.add(data1);
         GespreksData.add(data2);
     }
+
     public ArrayList<String> getGespreksData() {
         return GespreksData;
     }

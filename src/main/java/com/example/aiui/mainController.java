@@ -19,9 +19,11 @@ import javafx.stage.Modality;
 public class mainController implements Initializable{
     User user;
     data DB;
+    GesprekManager gesprekManager;
     public mainController(data DB, User user){
         this.DB = DB;
         this.user = user;
+        gesprekManager = user.getGespreksManager();
     }
 
     private Stage stage;
@@ -30,8 +32,8 @@ public class mainController implements Initializable{
 
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
     private boolean EnglishIsActive = true;
-    @FXML
-    private Button NieuweGesprek;
+    @FXML private Button NieuweGesprek;
+
     private boolean firstMessage = true;
     private int currentGesprekId = 0;
     ArrayList<String> Onderwerpen;
@@ -283,8 +285,8 @@ public class mainController implements Initializable{
         language.setText(bundle.getString("Taal"));
         setting_register.setText(bundle.getString("settingsregister"));
 
-        Onderwerpen = user.getGespreksManager().getOnderwerpen();
-        Laadchat(user.getGespreksManager().getGesprek(0).getGesprekDataManager().getGespreksData());
+        Onderwerpen = gesprekManager.getOnderwerpen();
+        Laadchat(gesprekManager.getGesprek(0).getGesprekDataManager().getGespreksData());
         OnderwerpLabel.setText(user.getGespreksManager().getGesprek(0).getOnderwerp());
         GesprekOnderwerpen.getItems().addAll(Onderwerpen);
     }
@@ -298,15 +300,17 @@ public class mainController implements Initializable{
             updateOnderwerp(userMessage);
             firstMessage=false;
         }
+
         //genereer een response en sla hem op(gebeurt in generateResponseJuisteGesprek)
-        String Response = user.getGespreksManager().GenerateResponse(user.getGespreksManager().getGesprek(currentGesprekId), userMessage);
+        String Response = gesprekManager.GenerateResponse(gesprekManager.getGesprek(currentGesprekId), userMessage);
         //voeg het berricht toe en clear het textfield
         chatList.getItems().addAll(userMessage);
         chatList.getItems().addAll(Response);
         input.clear();
     }
+
     public void updateOnderwerp(String onderwerp){//methode voor updaten van het onderwerp van een chat en het veranderen van het onderwerp on ander plekken waar het wordt gebruikt
-        user.getGespreksManager().getGesprek(currentGesprekId).setOnderwerp(onderwerp);
+        gesprekManager.getGesprek(currentGesprekId).setOnderwerp(onderwerp);
         OnderwerpLabel.setText(onderwerp);
         Onderwerpen.set(currentGesprekId, onderwerp);
         GesprekOnderwerpen.getItems().clear();
@@ -317,7 +321,7 @@ public class mainController implements Initializable{
         //firstmessage belangrijk voor setonclick methode
         firstMessage = true;
         //maak gesprek aan en vernieuw de chatgegevens
-        Gesprek gesprek = user.getGespreksManager().newGesprek();
+        Gesprek gesprek = gesprekManager.newGesprek();
         GesprekOnderwerpen.getItems().add(gesprek.getOnderwerp());
         OnderwerpLabel.setText(gesprek.getOnderwerp());
         Onderwerpen.add(gesprek.getOnderwerp());
@@ -328,24 +332,22 @@ public class mainController implements Initializable{
     public void SelecteerdChat(){//methode voor het klikken op textsfield, hij checked welk gesprek je wil zien en laat de inhoud zien **Deze methode werkt alleen als de onderwerpen niet hetzelfde zijn
         chatList.getItems().clear();
         String SelectedChat = GesprekOnderwerpen.getSelectionModel().getSelectedItem();
-        for(Gesprek gesprek : user.getGespreksManager().getGesprekkenLijst()) {
+        for(Gesprek gesprek : gesprekManager.getGesprekkenLijst()) {
             if (SelectedChat.equals(gesprek.getOnderwerp())) {
                 currentGesprekId = gesprek.getId();
                 Laadchat(gesprek.getGesprekDataManager().getGespreksData());
             }
         }
     }
+
     public void Laadchat(ArrayList<String> gespreksData){//methode voor het laden van chats
         chatList.getItems().clear();
         for (int i = 0; i < gespreksData.size(); i++) {
             String str = gespreksData.get(i);
-            if (i % 2 == 0) {
-                chatList.getItems().add(user.getFirstName() + ": " + str);
-            } else {
-                chatList.getItems().add("Ai: " + str);
-            }
+            String prefix = (i % 2 == 0) ? user.getFirstName() + ": " : "Ai: ";  //ternary operator vervangt simpele 'if'
+            chatList.getItems().add(prefix+str);
         }
-        OnderwerpLabel.setText(user.getGespreksManager().getGesprek(currentGesprekId).getOnderwerp());
+        OnderwerpLabel.setText(gesprekManager.getGesprek(currentGesprekId).getOnderwerp());
     }
 
 
@@ -354,6 +356,7 @@ public class mainController implements Initializable{
         //weizig het onderwerp code
         GesprekOnderwerpen.refresh();
     }
+
     public void UserInfoUpdate(User UpdateUser){//voor het opslaan van de chatData
         DB.getUserDB().getUsers().set(UpdateUser.getEmployeeID(), UpdateUser);
     }
