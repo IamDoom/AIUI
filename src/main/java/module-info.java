@@ -3,6 +3,8 @@ module com.example.aiui {
     requires javafx.fxml;
     requires java.sql;
     requires java.prefs;
+    requires org.junit.jupiter.api;
+    requires org.testng;
 
 
     opens com.example.aiui to javafx.fxml;
