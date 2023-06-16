@@ -124,12 +124,16 @@ class Data {
     }
 
     public void registerUser(String firstname, String lastname, String emailaddress, String username, String password,  boolean administrator){
+        //check password strenght
+        PasswordCheck passwordCheck = new PasswordCheck();
+        passwordCheck.WachtWoordStengthVerwerker(password);
         UserFactory userFactory;
         if (administrator) {
             userFactory = new administratorFactory();
         }else{
             userFactory = new employeeFactory();
         }
+
         User newUser = userFactory.createUser(firstname,lastname,emailaddress,username,password);
         UserDB.addUser(newUser);
     }
