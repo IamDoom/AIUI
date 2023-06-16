@@ -350,7 +350,7 @@ public class mainController implements Initializable {
             firstMessage = false;
         }
         //genereer een response en sla hem op(gebeurt in generateResponseJuisteGesprek)
-        String Response = user.getGespreksManager().GenerateResponseVoorGesprek(user.getGespreksManager().getGesprek(currentGesprekId), userMessage);
+        String Response = user.getGespreksManager().generateResponseVoorGesprek(user.getGespreksManager().getGesprek(currentGesprekId), userMessage);
         //voeg het berricht toe en clear het textfield
         chatList.getItems().addAll(userMessage);
         chatList.getItems().addAll(Response);

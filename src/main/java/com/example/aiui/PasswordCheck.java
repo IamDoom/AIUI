@@ -1,7 +1,7 @@
 package com.example.aiui;
 
 public class PasswordCheck {
-    public void WachtWoordStengthVerwerker(String ww){
+    public void wachtwoordSterkteVerwerker(String ww){
         int Strenght = this.WachtWoordCheck(ww);
         if(0 <= Strenght && Strenght < 3){
             System.out.println("Low Password Strength");
