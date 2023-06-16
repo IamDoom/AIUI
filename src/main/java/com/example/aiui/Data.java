@@ -125,10 +125,7 @@ class UserDB{
     }
 }
 
-class chatHistory{
-    private final ArrayList<String> chat = new ArrayList<>();
 
-}
 
 class Data {
     private final UserDB UserDB;
