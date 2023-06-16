@@ -34,16 +34,17 @@ class ConceptResponseGenerator implements ResponseGenerator {
 
 class GespreksManager {
     private ArrayList<Gesprek> gesprekkenLijst;
+    ResponseGenerator responseGenerator = new ConceptResponseGenerator();
 
     public GespreksManager() {
         gesprekkenLijst = new ArrayList<>();
-        Gesprek eersteGesprek = new Gesprek();
+        Gesprek eersteGesprek = new Gesprek(responseGenerator);
         eersteGesprek.setId(0);
         gesprekkenLijst.add(eersteGesprek);
     }
 
     public Gesprek newGesprek() {
-        Gesprek gesprek = new Gesprek();
+        Gesprek gesprek = new Gesprek(responseGenerator);
         gesprek.setId(gesprekkenLijst.size());
         gesprekkenLijst.add(gesprek);
         return gesprek;
@@ -79,10 +80,12 @@ public class Gesprek {
     private String onderwerp;
     private int id = 0;
     private GesprekDataManager gesprekDataManager;
+    private ResponseGenerator responseGenerator;
 
-    public Gesprek() {
+    public Gesprek(ResponseGenerator responseGenerator) {
         onderwerp = "Geen onderwerp";
         gesprekDataManager = new GesprekDataManager(new ConceptResponseGenerator());
+        this.responseGenerator = responseGenerator;
     }
 
     public GesprekDataManager getGesprekDataManager() {
