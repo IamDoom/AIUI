@@ -2,22 +2,14 @@ package com.example.aiui;
 
 public class PasswordCheck {
     public boolean wachtwoordSterkteVerwerker(String ww){
-        int Strenght = this.WachtWoordCheck(ww);
-        if(0 <= Strenght && Strenght < 3){
-            System.out.println("Low Password Strength");
-            return false;
-        }
-        if(2 < Strenght && Strenght < 5){
-            System.out.println("Decent Password Strength");
-            return true;
-        }
-        if(Strenght == 5) {
-            System.out.println("Strong Password Strength");
-            return true;
-        }
-        else {
-            return false;
-        }
+        int strength = this.WachtWoordCheck(ww);
+        String strengthMessage = (0 <= strength && strength < 3) ? "Low Password Strength"
+                : (2 < strength && strength < 5) ? "Decent Password Strength"
+                : (strength == 5) ? "Strong Password Strength"
+                : "";
+        System.out.println(strengthMessage);
+        return (3<= strength && strength <=5);
+
     }
     public int WachtWoordCheck(String password){
         int strength = 0;
