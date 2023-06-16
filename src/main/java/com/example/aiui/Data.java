@@ -138,7 +138,7 @@ class Data {
     public Boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password,  boolean administrator) {
         //check password strenght
         PasswordCheck passwordCheck = new PasswordCheck();
-        if (passwordCheck.WachtWoordStengthVerwerker(password)) {
+        if (passwordCheck.wachtwoordSterkteVerwerker(password)) {
             UserFactory userFactory;
             if (administrator) {
                 userFactory = new administratorFactory();
