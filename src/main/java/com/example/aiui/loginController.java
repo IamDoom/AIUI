@@ -14,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,10 +21,10 @@ import java.util.ResourceBundle;
 
 
 public class loginController implements Initializable {
-    public loginController(data DB){
+    public loginController(Data DB){
         this.DB = DB;
     }
-    data DB;
+    Data DB;
     User user;
     private Stage stage;
     private Scene scene;

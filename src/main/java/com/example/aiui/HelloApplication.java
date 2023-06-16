@@ -11,7 +11,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
-            loader.setControllerFactory(type -> new LoginController(DB));
+            loader.setControllerFactory(type -> new loginController(DB));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setTitle("AIUI: Login");
