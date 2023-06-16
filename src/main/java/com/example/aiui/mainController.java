@@ -79,40 +79,29 @@ public class mainController implements Initializable {
         if (EnglishIsActive) {
             EnglishIsActive = false;
             bundle = ResourceBundle.getBundle("com.example.aiui.Nederlands");
-            showSettings.setText(bundle.getString("Settings"));
-            input.setPromptText(bundle.getString("PromptText"));
-            Submit.setText(bundle.getString("Submit"));
-            closeSettings.setText(bundle.getString("closesettings"));
-            advanced.setText(bundle.getString("advanced"));
-            edituser.setText(bundle.getString("edituser"));
-            language.setText(bundle.getString("Taal"));
-            setting_register.setText(bundle.getString("settingsregister"));
-            HisLabel.setText(bundle.getString("History"));
-            logUit.setText(bundle.getString("loguit"));
-            darkmode.setText(bundle.getString("DarkMode"));
-            lightmode.setText(bundle.getString("LightMode"));
-            colormode1.setText(bundle.getString("Thema1"));
-            colormode2.setText(bundle.getString("Thema2"));
-            NieuweGesprek.setText(bundle.getString("nieuwGesprek"));
+            setLanguage(bundle);
         } else {
             EnglishIsActive = true;
             bundle = ResourceBundle.getBundle("com.example.aiui.English");
-            showSettings.setText(bundle.getString("Settings"));
-            input.setPromptText(bundle.getString("PromptText"));
-            Submit.setText(bundle.getString("Submit"));
-            closeSettings.setText(bundle.getString("closesettings"));
-            advanced.setText(bundle.getString("advanced"));
-            edituser.setText(bundle.getString("edituser"));
-            language.setText(bundle.getString("Taal"));
-            setting_register.setText(bundle.getString("settingsregister"));
-            HisLabel.setText(bundle.getString("History"));
-            logUit.setText(bundle.getString("loguit"));
-            darkmode.setText(bundle.getString("DarkMode"));
-            lightmode.setText(bundle.getString("LightMode"));
-            colormode1.setText(bundle.getString("Thema1"));
-            colormode2.setText(bundle.getString("Thema2"));
-            NieuweGesprek.setText(bundle.getString("nieuwGesprek"));
+            setLanguage(bundle);
         }
+    }
+    public void setLanguage(ResourceBundle bundle){
+        showSettings.setText(bundle.getString("Settings"));
+        input.setPromptText(bundle.getString("PromptText"));
+        Submit.setText(bundle.getString("Submit"));
+        closeSettings.setText(bundle.getString("closesettings"));
+        advanced.setText(bundle.getString("advanced"));
+        edituser.setText(bundle.getString("edituser"));
+        language.setText(bundle.getString("Taal"));
+        setting_register.setText(bundle.getString("settingsregister"));
+        HisLabel.setText(bundle.getString("History"));
+        logUit.setText(bundle.getString("loguit"));
+        darkmode.setText(bundle.getString("DarkMode"));
+        lightmode.setText(bundle.getString("LightMode"));
+        colormode1.setText(bundle.getString("Thema1"));
+        colormode2.setText(bundle.getString("Thema2"));
+        NieuweGesprek.setText(bundle.getString("nieuwGesprek"));
     }
 
     protected void LightMode() {
