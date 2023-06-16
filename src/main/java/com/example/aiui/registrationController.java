@@ -154,7 +154,7 @@ public class registrationController implements Initializable {
                 // Clear the text fields
                 resetTextfields();
                 // Show the registration success message
-                ShowAlert("User"  + UserInfo.get(0) +  UserInfo.get(1) +  "registered with username"  + UserInfo.get(3),"Registration failed");
+                ShowAlert("User "  + UserInfo.get(0) + " " +  UserInfo.get(1) +  " registered with username: "  + UserInfo.get(3),"Registration Successful");
             }
             else {
                ShowAlert("PasswordStrength is too low","Registration failed");
