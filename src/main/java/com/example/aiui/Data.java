@@ -139,12 +139,7 @@ class Data {
         //check password strenght
         PasswordCheck passwordCheck = new PasswordCheck();
         if (passwordCheck.wachtwoordSterkteVerwerker(Userdata.get(4))) {
-            UserFactory userFactory;
-            if (administrator) {
-                userFactory = new administratorFactory();
-            } else {
-                userFactory = new employeeFactory();
-            }
+            UserFactory userFactory = (administrator)? new administratorFactory() : new employeeFactory();
             userFactory.CreateAndAddUser(Userdata, this.UserDB);
             return true;
         }
