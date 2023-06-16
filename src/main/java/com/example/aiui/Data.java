@@ -3,17 +3,16 @@ import java.util.ArrayList;
 
 
 abstract class UserFactory{
-    User createUser(String firstName, String lastName, String email, String username, String password) {
-        return null;
+
+    abstract User createUser(String firstName, String lastName, String email, String username, String password);
+
+    public void AddUser(User user, UserDB userDB) {
+        userDB.addUser(user);
     }
 
-    void AddUser(User user) {
-
-    }
-
-    final void CreateAndAddUser(String firstName, String lastName, String email, String username, String password){
-        createUser(firstName, lastName, email, username, password);
-        AddUser(User user);
+    final void CreateAndAddUser(String firstName, String lastName, String email, String username, String password,UserDB userDB){
+        User user = createUser(firstName, lastName, email, username, password);
+        AddUser(user,userDB);
     }
 }
 
@@ -23,10 +22,6 @@ class administratorFactory extends UserFactory {
         return new Administrator(firstName, lastName, email, username, password);
     }
 
-    @Override
-    public void AddUser() {
-
-    }
 }
 class employeeFactory extends UserFactory {
     @Override
@@ -34,10 +29,6 @@ class employeeFactory extends UserFactory {
         return new Employee(firstName, lastName, email, username, password);
     }
 
-    @Override
-    public void AddUser() {
-
-    }
 }
 
 
@@ -155,7 +146,7 @@ class Data {
                 userFactory = new employeeFactory();
             }
 
-
+            userFactory.CreateAndAddUser(firstname,lastname,emailaddress,username,password,UserDB);
             return true;
         }
         else {
