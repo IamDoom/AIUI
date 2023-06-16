@@ -50,20 +50,45 @@ public class registrationController implements Initializable {
     @FXML private TextField register_username = new TextField();
 
     @FXML private Pane sidebar;
-
-    @FXML
-    void Toggle(ActionEvent event) {
-        Togglelang();
-    }
-
+    @FXML private Label Firstname;
+    @FXML private Label Lastname;
+    @FXML private Label Email;
+    @FXML private Label Username;
+    @FXML private Label Password;
     @FXML
     public void Togglelang() { // voor taal switchen
-        if (EnglishLanguage) {//voor nl
-            EnglishLanguage = false;
+        if (!EnglishLanguage) {//voor nl
             bundle = ResourceBundle.getBundle("com.example.aiui.Nederlands");
+            Firstname.setText(bundle.getString("Voornaam"));
+            Lastname.setText(bundle.getString("Achternaam"));
+            Email.setText(bundle.getString("email"));
+            Username.setText(bundle.getString("username"));
+            Password.setText(bundle.getString("password"));
+            register_firstname.setPromptText(bundle.getString("Voornaam"));
+            register_lastname.setPromptText(bundle.getString("Achternaam"));
+            register_emailadress.setPromptText(bundle.getString("email2"));
+            register_username.setPromptText(bundle.getString("username"));
+            register_password.setPromptText(bundle.getString("password"));
+            submit.setText(bundle.getString("Submit2"));
+            cancel.setText(bundle.getString("Cancel"));
+            titel.setText(bundle.getString("Registration"));
+
+
         } else {//voor Engels
-            EnglishLanguage = true;
             bundle = ResourceBundle.getBundle("com.example.aiui.English");
+            Firstname.setText(bundle.getString("Voornaam"));
+            Lastname.setText(bundle.getString("Achternaam"));
+            Email.setText(bundle.getString("email"));
+            Username.setText(bundle.getString("username"));
+            Password.setText(bundle.getString("password"));
+            register_firstname.setPromptText(bundle.getString("voornaam1"));
+            register_lastname.setPromptText(bundle.getString("achternaam1"));
+            register_emailadress.setPromptText(bundle.getString("email2"));
+            register_username.setPromptText(bundle.getString("username"));
+            register_password.setPromptText(bundle.getString("password"));
+            submit.setText(bundle.getString("Submit2"));
+            cancel.setText(bundle.getString("Cancel"));
+            titel.setText(bundle.getString("Registration"));
         }
     }
 
@@ -99,6 +124,7 @@ public class registrationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ThemaToepasser();
+        Togglelang();
     }
 
     public void closePopup() {
