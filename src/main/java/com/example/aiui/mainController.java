@@ -413,7 +413,7 @@ public class mainController implements Initializable {
     public void loguit(ActionEvent event) throws IOException {
         this.UserInfoUpdate(user);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
-        loader.setControllerFactory(type -> new loginController(DB));
+        loader.setControllerFactory(type -> new LoginController(DB));
         root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
