@@ -5,11 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -19,9 +15,12 @@ public class registrationController implements Initializable {
     private Stage stage;
     Data DB;
 
-    public registrationController(Data DB1) {
+    public registrationController(Data DB1, boolean englishIsActive) {
         this.DB = DB1;
+        this.EnglishLanguage = englishIsActive;
     }
+    boolean EnglishLanguage;
+    ResourceBundle bundle;
 
     @FXML private Pane achtergrond;
 
@@ -51,9 +50,47 @@ public class registrationController implements Initializable {
     @FXML private TextField register_username = new TextField();
 
     @FXML private Pane sidebar;
-
+    @FXML private Label Firstname;
+    @FXML private Label Lastname;
+    @FXML private Label Email;
+    @FXML private Label Username;
+    @FXML private Label Password;
     @FXML
-    void Toggle(ActionEvent event) {}
+    public void Togglelang() { // voor taal switchen
+        if (!EnglishLanguage) {//voor nl
+            bundle = ResourceBundle.getBundle("com.example.aiui.Nederlands");
+            Firstname.setText(bundle.getString("Voornaam"));
+            Lastname.setText(bundle.getString("Achternaam"));
+            Email.setText(bundle.getString("email"));
+            Username.setText(bundle.getString("username"));
+            Password.setText(bundle.getString("password"));
+            register_firstname.setPromptText(bundle.getString("Voornaam"));
+            register_lastname.setPromptText(bundle.getString("Achternaam"));
+            register_emailadress.setPromptText(bundle.getString("email2"));
+            register_username.setPromptText(bundle.getString("username"));
+            register_password.setPromptText(bundle.getString("password"));
+            submit.setText(bundle.getString("Submit2"));
+            cancel.setText(bundle.getString("Cancel"));
+            titel.setText(bundle.getString("Registration"));
+
+
+        } else {//voor Engels
+            bundle = ResourceBundle.getBundle("com.example.aiui.English");
+            Firstname.setText(bundle.getString("Voornaam"));
+            Lastname.setText(bundle.getString("Achternaam"));
+            Email.setText(bundle.getString("email"));
+            Username.setText(bundle.getString("username"));
+            Password.setText(bundle.getString("password"));
+            register_firstname.setPromptText(bundle.getString("voornaam1"));
+            register_lastname.setPromptText(bundle.getString("achternaam1"));
+            register_emailadress.setPromptText(bundle.getString("email2"));
+            register_username.setPromptText(bundle.getString("username"));
+            register_password.setPromptText(bundle.getString("password"));
+            submit.setText(bundle.getString("Submit2"));
+            cancel.setText(bundle.getString("Cancel"));
+            titel.setText(bundle.getString("Registration"));
+        }
+    }
 
 
     public void ThemaToepasser() {
@@ -87,6 +124,7 @@ public class registrationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ThemaToepasser();
+        Togglelang();
     }
 
     public void closePopup() {
@@ -129,22 +167,31 @@ public class registrationController implements Initializable {
             String username = register_username.getText();
             String password = register_password.getText();
             boolean admin = register_admin.isSelected();
-            DB.registerUser(firstname, lastname, email, username, password, admin);
+            if(DB.registerUser(firstname, lastname, email, username, password, admin)) {
 
-            // Clear the text fields
-            register_firstname.clear();
-            register_lastname.clear();
-            register_emailadress.clear();
-            register_username.clear();
-            register_password.clear();
+                // Clear the text fields
+                register_firstname.clear();
+                register_lastname.clear();
+                register_emailadress.clear();
+                register_username.clear();
+                register_password.clear();
 
-            // Show the registration success message
-            String message = "User " + firstname + " " + lastname + " registered with username " + username;
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Registration Success");
-            alert.setHeaderText(null);
-            alert.setContentText(message);
-            alert.showAndWait();
+                // Show the registration success message
+                String message = "User " + firstname + " " + lastname + " registered with username " + username;
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Registration Success");
+                alert.setHeaderText(null);
+                alert.setContentText(message);
+                alert.showAndWait();
+            }
+            else {
+                String message = "PasswordStrength is too low";
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Registration failed");
+                alert.setHeaderText(null);
+                alert.setContentText(message);
+                alert.showAndWait();
+            }
         }
     }
 

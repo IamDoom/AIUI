@@ -9,7 +9,6 @@ public class HelloApplication extends Application {
     Data DB = new Data();
     @Override
     public void start(Stage stage) {
-        // DB.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", false);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("startLogin.fxml"));
             loader.setControllerFactory(type -> new LoginController(DB));
