@@ -276,15 +276,7 @@ public class mainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ThemaToepasser();
-        achtergrond.getTransforms().setAll(scale);
-        showSettings.setText(bundle.getString("Settings"));
-        input.setPromptText(bundle.getString("PromptText"));
-        Submit.setText(bundle.getString("Submit"));
-        closeSettings.setText(bundle.getString("closesettings"));
-        advanced.setText(bundle.getString("advanced"));
-        edituser.setText(bundle.getString("edituser"));
-        language.setText(bundle.getString("Taal"));
-        setting_register.setText(bundle.getString("settingsregister"));
+        setLanguage(bundle);
         setting_register.setDisable(!(user instanceof Administrator));
         HisLabel.setText(bundle.getString("History"));
         logUit.setText(bundle.getString("loguit"));

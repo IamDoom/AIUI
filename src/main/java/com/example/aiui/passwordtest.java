@@ -6,13 +6,13 @@ public class passwordtest {
     @Test
     public void passwordlowstrengthtest(){
         Employee employee = new Employee("", "", "", "", "pass");
-        passwordCheck.WachtWoordStengthVerwerker(employee.getPassword());
+        passwordCheck.wachtwoordSterkteVerwerker(employee.getPassword());
 
     }
     @Test
     public void passwordhighstrengthtest(){
         Employee employee = new Employee("", "", "", "", "Password123*");
-        passwordCheck.WachtWoordStengthVerwerker(employee.getPassword());
+        passwordCheck.wachtwoordSterkteVerwerker(employee.getPassword());
     }
 
 }
