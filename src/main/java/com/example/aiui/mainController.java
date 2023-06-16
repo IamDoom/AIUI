@@ -301,9 +301,6 @@ public class mainController implements Initializable {
             popupStage.initOwner(stage);
             popupStage.setTitle("Register employee");
             popupStage.setScene(new Scene(root));
-
-            // Access the controller of the loaded FXML file if needed
-            registrationController registrationController = loader.getController();
             // Show the popup window
             popupStage.showAndWait();
         } catch (IOException e) {
@@ -326,6 +323,7 @@ public class mainController implements Initializable {
         edituser.setText(bundle.getString("edituser"));
         language.setText(bundle.getString("Taal"));
         setting_register.setText(bundle.getString("settingsregister"));
+        setting_register.setDisable(!(user instanceof Administrator));
         HisLabel.setText(bundle.getString("History"));
         logUit.setText(bundle.getString("loguit"));
         darkmode.setText(bundle.getString("DarkMode"));
@@ -345,12 +343,12 @@ public class mainController implements Initializable {
     public void setOnKeyPressed(ActionEvent Enter) {
         String userMessage = input.getText();
         //Update het onderwerp als usermessage het eerste bericht it
-        if(user.getGespreksManager().getGesprek(currentGesprekId).getGesprekDataManager().getGespreksData().isEmpty()) {
+        if(Manager.getGesprek(currentGesprekId).getGesprekDataManager().getGespreksData().isEmpty()) {
             updateOnderwerp(userMessage);
             firstMessage = false;
         }
         //genereer een response en sla hem op(gebeurt in generateResponseJuisteGesprek)
-        String Response = Manager.GenerateResponseVoorGesprek(Manager.getGesprek(currentGesprekId), userMessage);
+        String Response = Manager.generateResponseVoorGesprek(Manager.getGesprek(currentGesprekId), userMessage);
         //voeg het berricht toe en clear het textfield
         chatList.getItems().addAll(userMessage);
         chatList.getItems().addAll(Response);
@@ -378,13 +376,16 @@ public class mainController implements Initializable {
     public void SelecteerdChat() {//methode voor het klikken op textsfield, hij checkt welk gesprek je wil zien en laat de inhoud zien **Deze methode werkt alleen als de onderwerpen niet hetzelfde zijn
         chatList.getItems().clear();
         String SelectedChat = GesprekOnderwerpen.getSelectionModel().getSelectedItem();
-        for (Gesprek gesprek : Manager.getGesprekkenLijst()) {
-            if (SelectedChat.equals(gesprek.getOnderwerp())) {
-                currentGesprekId = gesprek.getId();
-                Laadchat(gesprek.getGesprekDataManager().getGespreksData());
+        if (SelectedChat != null)
+            for (Gesprek gesprek : Manager.getGesprekkenLijst()) {
+                if (SelectedChat.equals(gesprek.getOnderwerp())) {
+                    currentGesprekId = gesprek.getId();
+                    Laadchat(gesprek.getGesprekDataManager().getGespreksData());
+                }
             }
-        }
     }
+
+
 
     public void Laadchat(ArrayList<String> gespreksData) {//methode voor het laden van chats
         chatList.getItems().clear();
@@ -418,7 +419,7 @@ public class mainController implements Initializable {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle(user.getFirstName() + " " + user.getLastName());
+        stage.setTitle("AIUI: Login");
         stage.show();
     }
 }

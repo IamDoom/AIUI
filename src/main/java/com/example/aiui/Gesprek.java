@@ -3,46 +3,43 @@ package com.example.aiui;
 import java.util.ArrayList;
 
 interface ResponseGenerator {
-    String messageReceiver(String message);
+    String generateResponse(String message);
 }
 
-class conceptResponseGenerator implements ResponseGenerator {
+class ConceptResponseGenerator implements ResponseGenerator {
     private String defaultGreeting = "Hi! How can I assist you?";
     private String defaultHowAreYou = "As an AI, I don't have feelings or emotions, but I'm functioning as intended and ready to help you. How can I assist you today?";
     private String defaultFallback = "I don't have an answer for that now";
 
-    public String messageReceiver(String message) {
+    @Override
+    public String generateResponse(String message) {
         System.out.println("AI received message: " + message);
-        String response = response(message);
+        String response = getResponse(message);
+        System.out.println("Bot's reply: " + response);
         return response;
     }
 
-    private String response(String userMessage) {
+    private String getResponse(String userMessage) {
         // Replace this logic with your own or use an AI/chatbot API
         switch (userMessage){
             case "hello":
-                System.out.println("Bot's reply: " + defaultGreeting);
                 return defaultGreeting;
             case "how are you":
-                System.out.println("Bot's reply: " + defaultHowAreYou);
                 return defaultHowAreYou;
             default:
-                System.out.println("Bot's reply: " + defaultFallback );
                 return defaultFallback;
         }
     }
-
-
 }
 
 class GespreksManager {
     private ArrayList<Gesprek> gesprekkenLijst;
 
     public GespreksManager() {
-        gesprekkenLijst = new ArrayList<Gesprek>();
-        Gesprek EersteGesprek = new Gesprek();
-        EersteGesprek.setId(0);
-        gesprekkenLijst.add(EersteGesprek);
+        gesprekkenLijst = new ArrayList<>();
+        Gesprek eersteGesprek = new Gesprek();
+        eersteGesprek.setId(0);
+        gesprekkenLijst.add(eersteGesprek);
     }
 
     public Gesprek newGesprek() {
@@ -57,86 +54,79 @@ class GespreksManager {
     }
 
     public Gesprek getGesprek(int gesprekId) {
-        Gesprek DitGesprek = null;
         for (Gesprek gesprek : gesprekkenLijst) {
             if (gesprek.getId() == gesprekId) {
-                DitGesprek = gesprek;
-            }
-        }
-        return DitGesprek;
-    }
-
-    public ArrayList<String> getOnderwerpen() {
-        ArrayList<String> Onderwerpen = new ArrayList<String>();
-        for (Gesprek gesprek : gesprekkenLijst) {
-            Onderwerpen.add(gesprek.getOnderwerp());
-        }
-        return Onderwerpen;
-    }
-
-    public String GenerateResponseVoorGesprek(Gesprek gesprek, String input) {
-        for (Gesprek locaalgesprek : gesprekkenLijst) {
-            if (locaalgesprek.equals(gesprek)) {
-                return locaalgesprek.getGesprekDataManager().generateResponse(input);
+                return gesprek;
             }
         }
         return null;
     }
+
+    public ArrayList<String> getOnderwerpen() {
+        ArrayList<String> onderwerpen = new ArrayList<>();
+        for (Gesprek gesprek : gesprekkenLijst) {
+            onderwerpen.add(gesprek.getOnderwerp());
+        }
+        return onderwerpen;
+    }
+
+    public String generateResponseVoorGesprek(Gesprek gesprek, String input) {
+        return gesprek.getGesprekDataManager().generateResponse(input);
+    }
 }
 
 public class Gesprek {
-    private String Onderwerp;
+    private String onderwerp;
     private int id = 0;
     private GesprekDataManager gesprekDataManager;
-    public Gesprek(){
-        Onderwerp = "Geen onderwerp";
-        gesprekDataManager = new GesprekDataManager();
-    }
 
+    public Gesprek() {
+        onderwerp = "Geen onderwerp";
+        gesprekDataManager = new GesprekDataManager(new ConceptResponseGenerator());
+    }
 
     public GesprekDataManager getGesprekDataManager() {
         return gesprekDataManager;
     }
 
-
     public String getOnderwerp() {
-        return Onderwerp;
+        return onderwerp;
     }
-
 
     public int getId() {
         return id;
     }
 
-
     public void setId(int id) {
         this.id = id;
     }
 
-
     public void setOnderwerp(String onderwerp) {
-        Onderwerp = onderwerp;
+        this.onderwerp = onderwerp;
     }
 }
+
 class GesprekDataManager {
-    public GesprekDataManager(){
-        GespreksData = new ArrayList<String>();
+    private ArrayList<String> gespreksData;
+    private ResponseGenerator responseGenerator;
+
+    public GesprekDataManager(ResponseGenerator responseGenerator) {
+        this.responseGenerator = responseGenerator;
+        gespreksData = new ArrayList<>();
     }
-    private ArrayList<String> GespreksData;
-    private ResponseGenerator responseGenerator = new conceptResponseGenerator();
+
     public String generateResponse(String userMessage) {
-        String response = responseGenerator.messageReceiver(userMessage);
-        this.OnthoudData(userMessage, response);
+        String response = responseGenerator.generateResponse(userMessage);
+        rememberData(userMessage, response);
         return response;
     }
-    public void OnthoudData(String data1, String data2){
-        GespreksData.add(data1);
-        GespreksData.add(data2);
+
+    public void rememberData(String data1, String data2) {
+        gespreksData.add(data1);
+        gespreksData.add(data2);
     }
+
     public ArrayList<String> getGespreksData() {
-        return GespreksData;
+        return gespreksData;
     }
-
-
 }
-

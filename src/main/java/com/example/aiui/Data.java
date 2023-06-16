@@ -2,21 +2,33 @@ package com.example.aiui;
 import java.util.ArrayList;
 
 
-interface UserFactory{
-    User createUser(String firstName, String lastName, String email, String username, String password);
+abstract class UserFactory{
+
+    abstract User createUser(String firstName, String lastName, String email, String username, String password);
+
+    public void AddUser(User user, UserDB userDB) {
+        userDB.addUser(user);
+    }
+
+    final void CreateAndAddUser(String firstName, String lastName, String email, String username, String password,UserDB userDB){
+        User user = createUser(firstName, lastName, email, username, password);
+        AddUser(user,userDB);
+    }
 }
 
-class administratorFactory implements UserFactory{
+class administratorFactory extends UserFactory {
     @Override
     public User createUser(String firstName, String lastName, String email, String username, String password) {
         return new Administrator(firstName, lastName, email, username, password);
     }
+
 }
-class employeeFactory implements UserFactory{
+class employeeFactory extends UserFactory {
     @Override
     public User createUser(String firstName, String lastName, String email, String username, String password) {
         return new Employee(firstName, lastName, email, username, password);
     }
+
 }
 
 
@@ -126,15 +138,15 @@ class Data {
     public Boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password,  boolean administrator) {
         //check password strenght
         PasswordCheck passwordCheck = new PasswordCheck();
-        if (passwordCheck.WachtWoordStengthVerwerker(password)) {
+        if (passwordCheck.wachtwoordSterkteVerwerker(password)) {
             UserFactory userFactory;
             if (administrator) {
                 userFactory = new administratorFactory();
             } else {
                 userFactory = new employeeFactory();
             }
-            User newUser = userFactory.createUser(firstname, lastname, emailaddress, username, password);
-            UserDB.addUser(newUser);
+
+            userFactory.CreateAndAddUser(firstname,lastname,emailaddress,username,password, this.UserDB);
             return true;
         }
         else {
