@@ -146,30 +146,11 @@ class PasswordCheck {
     }
     public int WachtWoordCheck(String password){
         int strength = 0;
-        if (password.length() >= 8) {
-            strength++;
-        }
-
-        // Check for uppercase letters
-        if (password.matches(".*[A-Z].*")) {
-            strength++;
-        }
-
-        // Check for lowercase letters
-        if (password.matches(".*[a-z].*")) {
-            strength++;
-        }
-
-        // Check for digits
-        if (password.matches(".*\\d.*")) {
-            strength++;
-        }
-
-        // Check for special characters
-        if (password.matches(".*[^a-zA-Z0-9].*")) {
-            strength++;
-        }
-
+        strength = (password.length() >= 8)?strength+1:strength;
+        strength = (password.matches(".*[A-Z].*"))?strength+1:strength;
+        strength = (password.matches(".*[a-z].*"))?strength+1:strength;
+        strength = (password.matches(".*\\d.*"))?strength+1:strength;
+        strength = (password.matches(".*[^a-zA-Z0-9].*"))?strength+1:strength;
         return strength;
     }
 }
