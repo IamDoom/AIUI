@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class HelloApplication extends Application {
+
     Data DB = new Data();
     @Override
     public void start(Stage stage) {
