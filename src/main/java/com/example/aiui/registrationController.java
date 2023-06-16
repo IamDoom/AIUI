@@ -123,25 +123,11 @@ public class registrationController implements Initializable {
     }
 
     protected boolean isFilledin() {
-        String firstname = register_firstname.getText();
-        String lastname = register_lastname.getText();
-        String email = register_emailadress.getText();
-        String username = register_username.getText();
-        String password = register_password.getText();
-        if (firstname.isEmpty()) {
-            return false;
-        }
-        if (lastname.isEmpty()) {
-            return false;
-        }
-        if (email.isEmpty()) {
-            return false;
-        }
-        if (username.isEmpty()) {
-            return false;
-        }
-        if (password.isEmpty()) {
-            return false;
+        TextField[] fields = {register_firstname, register_lastname, register_emailadress, register_username, register_password};
+        for (TextField field : fields) {
+            if (field.getText().isEmpty()) {
+                return false;
+            }
         }
         return true;
     }

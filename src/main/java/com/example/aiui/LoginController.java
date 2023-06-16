@@ -40,7 +40,6 @@ public class LoginController implements Initializable {
     @FXML private Pane achtergrond;
     @FXML private PasswordField password = new PasswordField();
     @FXML private TextField username = new TextField();
-    @FXML private Label errorMessage = new Label();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,18 +52,13 @@ public class LoginController implements Initializable {
         String password = this.password.getText();
         String username = this.username.getText();
         if (password.isEmpty() || username.isEmpty()) {
-            errorMessage.setText("Wachtwoord of gebruikersnaam incompleet");
-            System.out.println(username);
-            System.out.println(password);
+            System.out.print(username+"\n"+password);
         } else {
             user = db.login(username, password);
-            System.out.println(username);
-            System.out.println(password);
+            System.out.print(username+"\n"+password);
             if (user == null) {
-                errorMessage.setText("Wachtwoord of gebruikersnaam incorrect");
             } else {
                 try {
-                    System.out.println("login succesfull");
                     login(event);
                 } catch (IOException e) {
                     e.printStackTrace();
