@@ -70,31 +70,44 @@ public class registrationController implements Initializable {
         titel.setText(bundle.getString("Registration"));
     }
 
+    public void darkmode(){
+        achtergrond.setStyle("-fx-background-color: black");
+        registerpanel.setStyle("-fx-background-color: black; -fx-border-radius: 24px");
+        titel.setStyle("-fx-text-fill: lightgray");
+        submit.setStyle("-fx-background-color: black");
+        cancel.setStyle("-fx-background-color: black");
+    }
+    public void lightmode(){
+        achtergrond.setStyle("-fx-background-color:  linear-gradient(to right, #5bc3f0, #174694)");
+        registerpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+        titel.setStyle("-fx-text-fill: white");
+        submit.setStyle("-fx-background-color:  #5BC3F0");
+        cancel.setStyle("-fx-background-color:  #5BC3F0");
+    }
+    public void colormode1(){
+        achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkgreen, lime)");
+        registerpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+        titel.setStyle("-fx-text-fill: white");
+        submit.setStyle("-fx-background-color: darkgreen");
+        cancel.setStyle("-fx-background-color: darkgreen");
+    }
+    public void colormode2(){
+        achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkred, red)");
+        registerpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
+        titel.setStyle("-fx-text-fill: white");
+        submit.setStyle("-fx-background-color: darkred");
+        cancel.setStyle("-fx-background-color: darkred");
+    }
+
     public void ThemaToepasser() {
         if (ThemaBeheerder.isDarkMode()) {
-            achtergrond.setStyle("-fx-background-color: black");
-            registerpanel.setStyle("-fx-background-color: black; -fx-border-radius: 24px");
-            titel.setStyle("-fx-text-fill: lightgray");
-            submit.setStyle("-fx-background-color: black");
-            cancel.setStyle("-fx-background-color: black");
+            darkmode();
         } else if (ThemaBeheerder.isLightMode()) {
-            achtergrond.setStyle("-fx-background-color:  linear-gradient(to right, #5bc3f0, #174694)");
-            registerpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
-            titel.setStyle("-fx-text-fill: white");
-            submit.setStyle("-fx-background-color:  #5BC3F0");
-            cancel.setStyle("-fx-background-color:  #5BC3F0");
+            lightmode();
         } else if (ThemaBeheerder.isColorMode1()) {
-            achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkgreen, lime)");
-            registerpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
-            titel.setStyle("-fx-text-fill: white");
-            submit.setStyle("-fx-background-color: darkgreen");
-            cancel.setStyle("-fx-background-color: darkgreen");
+            colormode1();
         } else if (ThemaBeheerder.isColorMode2()) {
-            achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkred, red)");
-            registerpanel.setStyle("-fx-background-color: white; -fx-border-radius: 24px");
-            titel.setStyle("-fx-text-fill: white");
-            submit.setStyle("-fx-background-color: darkred");
-            cancel.setStyle("-fx-background-color: darkred");
+            colormode2();
         }
     }
 
@@ -152,31 +165,29 @@ public class registrationController implements Initializable {
             boolean admin = register_admin.isSelected();
             ArrayList<String> UserInfo = ToArrayList();
             if(DB.registerUser(UserInfo, admin)) {
-
                 // Clear the text fields
-                register_firstname.clear();
-                register_lastname.clear();
-                register_emailadress.clear();
-                register_username.clear();
-                register_password.clear();
-
+                resetTextfields();
                 // Show the registration success message
-                String message = "User " + UserInfo.get(0) + " " + UserInfo.get(1) + " registered with username " + UserInfo.get(3);
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Registration Success");
-                alert.setHeaderText(null);
-                alert.setContentText(message);
-                alert.showAndWait();
+                ShowAlert("User"  + UserInfo.get(0) +  UserInfo.get(1) +  "registered with username"  + UserInfo.get(3),"Registration failed");
             }
             else {
-                String message = "PasswordStrength is too low";
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Registration failed");
-                alert.setHeaderText(null);
-                alert.setContentText(message);
-                alert.showAndWait();
+               ShowAlert("PasswordStrength is too low","Registration failed");
             }
         }
+    }
+    public void resetTextfields(){
+        register_firstname.clear();
+        register_lastname.clear();
+        register_emailadress.clear();
+        register_username.clear();
+        register_password.clear();
+    }
+    public void ShowAlert(String Message, String Title){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(Title);
+        alert.setHeaderText(null);
+        alert.setContentText(Message);
+        alert.showAndWait();
     }
 
 

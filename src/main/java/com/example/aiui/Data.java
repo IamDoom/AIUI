@@ -139,7 +139,6 @@ class Data {
     }
 
     public Boolean registerUser(ArrayList<String> Userdata,  boolean administrator) {
-
         //check password strenght
         PasswordCheck passwordCheck = new PasswordCheck();
         if (passwordCheck.wachtwoordSterkteVerwerker(Userdata.get(4))) {
