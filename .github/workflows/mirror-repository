@@ -1,0 +1,26 @@
+name: Mirror Repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone the old repository
+        run: |
+          git clone --bare https://github.com/IamDoom/AIUI.git
+          cd AIUI.git
+
+      - name: Mirror-push to the new repository
+        run: |
+          git push --mirror https://github.com/hhs-semester-se-s2/2023-Projectgroep-H-1-SE.4d.git
+
+      - name: Cleanup
+        run: |
+          cd ..
+          rm -rf AIUI.git
+
