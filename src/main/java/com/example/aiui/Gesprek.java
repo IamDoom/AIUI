@@ -7,7 +7,7 @@ interface ResponseGenerator {
 }
 
 class ConceptResponseGenerator implements ResponseGenerator {
-    private String defaultGreeting = "Hi! How can I assist you?";
+    private final String defaultGreeting = "Hi! How can I assist you?";
     private String defaultHowAreYou = "As an AI, I don't have feelings or emotions, but I'm functioning as intended and ready to help you. How can I assist you today?";
     private String defaultFallback = "I don't have an answer for that now";
 
