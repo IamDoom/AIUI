@@ -309,7 +309,7 @@ public class mainController implements Initializable {
 
             // Access the controller of the loaded FXML file if needed
             registrationController registrationController = loader.getController();
-            registrationController.setStage();
+            registrationController.setStage(stage);
             // Show the popup window
             popupStage.showAndWait();
         } catch (IOException e) {

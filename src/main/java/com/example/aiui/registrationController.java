@@ -50,7 +50,7 @@ public class registrationController implements Initializable {
     @FXML
     void Toggle(ActionEvent event) {}
 
-    public void setStage() {
+    public void setStage(Stage stage) {
         this.stage = stage;
     }
 
