@@ -87,6 +87,13 @@ public class mainController implements Initializable {
             edituser.setText(bundle.getString("edituser"));
             language.setText(bundle.getString("Taal"));
             setting_register.setText(bundle.getString("settingsregister"));
+            HisLabel.setText(bundle.getString("History"));
+            logUit.setText(bundle.getString("loguit"));
+            darkmode.setText(bundle.getString("DarkMode"));
+            lightmode.setText(bundle.getString("LightMode"));
+            colormode1.setText(bundle.getString("Thema1"));
+            colormode2.setText(bundle.getString("Thema2"));
+            NieuweGesprek.setText(bundle.getString("nieuwGesprek"));
         } else {
             EnglishIsActive = true;
             bundle = ResourceBundle.getBundle("com.example.aiui.English");
@@ -98,6 +105,13 @@ public class mainController implements Initializable {
             edituser.setText(bundle.getString("edituser"));
             language.setText(bundle.getString("Taal"));
             setting_register.setText(bundle.getString("settingsregister"));
+            HisLabel.setText(bundle.getString("History"));
+            logUit.setText(bundle.getString("loguit"));
+            darkmode.setText(bundle.getString("DarkMode"));
+            lightmode.setText(bundle.getString("LightMode"));
+            colormode1.setText(bundle.getString("Thema1"));
+            colormode2.setText(bundle.getString("Thema2"));
+            NieuweGesprek.setText(bundle.getString("nieuwGesprek"));
         }
     }
 
@@ -175,6 +189,7 @@ public class mainController implements Initializable {
         Zoom.setStyle("-fx-background-color:  green");
         Minus.setStyle("-fx-background-color:  green");
     }
+
 
     protected void color2() {
         achtergrond.setStyle("-fx-background-color: linear-gradient(to right, darkred, red)");
@@ -278,7 +293,7 @@ public class mainController implements Initializable {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("register.fxml"));
-            loader.setControllerFactory(type -> new registrationController(DB));
+            loader.setControllerFactory(type -> new registrationController(DB, EnglishIsActive));
             Parent root = loader.load();
 
             Stage popupStage = new Stage();
@@ -311,6 +326,13 @@ public class mainController implements Initializable {
         edituser.setText(bundle.getString("edituser"));
         language.setText(bundle.getString("Taal"));
         setting_register.setText(bundle.getString("settingsregister"));
+        HisLabel.setText(bundle.getString("History"));
+        logUit.setText(bundle.getString("loguit"));
+        darkmode.setText(bundle.getString("DarkMode"));
+        lightmode.setText(bundle.getString("LightMode"));
+        colormode1.setText(bundle.getString("Thema1"));
+        colormode2.setText(bundle.getString("Thema2"));
+        NieuweGesprek.setText(bundle.getString("nieuwGesprek"));
 
         Onderwerpen = Manager.getOnderwerpen();
         Laadchat(Manager.getGesprek(0).getGesprekDataManager().getGespreksData());
@@ -323,7 +345,7 @@ public class mainController implements Initializable {
     public void setOnKeyPressed(ActionEvent Enter) {
         String userMessage = input.getText();
         //Update het onderwerp als usermessage het eerste bericht it
-        if (firstMessage) {
+        if(user.getGespreksManager().getGesprek(currentGesprekId).getGesprekDataManager().getGespreksData().isEmpty()) {
             updateOnderwerp(userMessage);
             firstMessage = false;
         }
@@ -344,8 +366,6 @@ public class mainController implements Initializable {
     }
 
     public void NieuwGesprek() {
-        //firstmessage belangrijk voor setonclick methode
-        firstMessage = true;
         //maak gesprek aan en vernieuw de chatgegevens
         Gesprek gesprek = Manager.newGesprek();
         GesprekOnderwerpen.getItems().add(gesprek.getOnderwerp());
