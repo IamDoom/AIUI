@@ -146,7 +146,7 @@ class Data {
                 userFactory = new employeeFactory();
             }
 
-            userFactory.CreateAndAddUser(firstname,lastname,emailaddress,username,password,UserDB);
+            userFactory.CreateAndAddUser(firstname,lastname,emailaddress,username,password, this.UserDB);
             return true;
         }
         else {

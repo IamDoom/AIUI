@@ -40,8 +40,6 @@ public class mainController implements Initializable {
     @FXML private ListView<String> chatList;
     private ResourceBundle bundle = ResourceBundle.getBundle("com.example.aiui.English");
     private boolean EnglishIsActive = true;
-    private static final double ZZOOM = 1.109375;
-    private static final double SMALL = 0.78125;
     @FXML private ListView<String> GesprekOnderwerpen;
     @FXML private Pane Base;
     @FXML private Button darkmode;
@@ -136,8 +134,6 @@ public class mainController implements Initializable {
         colormode1.setStyle("-fx-background-color:  #5BC3F0");
         colormode2.setStyle("-fx-background-color:  #5BC3F0");
         closeSettings.setStyle("-fx-background-color: #5BC3F0");
-        Zoom.setStyle("-fx-background-color:  #5BC3F0");
-        Minus.setStyle("-fx-background-color:  #5BC3F0");
     }
 
     protected void DarkMode() {
@@ -161,8 +157,6 @@ public class mainController implements Initializable {
         colormode1.setStyle("-fx-background-color:   darkgrey");
         colormode2.setStyle("-fx-background-color:   darkgrey");
         closeSettings.setStyle("-fx-background-color:  darkgrey");
-        Zoom.setStyle("-fx-background-color:   darkgrey");
-        Minus.setStyle("-fx-background-color:   darkgrey");
     }
 
     protected void color1() {
@@ -186,8 +180,6 @@ public class mainController implements Initializable {
         colormode1.setStyle("-fx-background-color: green");
         colormode2.setStyle("-fx-background-color: green");
         closeSettings.setStyle("-fx-background-color: green");
-        Zoom.setStyle("-fx-background-color:  green");
-        Minus.setStyle("-fx-background-color:  green");
     }
 
 
@@ -212,8 +204,6 @@ public class mainController implements Initializable {
         colormode1.setStyle("-fx-background-color: red");
         colormode2.setStyle("-fx-background-color: red");
         closeSettings.setStyle("-fx-background-color: red");
-        Zoom.setStyle("-fx-background-color:  red");
-        Minus.setStyle("-fx-background-color:  red");
     }
 
     public void ThemaToepasser() {
@@ -247,20 +237,6 @@ public class mainController implements Initializable {
     public void color2Klick() {
         update(false, false, false, true);
     }
-
-    @FXML
-    private void handleZoom() {
-        scale.setX(scale.getX() * ZZOOM);
-        scale.setY(scale.getY() * ZZOOM);
-    }
-
-    @FXML
-    private void handleMin() {
-        scale.setX(scale.getX() * SMALL);
-        scale.setY(scale.getY() * SMALL);
-    }
-
-
 
     public void update(boolean darkmode, boolean lightmode, boolean colormode1, boolean colormode2) {
         ThemaBeheerder.setDarkMode(darkmode);
@@ -311,9 +287,6 @@ public class mainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ThemaToepasser();
-        scale = new Scale();
-        scale.setX(1.0);
-        scale.setY(1.0);
         achtergrond.getTransforms().setAll(scale);
         showSettings.setText(bundle.getString("Settings"));
         input.setPromptText(bundle.getString("PromptText"));
@@ -331,7 +304,6 @@ public class mainController implements Initializable {
         colormode1.setText(bundle.getString("Thema1"));
         colormode2.setText(bundle.getString("Thema2"));
         NieuweGesprek.setText(bundle.getString("nieuwGesprek"));
-
         Onderwerpen = Manager.getOnderwerpen();
         Laadchat(Manager.getGesprek(0).getGesprekDataManager().getGespreksData());
         OnderwerpLabel.setText(Manager.getGesprek(0).getOnderwerp());
@@ -340,7 +312,19 @@ public class mainController implements Initializable {
 
     //hier beginnen de methodes voor de chatgeshiedenis
     @FXML
-    public void setOnKeyPressed(ActionEvent Enter) {
+    public void HandleButtonPress(ActionEvent E){
+        if(!input.getText().isEmpty()){
+            this.HandleMessage();
+        }
+    }
+    public void SetOnKeyPressed(ActionEvent event) {
+        if (!input.getText().isEmpty()) {
+            this.HandleMessage();
+        }
+    }
+
+    @FXML
+    public void HandleMessage() {
         String userMessage = input.getText();
         //Update het onderwerp als usermessage het eerste bericht it
         if(Manager.getGesprek(currentGesprekId).getGesprekDataManager().getGespreksData().isEmpty()) {
@@ -376,13 +360,16 @@ public class mainController implements Initializable {
     public void SelecteerdChat() {//methode voor het klikken op textsfield, hij checkt welk gesprek je wil zien en laat de inhoud zien **Deze methode werkt alleen als de onderwerpen niet hetzelfde zijn
         chatList.getItems().clear();
         String SelectedChat = GesprekOnderwerpen.getSelectionModel().getSelectedItem();
-        for (Gesprek gesprek : Manager.getGesprekkenLijst()) {
-            if (SelectedChat.equals(gesprek.getOnderwerp())) {
-                currentGesprekId = gesprek.getId();
-                Laadchat(gesprek.getGesprekDataManager().getGespreksData());
+        if (SelectedChat != null)
+            for (Gesprek gesprek : Manager.getGesprekkenLijst()) {
+                if (SelectedChat.equals(gesprek.getOnderwerp())) {
+                    currentGesprekId = gesprek.getId();
+                    Laadchat(gesprek.getGesprekDataManager().getGespreksData());
+                }
             }
-        }
     }
+
+
 
     public void Laadchat(ArrayList<String> gespreksData) {//methode voor het laden van chats
         chatList.getItems().clear();
