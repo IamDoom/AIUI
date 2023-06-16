@@ -2,6 +2,7 @@ package com.example.aiui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -132,18 +133,25 @@ public class registrationController implements Initializable {
         return true;
     }
 
+    public ArrayList<String> ToArrayList(){
+        ArrayList<String> TextsFieldInfo = new ArrayList<String>();
+        TextsFieldInfo.add((register_firstname.getText()));
+        TextsFieldInfo.add((register_lastname.getText()));
+        TextsFieldInfo.add((register_emailadress.getText()));
+        TextsFieldInfo.add((register_username.getText()));
+        TextsFieldInfo.add((register_password.getText()));
+        return TextsFieldInfo;
+    }
+
     @FXML
     protected void submitRegistration(ActionEvent event) throws IOException {
         if (!isFilledin()) {
             errorMessage.setText("Please fill in all fields!");
         } else {
-            String firstname = register_firstname.getText();
-            String lastname = register_lastname.getText();
-            String email = register_emailadress.getText();
-            String username = register_username.getText();
-            String password = register_password.getText();
+            ToArrayList();
             boolean admin = register_admin.isSelected();
-            if(DB.registerUser(firstname, lastname, email, username, password, admin)) {
+            ArrayList<String> UserInfo = ToArrayList();
+            if(DB.registerUser(UserInfo, admin)) {
 
                 // Clear the text fields
                 register_firstname.clear();
@@ -153,7 +161,7 @@ public class registrationController implements Initializable {
                 register_password.clear();
 
                 // Show the registration success message
-                String message = "User " + firstname + " " + lastname + " registered with username " + username;
+                String message = "User " + UserInfo.get(0) + " " + UserInfo.get(1) + " registered with username " + UserInfo.get(3);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Registration Success");
                 alert.setHeaderText(null);
