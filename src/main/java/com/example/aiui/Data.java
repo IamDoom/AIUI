@@ -4,31 +4,33 @@ import java.util.ArrayList;
 
 abstract class UserFactory{
 
-    abstract User createUser(String firstName, String lastName, String email, String username, String password);
+    abstract User createUser(ArrayList<String > Userdata);
 
     public void AddUser(User user, UserDB userDB) {
         userDB.addUser(user);
     }
 
-    final void CreateAndAddUser(String firstName, String lastName, String email, String username, String password,UserDB userDB){
-        User user = createUser(firstName, lastName, email, username, password);
+    final void CreateAndAddUser(ArrayList<String > Userdata, UserDB userDB){
+        User user = createUser(Userdata);
         AddUser(user,userDB);
     }
 }
 
 class administratorFactory extends UserFactory {
-    @Override
-    public User createUser(String firstName, String lastName, String email, String username, String password) {
-        return new Administrator(firstName, lastName, email, username, password);
-    }
 
+
+    @Override
+    User createUser(ArrayList<String> Userdata) {
+        return new Administrator(Userdata);
+    }
 }
 class employeeFactory extends UserFactory {
-    @Override
-    public User createUser(String firstName, String lastName, String email, String username, String password) {
-        return new Employee(firstName, lastName, email, username, password);
-    }
 
+
+    @Override
+    User createUser(ArrayList<String> Userdata) {
+        return new Employee(Userdata);
+    }
 }
 
 
@@ -41,18 +43,20 @@ abstract class User{
     private String Username;
     private final int employeeID;
     private String Email;
-    protected String type;
 
-    public User(String firstName, String lastName, String email, String username, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.Username = username;
+
+    public User(ArrayList<String> Userdata) {
+        this.firstName = Userdata.get(0);
+        this.lastName = Userdata.get(1);
+        this.Email = Userdata.get(2);
+        this.Username = Userdata.get(3);
+        this.password = Userdata.get(4);
         this.employeeID = IDcounter;
         IDcounter += 1;
-        this.Email = email;
         this.gespreksManager = new GespreksManager();
+
     }
+
 
     public String getFirstName() {
         return firstName;
@@ -97,16 +101,14 @@ abstract class User{
     }
 }
 class Employee extends User{
-    Employee(String firstName, String lastName, String email, String username, String password){
-        super(firstName,lastName,email,username,password);
-        super.type = "employee";
+    Employee(ArrayList<String > Userdata){
+        super( Userdata);
     }
 }
 
 class Administrator extends User{
-    Administrator(String firstName, String lastName, String email, String username, String password){
-        super(firstName,lastName,email,username,password);
-        super.type = "admin";
+    Administrator(ArrayList<String > Userdata){
+        super(Userdata);
     }
 }
 
@@ -129,46 +131,18 @@ class chatHistory{
 }
 
 class Data {
-    String tempfirstName;
-    String templastName;
-    String tempemail;
-    String tempusername;
-    String temppassword;
     private final UserDB UserDB;
     public Data(){
         UserDB = new UserDB();
-        tempfirstName = "john";
-        templastName = "doe";
-        tempemail = "johndoe@emailadress.com";
-        temppassword = "Lol123";
-        tempusername = "abc";
-        this.registerUser(true);
+        Standaardlogin standaardlogin = new Standaardlogin();
+        this.registerUser(standaardlogin.getStandaardLoginGegevens(), true);
     }
 
-    public void setTempfirstName(String tempfirstName) {
-        this.tempfirstName = tempfirstName;
-    }
+    public Boolean registerUser(ArrayList<String> Userdata,  boolean administrator) {
 
-    public void setTemplastName(String templastName) {
-        this.templastName = templastName;
-    }
-
-    public void setTempemail(String tempemail) {
-        this.tempemail = tempemail;
-    }
-
-    public void setTempusername(String tempusername) {
-        this.tempusername = tempusername;
-    }
-
-    public void settempPassword(String password) {
-        this.temppassword = password;
-    }
-
-    public Boolean registerUser(boolean administrator) {
         //check password strenght
         PasswordCheck passwordCheck = new PasswordCheck();
-        if (passwordCheck.wachtwoordSterkteVerwerker(temppassword)) {
+        if (passwordCheck.wachtwoordSterkteVerwerker(Userdata.get(4))) {
             UserFactory userFactory;
             if (administrator) {
                 userFactory = new administratorFactory();
@@ -176,12 +150,7 @@ class Data {
                 userFactory = new employeeFactory();
             }
 
-            userFactory.CreateAndAddUser(tempfirstName,templastName,tempemail,tempusername,temppassword, this.UserDB);
-            tempfirstName = null;
-            templastName = null;
-            tempemail = null;
-            temppassword = null;
-            tempusername = null;
+            userFactory.CreateAndAddUser(Userdata, this.UserDB);
             return true;
         }
         else {
@@ -202,5 +171,22 @@ class Data {
         }
         System.out.println("no user matches the given credentials");
         return null; //login credentials match no user
+    }
+
+}
+class Standaardlogin{
+    ArrayList<String> StandaardLoginGegevens;
+
+    public Standaardlogin() {
+        StandaardLoginGegevens = new ArrayList<String>();
+        StandaardLoginGegevens.add("john");
+        StandaardLoginGegevens.add("doe");
+        StandaardLoginGegevens.add("johndoe@emailadress.com");
+        StandaardLoginGegevens.add("abc");
+        StandaardLoginGegevens.add("Lol123");
+    }
+
+    public ArrayList<String> getStandaardLoginGegevens() {
+        return StandaardLoginGegevens;
     }
 }

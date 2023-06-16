@@ -263,13 +263,7 @@ public class mainController implements Initializable {
         ThemaToepasser();
         setLanguage(bundle);
         setting_register.setDisable(!(user instanceof Administrator));
-        HisLabel.setText(bundle.getString("History"));
-        logUit.setText(bundle.getString("loguit"));
-        darkmode.setText(bundle.getString("DarkMode"));
-        lightmode.setText(bundle.getString("LightMode"));
-        colormode1.setText(bundle.getString("Thema1"));
-        colormode2.setText(bundle.getString("Thema2"));
-        NieuweGesprek.setText(bundle.getString("nieuwGesprek"));
+
         Onderwerpen = Manager.getOnderwerpen();
         Laadchat(Manager.getGesprek(0).getGesprekDataManager().getGespreksData());
         OnderwerpLabel.setText(Manager.getGesprek(0).getOnderwerp());
@@ -350,11 +344,6 @@ public class mainController implements Initializable {
         OnderwerpLabel.setText(Manager.getGesprek(currentGesprekId).getOnderwerp());
     }
 
-
-    public void WeizigOnderwerp() {
-        //weizig het onderwerp code
-        GesprekOnderwerpen.refresh();
-    }
 
     public void UserInfoUpdate(User UpdateUser) {//voor het opslaan van de chatData
         DB.getUserDB().getUsers().set(UpdateUser.getEmployeeID(), UpdateUser);
