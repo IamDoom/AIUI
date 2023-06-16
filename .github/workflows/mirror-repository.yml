@@ -1,9 +1,7 @@
 name: Mirror Repository
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   mirror:
@@ -23,4 +21,3 @@ jobs:
         run: |
           cd ..
           rm -rf AIUI.git
-
