@@ -15,6 +15,7 @@ public class HelloApplication extends Application {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setTitle("AIUI: Login");
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {

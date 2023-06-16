@@ -12,43 +12,29 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class registrationController implements Initializable {
-    private Stage stage;
     Data DB;
 
-    public registrationController(Data DB1, boolean englishIsActive) {
-        this.DB = DB1;
+    public registrationController(Data DB, boolean englishIsActive) {
+        this.DB = DB;
         this.EnglishLanguage = englishIsActive;
     }
     boolean EnglishLanguage;
     ResourceBundle bundle;
 
     @FXML private Pane achtergrond;
-
     @FXML private Button cancel;
     @FXML private Button submit;
-
     @FXML private Label titel;
-
     @FXML private VBox registerpanel;
-
     @FXML private Label errorMessage;
-
     @FXML private Button login;
-
     @FXML private Button mode;
-
     @FXML private CheckBox register_admin = new CheckBox();
-
     @FXML private TextField register_emailadress = new TextField();
-
     @FXML private TextField register_firstname = new TextField();
-
     @FXML private TextField register_lastname = new TextField();
-
     @FXML private PasswordField register_password = new PasswordField();
-
     @FXML private TextField register_username = new TextField();
-
     @FXML private Pane sidebar;
     @FXML private Label Firstname;
     @FXML private Label Lastname;
@@ -91,7 +77,6 @@ public class registrationController implements Initializable {
             titel.setText(bundle.getString("Registration"));
         }
     }
-
 
     public void ThemaToepasser() {
         if (ThemaBeheerder.isDarkMode()) {

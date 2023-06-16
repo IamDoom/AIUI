@@ -301,9 +301,6 @@ public class mainController implements Initializable {
             popupStage.initOwner(stage);
             popupStage.setTitle("Register employee");
             popupStage.setScene(new Scene(root));
-
-            // Access the controller of the loaded FXML file if needed
-            registrationController registrationController = loader.getController();
             // Show the popup window
             popupStage.showAndWait();
         } catch (IOException e) {
@@ -326,6 +323,7 @@ public class mainController implements Initializable {
         edituser.setText(bundle.getString("edituser"));
         language.setText(bundle.getString("Taal"));
         setting_register.setText(bundle.getString("settingsregister"));
+        setting_register.setDisable(!(user instanceof Administrator));
         HisLabel.setText(bundle.getString("History"));
         logUit.setText(bundle.getString("loguit"));
         darkmode.setText(bundle.getString("DarkMode"));
@@ -345,7 +343,7 @@ public class mainController implements Initializable {
     public void setOnKeyPressed(ActionEvent Enter) {
         String userMessage = input.getText();
         //Update het onderwerp als usermessage het eerste bericht it
-        if(user.getGespreksManager().getGesprek(currentGesprekId).getGesprekDataManager().getGespreksData().isEmpty()) {
+        if(Manager.getGesprek(currentGesprekId).getGesprekDataManager().getGespreksData().isEmpty()) {
             updateOnderwerp(userMessage);
             firstMessage = false;
         }
@@ -418,7 +416,7 @@ public class mainController implements Initializable {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle(user.getFirstName() + " " + user.getLastName());
+        stage.setTitle("AIUI: Login");
         stage.show();
     }
 }

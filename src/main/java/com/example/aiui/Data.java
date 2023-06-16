@@ -75,15 +75,35 @@ abstract class User{
     public void setEmail(String email) {
         Email = email;
     }
-
     public GespreksManager getGespreksManager() {
         return gespreksManager;
     }
-
     public void setGespreksManager(GespreksManager gespreksManager) {
         this.gespreksManager = gespreksManager;
     }
+    public String getType() {
+        return type;
+    }
+
+    public String sendMessage(String message){
+        beforeSendMessage(message);
+        String response =  sendMessageLogic(message);
+        afterSendMessage(message);
+        return response;
+    }
+    private void beforeSendMessage(String message){
+
+    }
+    public String sendMessageLogic(String message){
+
+        return "response";
+    }
+
+    private void afterSendMessage(String message){
+
+    }
 }
+
 class Employee extends User{
     Employee(String firstName, String lastName, String email, String username, String password){
         super(firstName,lastName,email,username,password);
