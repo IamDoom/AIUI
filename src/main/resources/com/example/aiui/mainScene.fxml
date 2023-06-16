@@ -45,12 +45,12 @@
                   <Font name="Segoe UI Bold" size="40.0" />
                </font>
             </Label>
-            <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="23.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="66.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/geschiedenis.png" />
                </image>
             </ImageView>
-            <Label fx:id="HisLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="97.0" layoutY="34.0" text="History" textFill="WHITE">
+            <Label fx:id="HisLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="34.0" text="History" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="40.0" />
                </font>
