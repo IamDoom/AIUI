@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
-    Data db = new Data();
+    Data db;
     User user;
     public LoginController(Data DB) {
         this.db = DB;
