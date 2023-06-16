@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.mainController">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aiui.mainController">
    <children>
       <Pane fx:id="achtergrond" layoutX="-1.0" layoutY="-9.0" minHeight="576.0" minWidth="1024.0" style="-fx-background-color: linear-gradient(to right, #5bc3f0, #174694);;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-9.0">
          <children>
@@ -179,22 +173,6 @@
                      </padding>
                      <VBox.margin>
                         <Insets bottom="5.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="Zoom" alignment="CENTER" minWidth="175.0" mnemonicParsing="false" onAction="#handleZoom" style="-fx-background-radius: 4px; -fx-background-color: #5BC3F0;" text="+++++" textFill="WHITE">
-                     <font>
-                        <Font name="Segoe UI Bold" size="13.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="5.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="Minus" alignment="CENTER" minWidth="175.0" mnemonicParsing="false" onAction="#handleMin" style="-fx-background-radius: 4px; -fx-background-color: #5BC3F0;" text="-----" textFill="WHITE">
-                     <font>
-                        <Font name="Segoe UI Bold" size="13.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </Button>
                </children>
