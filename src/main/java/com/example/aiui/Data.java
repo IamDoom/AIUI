@@ -6,13 +6,14 @@ interface UserFactory{
     User createUser(String firstName, String lastName, String email, String username, String password);
 }
 
-class administratorFactory implements UserFactory{
+class AdministratorFactory implements UserFactory{
     @Override
     public User createUser(String firstName, String lastName, String email, String username, String password) {
         return new Administrator(firstName, lastName, email, username, password);
     }
 }
-class employeeFactory implements UserFactory{
+
+class EmployeeFactory implements UserFactory{
     @Override
     public User createUser(String firstName, String lastName, String email, String username, String password) {
         return new Employee(firstName, lastName, email, username, password);
@@ -26,19 +27,19 @@ abstract class User{
     private String firstName;
     private String lastName;
     private String password;
-    private String Username;
+    private String username;
     private final int employeeID;
-    private String Email;
+    private String email;
     protected String type;
 
     public User(String firstName, String lastName, String email, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.Username = username;
+        this.username = username;
         this.employeeID = IDcounter;
         IDcounter += 1;
-        this.Email = email;
+        this.email = email;
         this.gespreksManager = new GespreksManager();
     }
 
@@ -55,10 +56,10 @@ abstract class User{
         this.lastName = lastName;
     }
     public String getUsername() {
-        return Username;
+        return username;
     }
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
     public int getEmployeeID() {
         return employeeID;
@@ -70,10 +71,10 @@ abstract class User{
         this.password = password;
     }
     public String getEmail() {
-        return Email;
+        return email;
     }
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
     public GespreksManager getGespreksManager() {
         return gespreksManager;
@@ -131,49 +132,43 @@ class UserDB{
     }
 }
 
-class chatHistory{
+class ChatHistory{
     private final ArrayList<String> chat = new ArrayList<>();
-
 }
 
 class Data {
-    private final UserDB UserDB;
+    private final UserDB userDB;
     public Data(){
-        UserDB = new UserDB();
-        this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "Lol123", true);
+        userDB = new UserDB();
+        this.registerUser("john", "doe", "johndoe@emailadress.com","abc", "123", true);
     }
 
-    public Boolean registerUser(String firstname, String lastname, String emailaddress, String username, String password,  boolean administrator) {
-        //check password strenght
+    public void registerUser(String firstname, String lastname, String emailaddress, String username, String password,  boolean administrator){
+        //check password strength
         PasswordCheck passwordCheck = new PasswordCheck();
-        if (passwordCheck.WachtWoordStengthVerwerker(password)) {
-            UserFactory userFactory;
-            if (administrator) {
-                userFactory = new administratorFactory();
-            } else {
-                userFactory = new employeeFactory();
-            }
-            User newUser = userFactory.createUser(firstname, lastname, emailaddress, username, password);
-            UserDB.addUser(newUser);
-            return true;
+        passwordCheck.wachtwoordSterkteVerwerker(password);
+        UserFactory userFactory;
+        if (administrator) {
+            userFactory = new AdministratorFactory();
+        }else{
+            userFactory = new EmployeeFactory();
         }
-        else {
-            return false;
-        }
-    }
 
+        User newUser = userFactory.createUser(firstname,lastname,emailaddress,username,password);
+        userDB.addUser(newUser);
+    }
 
     public UserDB getUserDB() {
-        return UserDB;
+        return userDB;
     }
 
     public User login(String username, String password) {
-        for(User user: UserDB.getUsers()){
+        for(User user: userDB.getUsers()){
             if(username.equals(user.getUsername()) && password.equals(user.getPassword())){
                 return user;
             }
         }
-        System.out.println("no user matches the given credentials");
+        System.out.println("No user matches the given credentials");
         return null; //login credentials match no user
     }
 }
