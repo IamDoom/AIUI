@@ -7,7 +7,7 @@ interface ResponseGenerator {
 }
 
 class ConceptResponseGenerator implements ResponseGenerator {
-    private String defaultGreeting = "Hi! How can I assist you?";
+    private final String defaultGreeting = "Hi! How can I assist you?";
     private String defaultHowAreYou = "As an AI, I don't have feelings or emotions, but I'm functioning as intended and ready to help you. How can I assist you today?";
     private String defaultFallback = "I don't have an answer for that now";
 
@@ -131,5 +131,45 @@ class GesprekDataManager {
 
     public ArrayList<String> getGespreksData() {
         return gespreksData;
+    }
+}
+class PasswordCheck {
+    public boolean wachtwoordSterkteVerwerker(String ww){
+        int strength = this.WachtWoordCheck(ww);
+        String strengthMessage = (0 <= strength && strength < 3) ? "Low Password Strength"
+                : (2 < strength && strength < 5) ? "Decent Password Strength"
+                : (strength == 5) ? "Strong Password Strength"
+                : "";
+        System.out.println(strengthMessage);
+        return (3<= strength && strength <=5);
+
+    }
+    public int WachtWoordCheck(String password){
+        int strength = 0;
+        if (password.length() >= 8) {
+            strength++;
+        }
+
+        // Check for uppercase letters
+        if (password.matches(".*[A-Z].*")) {
+            strength++;
+        }
+
+        // Check for lowercase letters
+        if (password.matches(".*[a-z].*")) {
+            strength++;
+        }
+
+        // Check for digits
+        if (password.matches(".*\\d.*")) {
+            strength++;
+        }
+
+        // Check for special characters
+        if (password.matches(".*[^a-zA-Z0-9].*")) {
+            strength++;
+        }
+
+        return strength;
     }
 }

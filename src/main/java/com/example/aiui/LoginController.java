@@ -22,10 +22,6 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
     Data db;
     User user;
-    public LoginController(Data DB) {
-        this.db = DB;
-    }
-
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -40,11 +36,12 @@ public class LoginController implements Initializable {
     @FXML private Pane achtergrond;
     @FXML private PasswordField password = new PasswordField();
     @FXML private TextField username = new TextField();
-
+    public LoginController(Data DB) {
+        this.db = DB;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ThemaToepasser();
-        this.db = db;
     }
 
     @FXML
