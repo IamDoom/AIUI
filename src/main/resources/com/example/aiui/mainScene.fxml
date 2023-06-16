@@ -109,28 +109,6 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="edituser" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minWidth="175.0" mnemonicParsing="false" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Edit user" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
-                     <font>
-                        <Font name="Segoe UI" size="13.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="8.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets bottom="5.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="advanced" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minWidth="175.0" mnemonicParsing="false" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Advanced (admin)" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
-                     <font>
-                        <Font name="Segoe UI" size="13.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="8.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets bottom="5.0" />
-                     </VBox.margin>
-                  </Button>
                   <Button fx:id="darkmode" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minWidth="175.0" mnemonicParsing="false" onAction="#darkKlick" style="-fx-background-color: #5BC3F0; -fx-background-radius: 4px;" text="Dark mode" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Segoe UI" size="13.0" />

@@ -44,9 +44,6 @@ public class mainController implements Initializable {
     @FXML private Pane Base;
     @FXML private Button darkmode;
     @FXML private Button mode;
-    @FXML private Scale scale;
-    @FXML private Button Zoom;
-    @FXML private Button Minus;
     @FXML private Pane achtergrond;
     @FXML private Label OnderwerpLabel;
     @FXML private Button showSettings;
@@ -56,9 +53,7 @@ public class mainController implements Initializable {
     @FXML private Button setting_register;
     @FXML private TextField input;
     @FXML private Pane sidebar;
-    @FXML private Button edituser;
     @FXML private Button language;
-    @FXML private Button advanced;
     @FXML private Button lightmode;
     @FXML private Button colormode1;
     @FXML private Button colormode2;
@@ -89,8 +84,6 @@ public class mainController implements Initializable {
         input.setPromptText(bundle.getString("PromptText"));
         Submit.setText(bundle.getString("Submit"));
         closeSettings.setText(bundle.getString("closesettings"));
-        advanced.setText(bundle.getString("advanced"));
-        edituser.setText(bundle.getString("edituser"));
         language.setText(bundle.getString("Taal"));
         setting_register.setText(bundle.getString("settingsregister"));
         HisLabel.setText(bundle.getString("History"));
@@ -116,8 +109,6 @@ public class mainController implements Initializable {
         NieuweGesprek.setStyle("-fx-background-color:  #5BC3F0");
         setting_register.setStyle("-fx-background-color:  #5BC3F0");
         language.setStyle("-fx-background-color:  #5BC3F0");
-        edituser.setStyle("-fx-background-color:  #5BC3F0");
-        advanced.setStyle("-fx-background-color:  #5BC3F0");
         darkmode.setStyle("-fx-background-color:  #5BC3F0");
         lightmode.setStyle("-fx-background-color:  #5BC3F0");
         colormode1.setStyle("-fx-background-color:  #5BC3F0");
@@ -139,8 +130,6 @@ public class mainController implements Initializable {
         NieuweGesprek.setStyle("-fx-background-color:   darkgrey");
         setting_register.setStyle("-fx-background-color:   darkgrey");
         language.setStyle("-fx-background-color:   darkgrey");
-        edituser.setStyle("-fx-background-color:   darkgrey");
-        advanced.setStyle("-fx-background-color:   darkgrey");
         darkmode.setStyle("-fx-background-color:   darkgrey");
         lightmode.setStyle("-fx-background-color:   darkgrey");
         colormode1.setStyle("-fx-background-color:   darkgrey");
@@ -162,8 +151,6 @@ public class mainController implements Initializable {
         NieuweGesprek.setStyle("-fx-background-color: green");
         setting_register.setStyle("-fx-background-color: green");
         language.setStyle("-fx-background-color: green");
-        edituser.setStyle("-fx-background-color: green");
-        advanced.setStyle("-fx-background-color: green");
         darkmode.setStyle("-fx-background-color: green");
         lightmode.setStyle("-fx-background-color: green");
         colormode1.setStyle("-fx-background-color: green");
@@ -186,8 +173,6 @@ public class mainController implements Initializable {
         NieuweGesprek.setStyle("-fx-background-color: red");
         setting_register.setStyle("-fx-background-color: red");
         language.setStyle("-fx-background-color: red");
-        edituser.setStyle("-fx-background-color: red");
-        advanced.setStyle("-fx-background-color: red");
         darkmode.setStyle("-fx-background-color: red");
         lightmode.setStyle("-fx-background-color: red");
         colormode1.setStyle("-fx-background-color: red");
